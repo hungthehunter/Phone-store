@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
+import java.awt.image.*;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -43,7 +43,7 @@ public class Login extends JFrame {
 		this.setLocationRelativeTo(null);		
 		
 		
-		Image myPicture=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("planet.jpg"));
+		Image myPicture=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/planet.jpg"));//
 		Image nvidia_pic=myPicture.getScaledInstance(898,663,Image.SCALE_DEFAULT);
 		getContentPane().setLayout(null);
 		JLabel nvidia_label=new JLabel(new ImageIcon(nvidia_pic));
@@ -65,7 +65,7 @@ public class Login extends JFrame {
 		textField.setBounds(103, 149, 313, 55);
 		panel_login.add(textField);
 		textField.setColumns(10);
-		Image my_email=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("email.png"));
+		Image my_email=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/email.png"));//
 		Image email_pic=my_email.getScaledInstance(45, 36, Image.SCALE_DEFAULT);
 		
 		
@@ -74,7 +74,7 @@ public class Login extends JFrame {
 		textField_1.setBounds(103, 251, 313, 55);
 		panel_login.add(textField_1);
 		textField_1.setColumns(10);
-		Image my_password=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("key-icon.png"));
+		Image my_password=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/key-icon.png"));//
 		Image password_pic=my_password.getScaledInstance(45, 36, Image.SCALE_DEFAULT);
 		
 		JButton btnNewButton_1 = new JButton("Đăng nhập");
@@ -115,5 +115,8 @@ public class Login extends JFrame {
 		
 		
 
+	}
+	public static void main(String[] args) {
+	
 	}
 }
