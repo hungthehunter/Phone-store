@@ -64,7 +64,7 @@ public class Login extends JFrame {
 		Color darkBrown=new Color(139, 69, 19);
 
 		Color oalkColor=new Color(	139, 106, 80);
-		Image myPicture=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/view/Assets/planet.jpg"));//
+		Image myPicture=new ImageIcon("Assets/planet.jpg").getImage();
 		Image nvidia_pic=myPicture.getScaledInstance(1000,670,Image.SCALE_SMOOTH);
 	
 		getContentPane().setLayout(null);
@@ -90,7 +90,7 @@ public class Login extends JFrame {
 		panel_login.add(textField);
 		
 		textField.setColumns(10);
-		Image my_email=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/view/Assets/email.png"));//
+		Image my_email=new ImageIcon("Assets/email.png").getImage();//
 		Image email_pic=my_email.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		
 		
@@ -100,7 +100,7 @@ public class Login extends JFrame {
 		textField_1.setBounds(82, 241, 313, 55);
 		panel_login.add(textField_1);
 		textField_1.setColumns(10);
-		Image my_password=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/view/Assets/key-icon.png"));//
+		Image my_password=new ImageIcon("Assets/key-icon.png").getImage();//
 	
 		Image password_pic=my_password.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		
