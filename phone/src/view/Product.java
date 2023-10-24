@@ -1,33 +1,24 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.TextArea;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Image;
-
-import javax.swing.JTextField;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.TextArea;
-import java.awt.Toolkit;
-import java.awt.Panel;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 
 public class Product extends JFrame {
 
@@ -221,6 +212,7 @@ public class Product extends JFrame {
 	     textArea.setBounds(83, 228, 361, 94);
 	     panelProductInfo.add(textArea);
 	     
+	     //Product Action Area
 	     JPanel panelProductAction = new JPanel();
 	     panelProductAction.setBorder(new LineBorder(Color.LIGHT_GRAY));
 	     panelProductAction.setBounds(630, 412, 454, 63);
@@ -261,6 +253,7 @@ public class Product extends JFrame {
 	     label.setBounds(640, 402, 46, 14);
 	     contentPane.add(label);
 	     
+	     //Product Find Area
 	     JPanel panelProductFind = new JPanel();
 	     panelProductFind.setBorder(new LineBorder(Color.LIGHT_GRAY));
 	     panelProductFind.setBounds(340, 412, 272, 226);
@@ -291,12 +284,14 @@ public class Product extends JFrame {
 	     comboBox.setBounds(103, 83, 159, 22);
 	     panelProductFind.add(comboBox);
 	     
+	     //Product Display img area
 	     JPanel panelPoductImage = new JPanel();
 	     panelPoductImage.setBorder(new LineBorder(Color.LIGHT_GRAY));
 	     panelPoductImage.setBounds(149, 412, 150, 226);
 	     contentPane.add(panelPoductImage);
 	     panelPoductImage.setLayout(null);
 	     
+	     //display invisible product
 	     JButton btnNewButton = new JButton("Sản Phẩm Bị Ẩn");
 	     btnNewButton.setBounds(10, 421, 129, 42);
 	     contentPane.add(btnNewButton);
