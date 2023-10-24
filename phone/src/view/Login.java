@@ -1,34 +1,57 @@
 package view;
 
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.io.IOException;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.Font;
-import javax.swing.JCheckBox;
 import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class Login extends JFrame {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
 
-	public Login() throws IOException{
-	this.init();	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Login loginFrame = new Login();
+					loginFrame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
-	
-	public void init() throws IOException {
+
+	/**
+	 * Create the frame.
+	 */
+	public Login() {
 		this.setTitle("Đăng nhập");
-		System.setProperty( "sun.java2d.uiScale", "1.0" );
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1350,700);
 		
@@ -36,12 +59,12 @@ public class Login extends JFrame {
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);		
 		Color lightOrangeColor = new Color(255, 204, 153);
-		 Color woodColor = new Color(210, 180, 140);
-		 Color beigeColor = new Color(245, 245, 220);
-	Color darkBrown=new Color(139, 69, 19);
+		Color woodColor = new Color(210, 180, 140);
+		Color beigeColor = new Color(245, 245, 220);
+		Color darkBrown=new Color(139, 69, 19);
 
-	Color oalkColor=new Color(	139, 106, 80);
-		Image myPicture=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/phone.jpg"));//
+		Color oalkColor=new Color(	139, 106, 80);
+		Image myPicture=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/view/Assets/planet.jpg"));//
 		Image nvidia_pic=myPicture.getScaledInstance(1000,670,Image.SCALE_SMOOTH);
 	
 		getContentPane().setLayout(null);
@@ -67,7 +90,7 @@ public class Login extends JFrame {
 		panel_login.add(textField);
 		
 		textField.setColumns(10);
-		Image my_email=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/email.png"));//
+		Image my_email=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/view/Assets/email.png"));//
 		Image email_pic=my_email.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		
 		
@@ -77,7 +100,7 @@ public class Login extends JFrame {
 		textField_1.setBounds(82, 241, 313, 55);
 		panel_login.add(textField_1);
 		textField_1.setColumns(10);
-		Image my_password=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/key.png"));//
+		Image my_password=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/view/Assets/key-icon.png"));//
 	
 		Image password_pic=my_password.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		
@@ -121,15 +144,8 @@ public class Login extends JFrame {
 		panel_login.add(chckbxNewCheckBox);
 
 
+		
 	}
-	public static void main(String[] args) {
-		System.setProperty("sun.java2d.uiScale", "1.0");
+	
 
-		try {
-			Login lg=new Login();
-			lg.setVisible(true);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	}
 }
