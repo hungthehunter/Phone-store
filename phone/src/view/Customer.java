@@ -40,7 +40,6 @@ public class Customer extends JFrame {
 	private JTable table;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
@@ -67,119 +66,120 @@ public class Customer extends JFrame {
 		 Color woodColor = new Color(210, 180, 140);
         Color darkGreen = new Color(0, 100, 0);
         Color buttonGreen = new Color(0, 150, 0);
+        Color purple_light=new Color(202,207,255);
 		navbar_panel.setBackground(Color.WHITE);
         
 		JLabel picture_navbar = new JLabel("PICTURE");
 		picture_navbar.setBounds(10, 10, 359, 208);
-		Image my_email=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/planet.jpg"));//
+		Image my_email=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/planet.jpg"));//
 		Image email_pic=my_email.getScaledInstance(359, 208, Image.SCALE_SMOOTH);
 		picture_navbar.setIcon(new ImageIcon(email_pic));
 		navbar_panel.add(picture_navbar);
 		
 		
-		Image my_customer=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/customer_picture.png"));//
+		Image my_customer=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/customer_picture.png"));//
 		Image customer_pic=my_customer.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon customer_icon=new ImageIcon(customer_pic);
 		
 		JButton Customer_button = new JButton("Customer",customer_icon);	
-		Customer_button.setBackground(new Color(135, 206, 235));
+		Customer_button.setBackground(purple_light);
 		Customer_button.setFont(new Font("Verdana", Font.BOLD, 12));
 		Customer_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 	    Customer_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
 		Customer_button.setBounds(10, 249, 359, 41);
 		navbar_panel.add(Customer_button);
 		
-		Image my_invoice=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/invoice.png"));//
+		Image my_invoice=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/invoice.png"));//
 		Image invoice_pic=my_invoice.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon invoice_icon=new ImageIcon(invoice_pic);
 		
 		JButton Invoice_button = new JButton("Invoice",invoice_icon);
-		Invoice_button.setBackground(new Color(154, 205, 50));
+		Invoice_button.setBackground(purple_light);
 		Invoice_button.setFont(new Font("Verdana", Font.BOLD, 12));
 		Invoice_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 		Invoice_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
 		Invoice_button.setBounds(10, 310, 359, 41);
 		navbar_panel.add(Invoice_button);
 	
-		Image my_counterParty=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/counterParty.png"));//
+		Image my_counterParty=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/counterParty.png"));//
 		Image counterParty_pic=my_counterParty.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon counterParty_icon=new ImageIcon(counterParty_pic);
 		
 		JButton counterParty_button = new JButton("Counter Party",counterParty_icon);
-		counterParty_button.setBackground(new Color(154, 205, 50));
+		counterParty_button.setBackground(purple_light);
 		counterParty_button.setFont(new Font("Verdana", Font.BOLD, 12));
 		counterParty_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 		counterParty_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
 		counterParty_button.setBounds(10, 373, 359, 41);
 		navbar_panel.add(counterParty_button);
 				
-		Image my_staff=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/staff.png"));//
+		Image my_staff=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/staff.png"));//
 		Image staff_pic=my_staff.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon staff_icon=new ImageIcon(staff_pic);
 		
 		JButton staff_button = new JButton("Staff",staff_icon);
-		staff_button.setBackground(new Color(154, 205, 50));
+		staff_button.setBackground(purple_light);
 		staff_button.setFont(new Font("Verdana", Font.BOLD, 12));
 		staff_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 		staff_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
 		staff_button.setBounds(10, 436, 359, 41);
 		navbar_panel.add(staff_button);
 		
-		Image my_salary=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/salary.png"));//
+		Image my_salary=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/salary.png"));//
 		Image salary_pic=my_salary.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon salary_icon=new ImageIcon(salary_pic);
 		
 		JButton salary_button = new JButton("Salary",salary_icon);
-		salary_button.setBackground(new Color(154, 205, 50));
+		salary_button.setBackground(purple_light);
 		salary_button.setFont(new Font("Verdana", Font.BOLD, 12));
 		salary_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 		salary_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
 		salary_button.setBounds(10, 499, 359, 41);
 		navbar_panel.add(salary_button);
 		
-		Image my_warantty=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/warrenty.png"));//
+		Image my_warantty=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/warrenty.png"));//
 		Image warantty_pic=my_warantty.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon warranty_icon=new ImageIcon(warantty_pic);
 		
 		JButton warantty_button = new JButton("Warranty",warranty_icon);
-		warantty_button.setBackground(new Color(154, 205, 50));
+		warantty_button.setBackground(purple_light);
 		warantty_button.setFont(new Font("Verdana", Font.BOLD, 12));
 		salary_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 		salary_button.setVerticalTextPosition(SwingConstants.CENTER);
 		warantty_button.setBounds(10, 565, 359, 41);
 		navbar_panel.add(warantty_button);
 		
-		Image my_products=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/phone.jpeg"));//
+		Image my_products=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/phone.jpeg"));//
 		Image products_pic=my_products.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon products_icon=new ImageIcon(products_pic);
 		
 		JButton products_button = new JButton("Products",products_icon);
-		products_button.setBackground(new Color(154, 205, 50));
+		products_button.setBackground(purple_light);
 		products_button.setFont(new Font("Tahoma", Font.BOLD, 12));
 		products_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 		products_button.setVerticalTextPosition(SwingConstants.CENTER);
 		products_button.setBounds(10, 627, 359, 41);
 		navbar_panel.add(products_button);
 		
-		Image my_statistics=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/Statistics.png"));//
+		Image my_statistics=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/Statistics.png"));//
 		Image statistics_pic=my_statistics.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon statistics_icon=new ImageIcon(statistics_pic);
 		
 		JButton statistics_button = new JButton("Statistics", statistics_icon);
-		statistics_button.setBackground(new Color(154, 205, 50));
+		statistics_button.setBackground(purple_light);
 		statistics_button.setFont(new Font("Tahoma", Font.BOLD, 12));
 		statistics_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 		statistics_button.setVerticalTextPosition(SwingConstants.CENTER);
 		statistics_button.setBounds(10, 693, 359, 41);
 		navbar_panel.add(statistics_button);
 		
-		Image my_director=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/director.png"));//
+		Image my_director=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/director.png"));//
 		Image director_pic=my_director.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon director_icon=new ImageIcon(director_pic);
 
 		
 		JButton director_button = new JButton("Director",director_icon);
-		director_button.setBackground(new Color(154, 205, 50));
+		director_button.setBackground(purple_light);
 		director_button.setFont(new Font("Verdana", Font.BOLD, 12));
 		director_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 		director_button.setVerticalTextPosition(SwingConstants.CENTER);
@@ -187,6 +187,7 @@ public class Customer extends JFrame {
 		navbar_panel.add(director_button);
 		
 		JPanel panel_content = new JPanel();
+		panel_content.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_content.setBackground(new Color(240, 240, 240));
 		panel_content.setBounds(379, 31, 1057, 814);
 		getContentPane().add(panel_content);
@@ -270,11 +271,6 @@ public class Customer extends JFrame {
 		Birth_label.setBounds(10, 197, 91, 13);
 		Searching_panel.add(Birth_label);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(99, 181, 268, 44);
-		Searching_panel.add(textField_2);
-		
 		JLabel Birth_label_1 = new JLabel("Gender :");
 		Birth_label_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		Birth_label_1.setBounds(10, 280, 91, 13);
@@ -331,6 +327,21 @@ public class Customer extends JFrame {
 		Searching_panel.add(textField_5);
 		textField_5.setColumns(10);
 		
+		String []day_list=new String[] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+		String []month_list=new String[] {"1","2","3","4","5","6","7","8","9","10","11","12"};
+		String []year_list=new String[]{"2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023"};
+		JComboBox day_comboBox = new JComboBox(day_list);
+		day_comboBox.setBounds(121, 181, 68, 34);
+		Searching_panel.add(day_comboBox);
+		
+		JComboBox month_comboBox = new JComboBox(month_list);
+		month_comboBox.setBounds(212, 181, 68, 34);
+		Searching_panel.add(month_comboBox);
+		
+		JComboBox year_comboBox = new JComboBox(year_list);
+		year_comboBox.setBounds(299, 181, 68, 34);
+		Searching_panel.add(year_comboBox);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 274, 650, 540);
@@ -353,7 +364,7 @@ public class Customer extends JFrame {
 		panel_content.add(function_panel);
 		function_panel.setLayout(null);
 		
-		Image my_add=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/add.png"));//
+		Image my_add=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/add.png"));//
 		Image add_pic=my_add.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon add_icon=new ImageIcon(add_pic);
 		
@@ -362,7 +373,7 @@ public class Customer extends JFrame {
 		add_button.setBounds(27, 10, 72, 57);
 		function_panel.add(add_button);
 		
-		Image my_accept=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/accept.png"));//
+		Image my_accept=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/accept.png"));//
 		Image accept_pic=my_accept.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon accept_icon=new ImageIcon(accept_pic);
 		
@@ -370,7 +381,7 @@ public class Customer extends JFrame {
 		accept_button.setBounds(109, 10, 72, 57);
 		function_panel.add(accept_button);
 		
-		Image my_delete=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/delete.png"));//
+		Image my_delete=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/delete.png"));//
 		Image delete_pic=my_delete.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon delete_icon=new ImageIcon(delete_pic);
 		
@@ -378,7 +389,7 @@ public class Customer extends JFrame {
 		delete_button.setBounds(200, 10, 72, 57);
 		function_panel.add(delete_button);
 		
-		Image my_clear=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/clear.png"));//
+		Image my_clear=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/clear.png"));//
 		Image clear_pic=my_clear.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		ImageIcon clear_icon=new ImageIcon(clear_pic);
 		
@@ -386,14 +397,15 @@ public class Customer extends JFrame {
 		clear_button.setBounds(282, 10, 72, 57);
 		function_panel.add(clear_button);
 		
-		Image my_customer_header=Toolkit.getDefaultToolkit().createImage(Login.class.getResource("/Icon/customer_picture.png"));//
+		Image my_customer_header=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/Icon/customer_picture.png"));//
 		Image customer_header_pic=my_customer_header.getScaledInstance(20, 15, Image.SCALE_SMOOTH);
 		ImageIcon customer_header_icon=new ImageIcon(customer_header_pic);
 		
 		JLabel customer_label = new JLabel("Customer");
+		customer_label.setBackground(new Color(135, 206, 235));
 		customer_label.setIcon(customer_header_icon);
 		customer_label.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		customer_label.setBounds(383, 10, 142, 22);
+		customer_label.setBounds(383, 0, 142, 32);
 		getContentPane().add(customer_label);
 		
 	}
