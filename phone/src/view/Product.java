@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
@@ -20,7 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class Product extends JFrame {
+public class Product extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -37,32 +39,32 @@ public class Product extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Product productFrame = new Product();
-					productFrame.setVisible(true);
-					productFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-					productFrame.setSize(1110, 856);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Product productFrame = new Product();
+//					productFrame.setVisible(true);
+//					productFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+//					productFrame.setSize(1110, 856);
+//					
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Product() {
-		setSize(1110, 856);
-		 
+         setLayout(new BorderLayout());
+//	     setPreferredSize(new Dimension(1110, 856));
+         
 		 contentPane = new JPanel();
 	     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	     contentPane.setBounds(5, 5, 1110, 856);
-	     setContentPane(contentPane);
 	     contentPane.setLayout(null);
 	     
 	     JLabel lblHnhnh = new JLabel("Hình Ảnh");
@@ -296,7 +298,9 @@ public class Product extends JFrame {
 	     btnNewButton.setBounds(10, 421, 129, 42);
 	     contentPane.add(btnNewButton);
 	     
-	     	     
+	     // Lưu ý phải có dòng code này 
+	     add(contentPane, BorderLayout.CENTER);
+
 		
 	
 	}

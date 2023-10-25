@@ -39,13 +39,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 public class Menu extends JFrame {
-
-
-
-
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 		
 		public Menu() {
@@ -173,6 +166,15 @@ public class Menu extends JFrame {
 			products_button.setVerticalTextPosition(SwingConstants.CENTER);
 			products_button.setBounds(10, 627, 359, 41);
 			navbar_panel.add(products_button);
+			products_button.addActionListener(new ActionListener() {
+			    @Override
+			    public void actionPerformed(ActionEvent e) {
+			        // Xử lý khi nhấn vào label "Products".
+			        // Tạo một instance của lớp Product và hiển thị nó.
+			        Product productFrame = new Product();
+			        productFrame.setVisible(true);
+			    }
+			});
 //			
 //			Image my_statistics=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/Statistics.png"));//
 		    Image my_statistics = new ImageIcon("Assets/Icon/Statistics.png").getImage();
