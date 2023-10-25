@@ -34,15 +34,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 public class homePage extends JFrame {
-
-
-
-
 		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+		private JLabel homePage_staff_pic;
+		private JLabel homepage_staff_pic;
+
 		public homePage() {
 			this.setTitle("Trang chủ");
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,7 +65,7 @@ public class homePage extends JFrame {
 	        Color purple_light=new Color(202,207,255);
 			navbar_panel.setBackground(Color.WHITE);
 	        
-			JLabel picture_navbar = new JLabel("PICTURE");
+			JLabel picture_navbar = new JLabel("");
 			picture_navbar.setBounds(10, 10, 359, 208);
 			Image my_email=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/planet.jpg"));//
 			Image email_pic=my_email.getScaledInstance(359, 208, Image.SCALE_SMOOTH);
@@ -75,17 +73,17 @@ public class homePage extends JFrame {
 			navbar_panel.add(picture_navbar);
 			
 			
-			Image my_customer=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/customer_picture.png"));//
-			Image customer_pic=my_customer.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-			ImageIcon customer_icon=new ImageIcon(customer_pic);
+			Image my_homePage=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/home.png"));//
+			Image homePage_pic=my_homePage.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
+			ImageIcon homePage_icon=new ImageIcon(homePage_pic);
 			
-			JButton Customer_button = new JButton("Customer",customer_icon);	
-			Customer_button.setBackground(purple_light);
-			Customer_button.setFont(new Font("Verdana", Font.BOLD, 12));
-			Customer_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
-		    Customer_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
-			Customer_button.setBounds(10, 249, 359, 41);
-			navbar_panel.add(Customer_button);
+			JButton homePage_button = new JButton("homePage",homePage_icon);	
+			homePage_button.setBackground(purple_light);
+			homePage_button.setFont(new Font("Verdana", Font.BOLD, 12));
+			homePage_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
+		    homePage_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
+			homePage_button.setBounds(10, 249, 359, 41);
+			navbar_panel.add(homePage_button);
 			
 			Image my_invoice=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/invoice.png"));//
 			Image invoice_pic=my_invoice.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
@@ -184,37 +182,127 @@ public class homePage extends JFrame {
 			director_button.setBounds(10, 760, 359, 41);
 			navbar_panel.add(director_button);
 			
-			String []number_list=new String[] {"1","2","3","4","5","6","7","8","9"};
+			JPanel panel = new JPanel();
+			panel.setBounds(381, 31, 1055, 804);
+			getContentPane().add(panel);
+			panel.setLayout(null);
 			
-			String[] customer_type_list=new String[] {"VIP","NORMAL"};
+			JLabel homePage_title = new JLabel("                               CHÀO MỪNG BẠN ĐĂNG NHẬP");
+			homePage_title.setBackground(Color.DARK_GRAY);
+			homePage_title.setForeground(Color.WHITE);
+			homePage_title.setFont(new Font("Times New Roman", Font.BOLD, 26));
+			homePage_title.setBounds(65, 0, 807, 154);
+			homePage_title.setOpaque(true);
+			panel.add(homePage_title);
 			
-			String []day_list=new String[] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
-			String []month_list=new String[] {"1","2","3","4","5","6","7","8","9","10","11","12"};
-			String []year_list=new String[]{"2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023"};
+			ImageIcon icon = new ImageIcon("D:/Esclipse/phone/Assets/wuju.jpg");
+			Image image = icon.getImage();
+			Image scaledImage = image.getScaledInstance(271, 167, Image.SCALE_SMOOTH); // Set desired width and height
+			ImageIcon scaledIcon = new ImageIcon(scaledImage);
 			
-			Image my_add=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/add.png"));//
-			Image add_pic=my_add.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-			ImageIcon add_icon=new ImageIcon(add_pic);
+			JLabel homepage_staff = new JLabel(scaledIcon);
+			homepage_staff.setBounds(378, 217, 271, 167);
 			
-			Image my_accept=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/accept.png"));//
-			Image accept_pic=my_accept.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-			ImageIcon accept_icon=new ImageIcon(accept_pic);
+			panel.add(homepage_staff);
 			
-			Image my_delete=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/delete.png"));//
-			Image delete_pic=my_delete.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-			ImageIcon delete_icon=new ImageIcon(delete_pic);
+			JLabel name_label = new JLabel("Tên :");
+			name_label.setFont(new Font("Times New Roman", Font.BOLD, 16));
+			name_label.setBounds(280, 469, 69, 28);
+			panel.add(name_label);
 			
-			Image my_clear=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/clear.png"));//
-			Image clear_pic=my_clear.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-			ImageIcon clear_icon=new ImageIcon(clear_pic);
+			JLabel gender_label = new JLabel("Giới tính :");
+			gender_label.setFont(new Font("Times New Roman", Font.BOLD, 16));
+			gender_label.setBounds(280, 546, 69, 28);
+			panel.add(gender_label);
 			
-			Image my_customer_header=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/customer_picture.png"));//
-			Image customer_header_pic=my_customer_header.getScaledInstance(20, 15, Image.SCALE_SMOOTH);
-			ImageIcon customer_header_icon=new ImageIcon(customer_header_pic);
+			JLabel dayOfBirth_label = new JLabel("Ngày sinh:");
+			dayOfBirth_label.setFont(new Font("Times New Roman", Font.BOLD, 16));
+			dayOfBirth_label.setBounds(280, 636, 88, 28);
+			panel.add(dayOfBirth_label);
+			
+			JLabel name_label_long = new JLabel("Quốc Hưng");
+			name_label_long.setFont(new Font("Times New Roman", Font.BOLD, 15));
+			name_label_long.setBackground(Color.LIGHT_GRAY);
+			name_label_long.setOpaque(true);
+			name_label_long.setBounds(378, 462, 271, 44);
+			panel.add(name_label_long);
+			
+			JLabel gender_label_long = new JLabel("Name");
+			gender_label_long.setFont(new Font("Tahoma", Font.BOLD, 15));
+			gender_label_long.setBackground(Color.LIGHT_GRAY);
+			gender_label_long.setOpaque(true);
+			gender_label_long.setBounds(378, 539, 271, 44);
+			panel.add(gender_label_long);
+			
+			JLabel dayOfbirth_label = new JLabel("14/02/2003");
+			dayOfbirth_label.setFont(new Font("Times New Roman", Font.BOLD, 15));
+			dayOfbirth_label.setBackground(Color.LIGHT_GRAY);
+			dayOfbirth_label.setOpaque(true);
+			dayOfbirth_label.setBounds(378, 629, 271, 44);
+			panel.add(dayOfbirth_label);
+			
+			Image my_account_button=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/staff.png"));//
+			Image account_button_pic=my_account_button.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
+			ImageIcon account_button_icon=new ImageIcon(account_button_pic); 
+			
+			
+			
+			JButton account_button = new JButton("Tài khoản",account_button_icon);
+			account_button.setBackground(SystemColor.inactiveCaption);
+			account_button.setFont(new Font("Tahoma", Font.BOLD, 12));
+			account_button.setBounds(742, 509, 157, 51);
+			panel.add(account_button);
+			
+			
+			Image my_change_password=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/changepassword.png"));//
+			Image change_password_pic=my_change_password.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
+			ImageIcon change_password_icon=new ImageIcon(change_password_pic); 
+			
+			JButton changpass_button = new JButton("đổi mật khẩu",change_password_icon);
+			changpass_button.setBackground(SystemColor.inactiveCaption);
+			changpass_button.setFont(new Font("Tahoma", Font.BOLD, 12));
+			changpass_button.setBounds(742, 597, 157, 51);
+			panel.add(changpass_button);
+			
+			Image my_log_off=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/log_off.png"));//
+			Image log_off_pic=my_log_off.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
+			ImageIcon log_off_icon=new ImageIcon(log_off_pic);
+			
+			JButton logOff_button = new JButton("Đăng xuất",log_off_icon);
+			logOff_button.setBackground(SystemColor.inactiveCaption);
+			logOff_button.setFont(new Font("Tahoma", Font.BOLD, 12));
+			logOff_button.setBounds(742, 684, 157, 51);
+			panel.add(logOff_button);
+			
+			JLabel duty_label = new JLabel("Chức vụ :");
+			duty_label.setFont(new Font("Times New Roman", Font.BOLD, 16));
+			duty_label.setBounds(276, 707, 69, 28);
+			panel.add(duty_label);
+			
+			JLabel duty_lable_long = new JLabel("Lính Bắn tỉa");
+			duty_lable_long.setFont(new Font("Times New Roman", Font.BOLD, 15));
+			duty_lable_long.setBackground(Color.LIGHT_GRAY);
+			duty_lable_long.setOpaque(true);
+			duty_lable_long.setBounds(378, 700, 271, 44);
+			panel.add(duty_lable_long);
+			
+			Image my_homePage_header=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/home.png"));//
+			Image homePage_header_pic=my_homePage_header.getScaledInstance(25, 20, Image.SCALE_SMOOTH);
+			ImageIcon homePage_header_icon=new ImageIcon(homePage_header_pic);
+			JLabel homePage_header_title = new JLabel("Home");
+			homePage_header_title.setFont(new Font("Tahoma", Font.BOLD, 12));
+			 homePage_header_title.setIcon(homePage_header_icon);
+			homePage_header_title.setBounds(381, 0, 94, 33);
+			getContentPane().add(homePage_header_title);
+			
+			
+		//Test
+			
+			
+			
 			
 		}
-		
-		
+	
 		public static void main(String[] args) {
 			System.setProperty("sun.java2d.uiScale", "1.0");
 		try {
