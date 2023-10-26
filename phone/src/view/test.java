@@ -234,19 +234,19 @@ public class test extends JFrame {
 			Image customer_header_pic=my_customer_header.getScaledInstance(20, 15, Image.SCALE_SMOOTH);
 			ImageIcon customer_header_icon=new ImageIcon(customer_header_pic);
 			
-			products_button.addActionListener(new ActionListener() {
-			    @Override
-			    public void actionPerformed(ActionEvent e) {
-			    	panelContentMain.removeAll();
-
-			        Product productFrame = new Product();
-			        productFrame.setSize(1110, 856);
-			        panelContentMain.add(productFrame);
-
-			        panelContentMain.revalidate();
-			        panelContentMain.repaint();
-			    }
-			});
+//			employee_button.addActionListener(new ActionListener() {
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+//					panelContentMain.removeAll();
+//					
+//					Employee employeeFrame = new Employee();
+//					employeeFrame.setSize(1071, 856);
+//					panelContentMain.add(employeeFrame);
+//					
+//					panelContentMain.revalidate();
+//					panelContentMain.repaint();
+//				}
+//			});
 			
 			warranty_button.addActionListener(new ActionListener() {
 			    @Override
@@ -261,6 +261,21 @@ public class test extends JFrame {
 			        panelContentMain.repaint();
 			    }
 			});
+			
+			products_button.addActionListener(new ActionListener() {
+			    @Override
+			    public void actionPerformed(ActionEvent e) {
+			    	panelContentMain.removeAll();
+
+			        Product productFrame = new Product();
+			        productFrame.setSize(1110, 856);
+			        panelContentMain.add(productFrame);
+
+			        panelContentMain.revalidate();
+			        panelContentMain.repaint();
+			    }
+			});
+			
 		}
 		
 		
