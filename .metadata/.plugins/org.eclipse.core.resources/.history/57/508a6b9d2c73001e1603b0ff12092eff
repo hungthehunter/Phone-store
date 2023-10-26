@@ -1,0 +1,73 @@
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+public class Product extends JPanel {
+    private JTable productTable;
+    private JTextField productIDText;
+    private JTextField productNameText;
+    private JTextField productCatText;
+    private JTextField productPurchaseText;
+    private JTextField productPriceText;
+    private JTextField productProducerText;
+    private JTextField productQuantityText;
+    private JTextField productImageText;
+    private JTextField textField;
+
+    public Product() {
+        setLayout(null);
+
+        // Rest of your code...
+
+        // Product Table Area
+        JPanel panelProductTable = new JPanel();
+        panelProductTable.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        panelProductTable.setBounds(10, 43, 610, 358);
+        add(panelProductTable);
+        panelProductTable.setLayout(null);
+
+        // Your table setup code here...
+
+        // Product Info Area
+        JPanel panelProductInfo = new JPanel();
+        panelProductInfo.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        panelProductInfo.setBounds(630, 43, 454, 358);
+        add(panelProductInfo);
+        panelProductInfo.setLayout(null);
+
+        // Rest of your code...
+
+        // Product Action Area
+        JPanel panelProductAction = new JPanel();
+        panelProductAction.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        panelProductAction.setBounds(630, 412, 454, 63);
+        add(panelProductAction);
+        panelProductAction.setLayout(null);
+
+        // Your buttons setup code here...
+
+        // Rest of your code...
+
+        // Product Find Area
+        JPanel panelProductFind = new JPanel();
+        panelProductFind.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        panelProductFind.setBounds(340, 412, 272, 226);
+        add(panelProductFind);
+        panelProductFind.setLayout(null);
+
+        // Your find components setup code here...
+
+        // Rest of your code...
+
+        // Product Display img area
+        JPanel panelPoductImage = new JPanel();
+        panelPoductImage.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        panelPoductImage.setBounds(149, 412, 150, 226);
+        add(panelPoductImage);
+        panelPoductImage.setLayout(null);
+
+        // Rest of your code...
+    }
+
+    // Add any additional methods for your Product panel here.
+}

@@ -1,0 +1,45 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MainFrame extends JFrame {
+    private ProductPanel productPanel;
+
+    public MainFrame() {
+        setTitle("Your Main Frame");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1200, 900);
+
+        productPanel = new ProductPanel();
+
+        JButton showProductButton = new JButton("Show Product");
+        showProductButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Add ProductPanel to the main frame when the button is clicked
+                setContentPane(productPanel);
+                revalidate();
+                repaint();
+            }
+        });
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(showProductButton, BorderLayout.NORTH);
+        setContentPane(mainPanel);
+    }
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    MainFrame mainFrame = new MainFrame();
+                    mainFrame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+}

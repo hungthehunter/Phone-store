@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+	<addCategory
+		id="custom_1698129146099"
+		name="productTable"
+		description=""
+		visible="true"
+		open="true"
+		nextCategory="org.eclipse.wb.swing.components"/>
+	<moveCategory
+		id="org.eclipse.wb.swing.containers"
+		nextCategory="org.eclipse.wb.swing.actions"/>
+	<removeCategory
+		id="custom_1698129146099"/>
+</commands>

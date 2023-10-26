@@ -1,0 +1,5 @@
+INDEX VERSION 1.134+C:\Users\kotak\OneDrive\Máy tính\Phone-store-workSpace\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+3413270776.index
+305446040.index
+1222838767.index

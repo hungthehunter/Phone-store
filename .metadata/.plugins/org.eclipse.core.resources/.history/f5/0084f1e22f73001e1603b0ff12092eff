@@ -1,0 +1,74 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Product extends JPanel {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField productIDText;
+	private JTextField productNameText;
+	private JTextField productCatText;
+	private JTextField productPurchaseText;
+	private JTextField productPriceText;
+	private JTextField productProducerText;
+	private JTextField productQuantityText;
+	private JTextField productImageText;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Product productFrame = new Product();
+//					productFrame.setVisible(true);
+//					productFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+//					productFrame.setSize(1110, 856);
+//					
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the frame.
+	 */
+
+    public public Product() {
+		// TODO Auto-generated constructor stub
+	}() {
+        setLayout(new BorderLayout());
+
+        JPanel panelProductInfo = new JPanel();
+        panelProductInfo.setLayout(new GridLayout(2, 2));
+
+        JLabel lblProductID = new JLabel("Product ID:");
+        productIDText = new JTextField(20);
+        JLabel lblProductName = new JLabel("Product Name:");
+        productNameText = new JTextField(20);
+
+        panelProductInfo.add(lblProductID);
+        panelProductInfo.add(productIDText);
+        panelProductInfo.add(lblProductName);
+        panelProductInfo.add(productNameText);
+
+        JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(e -> {
+            // Handle the save button action here
+        });
+
+        add(panelProductInfo, BorderLayout.CENTER);
+        add(saveButton, BorderLayout.SOUTH);
+    }
+}

@@ -1,0 +1,102 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+public class MenuWithButton extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MenuWithButton frame = new MenuWithButton();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public MenuWithButton() {
+		JFrame frame = new JFrame("Menu with Buttons");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+
+        // Tạo JPanel chứa các nút
+        JPanel menuPanel = new JPanel();
+        JButton button1 = new JButton("Giao diện 1");
+        JButton button2 = new JButton("Giao diện 2");
+        JButton button3 = new JButton("Giao diện 3");
+        menuPanel.add(button1);
+        menuPanel.add(button2);
+        menuPanel.add(button3);
+
+        // Tạo JPanel chứa các giao diện
+        JPanel cardPanel = new JPanel();
+        CardLayout cardLayout = new CardLayout();
+        cardPanel.setLayout(cardLayout);
+
+        JPanel interface1 = new JPanel();
+        interface1.add(new JLabel("Giao diện 1"));
+
+        JPanel interface2 = new JPanel();
+        interface2.add(new JLabel("Giao diện 2"));
+
+        JPanel interface3 = new JPanel();
+        interface3.add(new JLabel("Giao diện 3"));
+
+        
+        Login login = new Login();
+        cardPanel.add(interface1, "Giao diện 1");
+        cardPanel.add(interface2, "Giao diện 2");
+        cardPanel.add(interface3, "Giao diện 3");
+
+        // Xử lý sự kiện khi nút được nhấn
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "Giao diện 1");
+            }
+        });
+
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "Giao diện 2");
+            }
+        });
+
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "Giao diện 3");
+            }
+        });
+
+        // Thêm menuPanel và cardPanel vào frame
+        frame.add(menuPanel, BorderLayout.NORTH);
+        frame.add(cardPanel, BorderLayout.CENTER);
+
+        frame.setVisible(true);
+    }
+
+}
