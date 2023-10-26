@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 
 import javax.swing.JButton;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -166,16 +167,8 @@ public class Menu extends JFrame {
 			products_button.setVerticalTextPosition(SwingConstants.CENTER);
 			products_button.setBounds(10, 627, 359, 41);
 			navbar_panel.add(products_button);
-			products_button.addActionListener(new ActionListener() {
-			    @Override
-			    public void actionPerformed(ActionEvent e) {
-			        // Xử lý khi nhấn vào label "Products".
-			        // Tạo một instance của lớp Product và hiển thị nó.
-			        Product productFrame = new Product();
-			        productFrame.setVisible(true);
-			    }
-			});
-//			
+			
+			
 //			Image my_statistics=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/Statistics.png"));//
 		    Image my_statistics = new ImageIcon("Assets/Icon/Statistics.png").getImage();
 			Image statistics_pic=my_statistics.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
@@ -202,6 +195,11 @@ public class Menu extends JFrame {
 			director_button.setVerticalTextPosition(SwingConstants.CENTER);
 			director_button.setBounds(10, 760, 359, 41);
 			navbar_panel.add(director_button);
+			
+			JPanel panelContentMain = new JPanel();
+			panelContentMain.setBounds(377, 0, 1003, 749);
+			getContentPane().add(panelContentMain);
+			panelContentMain.setLayout(null);
 //			
 			String []number_list=new String[] {"1","2","3","4","5","6","7","8","9"};
 			
@@ -236,6 +234,23 @@ public class Menu extends JFrame {
 			Image customer_header_pic=my_customer_header.getScaledInstance(20, 15, Image.SCALE_SMOOTH);
 			ImageIcon customer_header_icon=new ImageIcon(customer_header_pic);
 			
+			products_button.addActionListener(new ActionListener() {
+			    @Override
+			    public void actionPerformed(ActionEvent e) {
+			    	panelContentMain.removeAll();
+
+			        Product productFrame = new Product();
+			        productFrame.setSize(1110, 856);
+			        panelContentMain.add(productFrame);
+			        
+			        
+			        panelContentMain.revalidate();
+			        panelContentMain.repaint();
+			    	
+			    }
+			});
+//			
+			
 		}
 		
 		
@@ -243,7 +258,7 @@ public class Menu extends JFrame {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						Menu menuFrame = new Menu();
+						test menuFrame = new test();
 						menuFrame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
