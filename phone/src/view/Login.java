@@ -100,7 +100,8 @@ public class Login extends JFrame {
 		textField_1.setBounds(82, 241, 313, 55);
 		panel_login.add(textField_1);
 		textField_1.setColumns(10);
-		Image my_password=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/key.png"));
+		Image my_password=new ImageIcon("Assets/key.png").getImage();//
+
 	
 		Image password_pic=my_password.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		
