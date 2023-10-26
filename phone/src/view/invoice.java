@@ -141,22 +141,22 @@ public class invoice extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("");
-		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Pictures\\New Folder\\add-outline-icon (1).png"));
+		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Documents\\Phone-store-Vbranch\\phone\\Assets\\Iconadd-outline-icon (1).png"));
 		btnNewButton_1.setBounds(1307, 90, 42, 39);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("");
-		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Pictures\\New Folder\\Trash-empty-icon.png"));
+		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Documents\\Phone-store-Vbranch\\phone\\Assets\\Icon\\Trash-empty-icon.png"));
 		btnNewButton_2.setBounds(1307, 190, 42, 45);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("");
-		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Pictures\\New Folder\\Button-Refresh-icon.png"));
+		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Documents\\Phone-store-Vbranch\\phone\\Assets\\Icon\\Button-Refresh-icon.png"));
 		btnNewButton_3.setBounds(1304, 246, 45, 45);
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("");
-		btnNewButton_4.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Pictures\\New Folder\\media-floppy-icon.png"));
+		btnNewButton_4.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Documents\\Phone-store-Vbranch\\phone\\Assets\\Icon\\media-floppy-icon.png"));
 		btnNewButton_4.setBounds(1307, 140, 42, 39);
 		contentPane.add(btnNewButton_4);
 		
@@ -247,22 +247,22 @@ public class invoice extends JFrame {
 		contentPane.add(lblNewLabel_7);
 		
 		JButton btnNewButton_5 = new JButton("");
-		btnNewButton_5.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Pictures\\New Folder\\Add-Outline-icon.png"));
+		btnNewButton_5.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Documents\\Phone-store-Vbranch\\phone\\Assets\\Icon\\Add-Outline-icon.png"));
 		btnNewButton_5.setBounds(1297, 357, 42, 39);
 		contentPane.add(btnNewButton_5);
 		
 		JButton btnNewButton_6 = new JButton("");
-		btnNewButton_6.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Pictures\\New Folder\\Trash-empty-icon.png"));
+		btnNewButton_6.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Documents\\Phone-store-Vbranch\\phone\\Assets\\Icon\\Trash-empty-icon.png"));
 		btnNewButton_6.setBounds(1297, 402, 42, 45);
 		contentPane.add(btnNewButton_6);
 		
 		JButton btnNewButton_7 = new JButton("");
-		btnNewButton_7.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Pictures\\New Folder\\Button-Refresh-icon.png"));
+		btnNewButton_7.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Documents\\Phone-store-Vbranch\\phone\\Assets\\Icon\\Trash-empty-icon.png"));
 		btnNewButton_7.setBounds(1297, 458, 42, 39);
 		contentPane.add(btnNewButton_7);
 		
 		JButton btnNewButton_8 = new JButton("");
-		btnNewButton_8.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Pictures\\New Folder\\media-floppy-icon.png"));
+		btnNewButton_8.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Documents\\Phone-store-Vbranch\\phone\\Assets\\Icon\\media-floppy-icon.png"));
 		btnNewButton_8.setBounds(1297, 508, 42, 39);
 		contentPane.add(btnNewButton_8);
 		
