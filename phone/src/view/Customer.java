@@ -2,6 +2,8 @@ package view;
 
 
 import java.awt.Image;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -46,6 +48,7 @@ public class Customer extends JFrame {
 	private JTextField textField_6;
 	
 	public Customer() {
+		setBackground(SystemColor.window);
 		this.setTitle("Trang chủ");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1450,900);
@@ -120,7 +123,7 @@ public class Customer extends JFrame {
 		JButton staff_button = new JButton("Staff",staff_icon);
 		staff_button.setBackground(purple_light);
 		staff_button.setFont(new Font("Verdana", Font.BOLD, 12));
-		staff_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
+		staff_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of 	the icon
 		staff_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
 		staff_button.setBounds(10, 436, 359, 41);
 		navbar_panel.add(staff_button);
@@ -402,11 +405,29 @@ public class Customer extends JFrame {
 		ImageIcon customer_header_icon=new ImageIcon(customer_header_pic);
 		
 		JLabel customer_label = new JLabel("Customer");
-		customer_label.setBackground(new Color(135, 206, 235));
+		 Border border = new LineBorder(Color.BLACK, 1); // Red border with a thickness of 2 pixels
+	        customer_label.setBorder(border);
+		customer_label.setBackground(SystemColor.activeCaption);
+		 customer_label.setOpaque(true);
 		customer_label.setIcon(customer_header_icon);
 		customer_label.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		customer_label.setBounds(383, 0, 142, 32);
+		customer_label.setBounds(379, 0, 142, 32);
 		getContentPane().add(customer_label);
+		
+		
+		Image my_homePage_header=Toolkit.getDefaultToolkit().createImage(homePage.class.getResource("/Icon/home.png"));//
+		Image homePage_header_pic=my_homePage_header.getScaledInstance(25, 20, Image.SCALE_SMOOTH);
+		ImageIcon homePage_header_icon=new ImageIcon(homePage_header_pic);
+		
+		JLabel my_homePage_header_title = new JLabel("Trang chủ");
+		my_homePage_header_title.setBorder(border);
+		my_homePage_header_title.setBackground(Color.WHITE);
+		my_homePage_header_title.setOpaque(true);
+		my_homePage_header_title.setIcon(homePage_header_icon);
+		my_homePage_header_title.setBounds(520, 0, 142, 32);
+		getContentPane().add(my_homePage_header_title);
+		
+		
 		
 	}
 	
