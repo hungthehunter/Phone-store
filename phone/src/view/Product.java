@@ -60,8 +60,7 @@ public class Product extends JPanel {
 	 */
 	public Product() {
          setLayout(new BorderLayout());
-//	     setPreferredSize(new Dimension(1110, 856));
-         
+         setSize(1110, 856);
 		 contentPane = new JPanel();
 	     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	     contentPane.setBounds(5, 5, 1110, 856);
@@ -93,6 +92,7 @@ public class Product extends JPanel {
 	     contentPane.add(lblThngTinSn);
 	     
 	     
+	     //Product Table Area
 	     String[] columnNames = {"STT", "Mã SP", "Tên SP", "Loại SP", "Giá Nhập", "Giá Bán", "Hãng SX", "Tồn Kho", "Hình Ảnh", "Chú Thích"};
 	     Object[][] data = {
 	         {"1", "SP001", "Sản phẩm 1", "Loại 1", "100", "150", "Hãng A", "50", "image1.jpg", "Mô tả sản phẩm 1"},
@@ -105,7 +105,6 @@ public class Product extends JPanel {
 	                return false;
 	            }
 	        };
-	     //Product Table Area
 		 JPanel panelProductTable = new JPanel();
 		 panelProductTable.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		 panelProductTable.setBounds(10, 43, 610, 358);
@@ -245,10 +244,10 @@ public class Product extends JPanel {
 	     panelProductAction.add(deleteProductBtn);
 	     
 	     JButton refreshProductBtn = new JButton();
-	     refreshProductBtn.setBounds(369, 11, 75, 41);
 	     Image iconRefresh = new ImageIcon("Assets/clear.png").getImage();
 	     iconRefresh = iconRefresh.getScaledInstance(75, 41, Image.SCALE_SMOOTH);
 	     refreshProductBtn.setIcon(new ImageIcon(iconRefresh));
+	     refreshProductBtn.setBounds(369, 11, 75, 41);
 	     panelProductAction.add(refreshProductBtn);
 	     
 	     JLabel label = new JLabel("New label");
