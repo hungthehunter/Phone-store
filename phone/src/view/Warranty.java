@@ -65,13 +65,12 @@ public class Warranty extends JPanel {
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		setSize(1450, 800);
 //		setLocationRelativeTo(null);
-//		setTitle("Quan Ly Dien Thoai");
 		warranty_panel = new JPanel();
 //		setContentPane(warranty_panel);
 		
 		warranty_panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		warranty_panel.setBounds(5, 5, 1071, 856);
+		warranty_panel.setBounds(2, 2, 1071, 856);
 		warranty_panel.setLayout(null);
 		
 		JLabel lblIMEI = new JLabel("Ma IMEI");
@@ -107,7 +106,7 @@ public class Warranty extends JPanel {
 		warranty_detail_table = new JTable(warranty_detailModel);
 		warranty_detail_table.getTableHeader().setReorderingAllowed(false);
 		JScrollPane warranty_detail_scroll = new JScrollPane(warranty_detail_table);
-		warranty_detail_scroll.setBounds(10, 137, 897, 134);
+		warranty_detail_scroll.setBounds(10, 137, 1026, 134);
 		warranty_detail_scroll.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		warranty_panel.add(warranty_detail_scroll);
 
@@ -126,7 +125,7 @@ public class Warranty extends JPanel {
 		warranty_inf_table = new JTable(warranty_infModel);
 		warranty_inf_table.getTableHeader().setReorderingAllowed(false);
 		JScrollPane warranty_inf_scroll = new JScrollPane(warranty_inf_table);
-		warranty_inf_scroll.setBounds(36, 379, 723, 331);
+		warranty_inf_scroll.setBounds(21, 378, 723, 331);
 		warranty_panel.add(warranty_inf_scroll);
 		
 		JLabel lblCTBH = new JLabel("Mã CTBH:");

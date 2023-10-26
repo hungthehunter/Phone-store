@@ -197,7 +197,7 @@ public class test extends JFrame {
 			navbar_panel.add(director_button);
 			
 			JPanel panelContentMain = new JPanel();
-			panelContentMain.setBounds(379, 0, 1001, 749);
+			panelContentMain.setBounds(379, 0, 1400, 749);
 			getContentPane().add(panelContentMain);
 			panelContentMain.setLayout(null);
 //			
