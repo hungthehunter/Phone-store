@@ -1,12 +1,16 @@
 package view;
+import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -261,10 +265,58 @@ public class invoice extends JFrame {
 		btnNewButton_8.setIcon(new ImageIcon("C:\\Users\\Ain1144\\Pictures\\New Folder\\media-floppy-icon.png"));
 		btnNewButton_8.setBounds(1297, 508, 42, 39);
 		contentPane.add(btnNewButton_8);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
+		 String[] columnNames = {"mã HĐ", "Khách Hàng", "Nhân viên", "ngày lập hóa đơn","tổng tiền"};
+	     Object[][] data = {
+	         {"GHN1", "Lê Trung Hiếu","Vũ Nguyễn Quang Vinh", "22/6/2014", "23tr9"},
+	         {"YHY2", "Hồ Ngọc Hà","Cao Chấn Vũ ","13/2/2013", "4tr9"},
+	     };
+	     
+	     DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+	            @Override
+	            public boolean isCellEditable(int row, int column) {
+	                return false;
+	            }
+	        };
+	     //Product Table Area
+		 JPanel panelProductTable = new JPanel();
+		 panelProductTable.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		 panelProductTable.setBounds(20, 20, 910, 320);
+		 contentPane.add(panelProductTable);
+		 panelProductTable.setLayout(null);
+		     	     
+		 JTable productTable = new JTable(model);
+		 productTable.getTableHeader().setReorderingAllowed(false);
+		     
+		 JScrollPane scrollPaneProductTable = new JScrollPane(productTable);
+		 scrollPaneProductTable.setBounds(10, 10, 890, 300);
+		 panelProductTable.add(scrollPaneProductTable);
+		 
+		 
+		 String[] columnNames1 = {"mã CTHĐ","mã HĐ","SP","mã IMEI", "số lượng", "Thành tiền", "ghi chú"};
+	     Object[][] data1 = {
+	         {"GHN01", "GHN1","Sản phẩm 1","001", "23","23tr9","no"},
+	         {"YHY02", "YHY2","Sản phẩm 2","002", "41","4tr9","no"},
+	     };
+		 DefaultTableModel model1 = new DefaultTableModel(data1, columnNames1) {
+	            @Override
+	            public boolean isCellEditable(int row, int column) {
+	                return false;
+	            }
+	        };
+	     //Product Table Area1
+		 JPanel panelProductTable1 = new JPanel();
+		 panelProductTable1.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		 panelProductTable1.setBounds(20, 230, 910, 420);
+		 contentPane.add(panelProductTable1);
+		 panelProductTable1.setLayout(null);
+		     	     
+		 JTable productTable1 = new JTable(model);
+		 productTable1.getTableHeader().setReorderingAllowed(false);
+		     
+		 JScrollPane scrollPaneProductTable1 = new JScrollPane(productTable1);
+		 scrollPaneProductTable1.setBounds(10, 150, 890, 150);
+		 panelProductTable1.add(scrollPaneProductTable1);
 	}
 }
 
