@@ -258,7 +258,7 @@ public class Menu extends JFrame {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						test menuFrame = new test();
+						Menu menuFrame = new Menu();
 						menuFrame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
