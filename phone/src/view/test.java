@@ -115,18 +115,18 @@ public class test extends JFrame {
 			counterParty_button.setBounds(10, 373, 359, 41);
 			navbar_panel.add(counterParty_button);
 					
-//			Image my_staff=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/staff.png"));//
-		    Image my_staff = new ImageIcon("Assets/Icon/staff.png").getImage();
-			Image staff_pic=my_staff.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-			ImageIcon staff_icon=new ImageIcon(staff_pic);
+//			Image my_employee=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/employee.png"));//
+		    Image my_employee = new ImageIcon("Assets/Icon/employee.png").getImage();
+			Image employee_pic=my_employee.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
+			ImageIcon employee_icon=new ImageIcon(employee_pic);
 			
-			JButton staff_button = new JButton("Staff",staff_icon);
-			staff_button.setBackground(purple_light);
-			staff_button.setFont(new Font("Verdana", Font.BOLD, 12));
-			staff_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
-			staff_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
-			staff_button.setBounds(10, 436, 359, 41);
-			navbar_panel.add(staff_button);
+			JButton employee_button = new JButton("Employee",employee_icon);
+			employee_button.setBackground(purple_light);
+			employee_button.setFont(new Font("Verdana", Font.BOLD, 12));
+			employee_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
+			employee_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
+			employee_button.setBounds(10, 436, 359, 41);
+			navbar_panel.add(employee_button);
 //			
 //			Image my_salary=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/salary.png"));//
 		    Image my_salary = new ImageIcon("Assets/Icon/salary.png").getImage();
@@ -146,13 +146,13 @@ public class test extends JFrame {
 			Image warantty_pic=my_warantty.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 			ImageIcon warranty_icon=new ImageIcon(warantty_pic);
 			
-			JButton warantty_button = new JButton("Warranty",warranty_icon);
-			warantty_button.setBackground(purple_light);
-			warantty_button.setFont(new Font("Verdana", Font.BOLD, 12));
+			JButton warranty_button = new JButton("Warranty",warranty_icon);
+			warranty_button.setBackground(purple_light);
+			warranty_button.setFont(new Font("Verdana", Font.BOLD, 12));
 			salary_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 			salary_button.setVerticalTextPosition(SwingConstants.CENTER);
-			warantty_button.setBounds(10, 565, 359, 41);
-			navbar_panel.add(warantty_button);
+			warranty_button.setBounds(10, 565, 359, 41);
+			navbar_panel.add(warranty_button);
 //			
 //			Image my_products=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/phone.jpeg"));//
 		    Image my_products = new ImageIcon("Assets/Icon/phone.jpeg").getImage();
@@ -245,11 +245,22 @@ public class test extends JFrame {
 
 			        panelContentMain.revalidate();
 			        panelContentMain.repaint();
-			    	
 			    }
 			});
-//			
 			
+			warranty_button.addActionListener(new ActionListener() {
+			    @Override
+			    public void actionPerformed(ActionEvent e) {
+			    	panelContentMain.removeAll();
+
+			        Warranty warrantyFrame = new Warranty();
+			        warrantyFrame.setSize(1071, 856);
+			        panelContentMain.add(warrantyFrame);
+
+			        panelContentMain.revalidate();
+			        panelContentMain.repaint();
+			    }
+			});
 		}
 		
 		
