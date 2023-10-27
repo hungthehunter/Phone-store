@@ -81,7 +81,14 @@ public class Menu extends JFrame {
 			ImageIcon customer_icon=new ImageIcon(customer_pic);
 			
 			JButton Customer_button = new JButton("Customer",customer_icon);	
+<<<<<<< HEAD
 			
+=======
+			Customer_button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+>>>>>>> d9ce5488dfbb0515ad6dfb80464e2bac9763204f
 			Customer_button.setBackground(purple_light);
 			Customer_button.setFont(new Font("Verdana", Font.BOLD, 12));
 			Customer_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
@@ -96,7 +103,14 @@ public class Menu extends JFrame {
 			ImageIcon invoice_icon=new ImageIcon(invoice_pic);
 			
 			JButton Invoice_button = new JButton("Invoice",invoice_icon);
+<<<<<<< HEAD
 			
+=======
+			Invoice_button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+>>>>>>> d9ce5488dfbb0515ad6dfb80464e2bac9763204f
 			Invoice_button.setBackground(purple_light);
 			Invoice_button.setFont(new Font("Verdana", Font.BOLD, 12));
 			Invoice_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
@@ -238,6 +252,7 @@ public class Menu extends JFrame {
 			
 			
 			//Xử lý sự kiện button cho các label menu
+<<<<<<< HEAD
 			Customer_button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					panelContentMain.removeAll();
@@ -266,6 +281,11 @@ public class Menu extends JFrame {
 				
 				@Override
 				
+=======
+			warantty_button.addActionListener(new ActionListener() {
+				
+				@Override
+>>>>>>> d9ce5488dfbb0515ad6dfb80464e2bac9763204f
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					panelContentMain.removeAll();
@@ -279,7 +299,11 @@ public class Menu extends JFrame {
 				}
 			});
 			
+<<<<<<< HEAD
 		
+=======
+			
+>>>>>>> d9ce5488dfbb0515ad6dfb80464e2bac9763204f
 			products_button.addActionListener(new ActionListener() {
 			    @Override
 			    public void actionPerformed(ActionEvent e) {
