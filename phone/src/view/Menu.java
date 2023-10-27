@@ -54,7 +54,7 @@ public class Menu extends JFrame {
 			this.setResizable(false);
 			
 			JPanel navbar_panel = new JPanel();
-			navbar_panel.setBounds(0, 0, 379, 856);
+			navbar_panel.setBounds(0, 0, 253, 856);
 			getContentPane().add(navbar_panel);
 			navbar_panel.setLayout(null);
 
@@ -66,11 +66,11 @@ public class Menu extends JFrame {
 	        Color purple_light=new Color(202,207,255);
 			navbar_panel.setBackground(Color.WHITE);
 	        
-			JLabel picture_navbar = new JLabel("PICTURE");
-			picture_navbar.setBounds(10, 10, 359, 208);
+			JLabel picture_navbar = new JLabel("");
+			picture_navbar.setBounds(10, 10, 243, 208);
 //			Image my_email=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Assets/planet.jpg"));		     
 		    Image my_email = new ImageIcon("Assets/planet.jpg").getImage();
-			my_email=my_email.getScaledInstance(359, 208, Image.SCALE_SMOOTH);
+			my_email=my_email.getScaledInstance(221, 208, Image.SCALE_SMOOTH);
 			picture_navbar.setIcon(new ImageIcon(my_email));
 			navbar_panel.add(picture_navbar);
 			
@@ -81,11 +81,12 @@ public class Menu extends JFrame {
 			ImageIcon customer_icon=new ImageIcon(customer_pic);
 			
 			JButton Customer_button = new JButton("Customer",customer_icon);	
+			
 			Customer_button.setBackground(purple_light);
 			Customer_button.setFont(new Font("Verdana", Font.BOLD, 12));
 			Customer_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 		    Customer_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
-			Customer_button.setBounds(10, 249, 359, 41);
+			Customer_button.setBounds(10, 249,  233, 41);
 			navbar_panel.add(Customer_button);
 			
 //			Image my_invoice=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/invoice.png"));//
@@ -95,11 +96,12 @@ public class Menu extends JFrame {
 			ImageIcon invoice_icon=new ImageIcon(invoice_pic);
 			
 			JButton Invoice_button = new JButton("Invoice",invoice_icon);
+			
 			Invoice_button.setBackground(purple_light);
 			Invoice_button.setFont(new Font("Verdana", Font.BOLD, 12));
 			Invoice_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 			Invoice_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
-			Invoice_button.setBounds(10, 310, 359, 41);
+			Invoice_button.setBounds(10, 310, 233, 41);
 			navbar_panel.add(Invoice_button);
 //		
 //			Image my_counterParty=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/counterParty.png"));//
@@ -112,7 +114,7 @@ public class Menu extends JFrame {
 			counterParty_button.setFont(new Font("Verdana", Font.BOLD, 12));
 			counterParty_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 			counterParty_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
-			counterParty_button.setBounds(10, 373, 359, 41);
+			counterParty_button.setBounds(10, 373,  233, 41);
 			navbar_panel.add(counterParty_button);
 					
 //			Image my_staff=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/staff.png"));//
@@ -125,7 +127,7 @@ public class Menu extends JFrame {
 			staff_button.setFont(new Font("Verdana", Font.BOLD, 12));
 			staff_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 			staff_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
-			staff_button.setBounds(10, 436, 359, 41);
+			staff_button.setBounds(10, 436,  233, 41);
 			navbar_panel.add(staff_button);
 //			
 //			Image my_salary=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/salary.png"));//
@@ -138,7 +140,7 @@ public class Menu extends JFrame {
 			salary_button.setFont(new Font("Verdana", Font.BOLD, 12));
 			salary_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 			salary_button.setVerticalTextPosition(SwingConstants.CENTER); // Set text position to the center vertically
-			salary_button.setBounds(10, 499, 359, 41);
+			salary_button.setBounds(10, 499,  233, 41);
 			navbar_panel.add(salary_button);
 //			
 //			Image my_warantty=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/warrenty.png"));//
@@ -151,7 +153,7 @@ public class Menu extends JFrame {
 			warantty_button.setFont(new Font("Verdana", Font.BOLD, 12));
 			salary_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 			salary_button.setVerticalTextPosition(SwingConstants.CENTER);
-			warantty_button.setBounds(10, 565, 359, 41);
+			warantty_button.setBounds(10, 565,  233, 41);
 			navbar_panel.add(warantty_button);
 //			
 //			Image my_products=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/phone.jpeg"));//
@@ -165,7 +167,7 @@ public class Menu extends JFrame {
 			products_button.setFont(new Font("Tahoma", Font.BOLD, 12));
 			products_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 			products_button.setVerticalTextPosition(SwingConstants.CENTER);
-			products_button.setBounds(10, 627, 359, 41);
+			products_button.setBounds(10, 627,  233, 41);
 			navbar_panel.add(products_button);
 			
 			
@@ -179,7 +181,7 @@ public class Menu extends JFrame {
 			statistics_button.setFont(new Font("Tahoma", Font.BOLD, 12));
 			statistics_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 			statistics_button.setVerticalTextPosition(SwingConstants.CENTER);
-			statistics_button.setBounds(10, 693, 359, 41);
+			statistics_button.setBounds(10, 693,  233, 41);
 			navbar_panel.add(statistics_button);
 //			
 //			Image my_director=Toolkit.getDefaultToolkit().createImage(Menu.class.getResource("/Icon/director.png"));//
@@ -193,11 +195,11 @@ public class Menu extends JFrame {
 			director_button.setFont(new Font("Verdana", Font.BOLD, 12));
 			director_button.setHorizontalTextPosition(SwingConstants.RIGHT); // Set text position to the right of the icon
 			director_button.setVerticalTextPosition(SwingConstants.CENTER);
-			director_button.setBounds(10, 760, 359, 41);
+			director_button.setBounds(10, 760,  233, 41);
 			navbar_panel.add(director_button);
 			
 			JPanel panelContentMain = new JPanel();
-			panelContentMain.setBounds(377, 0, 1003, 749);
+			panelContentMain.setBounds(250, 0, 1130, 749);
 			getContentPane().add(panelContentMain);
 			panelContentMain.setLayout(null);
 //			
@@ -234,6 +236,50 @@ public class Menu extends JFrame {
 			Image customer_header_pic=my_customer_header.getScaledInstance(20, 15, Image.SCALE_SMOOTH);
 			ImageIcon customer_header_icon=new ImageIcon(customer_header_pic);
 			
+			
+			//Xử lý sự kiện button cho các label menu
+			Customer_button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					panelContentMain.removeAll();
+					Customer CustomerFrame = new Customer();
+					CustomerFrame.setSize(1110, 856);
+					panelContentMain.add(CustomerFrame);
+					
+					panelContentMain.revalidate();
+					panelContentMain.repaint();
+				}
+			});
+			
+			Invoice_button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					panelContentMain.removeAll();
+					Invoice InvoiceFrame = new Invoice();
+					InvoiceFrame.setSize(1110, 856);
+					panelContentMain.add(InvoiceFrame);
+					
+					panelContentMain.revalidate();
+					panelContentMain.repaint();
+				}
+			});
+			
+			warantty_button.addActionListener(new ActionListener() {
+				
+				@Override
+				
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					panelContentMain.removeAll();
+					Warranty warrantyFrame = new Warranty();
+					warrantyFrame.setSize(1110, 856);
+					panelContentMain.add(warrantyFrame);
+					
+					panelContentMain.revalidate();
+					panelContentMain.repaint();
+					
+				}
+			});
+			
+		
 			products_button.addActionListener(new ActionListener() {
 			    @Override
 			    public void actionPerformed(ActionEvent e) {
@@ -242,8 +288,15 @@ public class Menu extends JFrame {
 			        Product productFrame = new Product();
 			        productFrame.setSize(1110, 856);
 			        panelContentMain.add(productFrame);
-			        
-			        
+
+//			    	Category categoryFrame = new Category();
+//			    	categoryFrame.setSize(1110, 856);
+//			    	panelContentMain.add(categoryFrame);
+			    	
+//			    	Receipt receiptFrame = new Receipt();
+//			    	receiptFrame.setSize(1110, 856);
+//			    	panelContentMain.add(receiptFrame);
+			    	
 			        panelContentMain.revalidate();
 			        panelContentMain.repaint();
 			    	
