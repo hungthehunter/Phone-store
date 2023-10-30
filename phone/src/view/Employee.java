@@ -108,18 +108,6 @@ public class Employee extends JPanel{
 		detail_scroll.setBounds(12, 21, 677, 401);
 		detail_panel.add(detail_scroll);
 		
-		Image addIcon = new ImageIcon("Assets/Icon/add.png").getImage();
-		addIcon = addIcon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-		
-		Image deleteIcon = new ImageIcon("Assets/Icon/delete.png").getImage();
-		deleteIcon = deleteIcon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-		
-		Image acceptIcon = new ImageIcon("Assets/Icon/accept.png").getImage();
-		acceptIcon = acceptIcon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-		
-		Image clearIcon = new ImageIcon("Assets/Icon/clear.png").getImage();
-		clearIcon = clearIcon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-		
 		JPanel account_panel = new JPanel();
 		account_panel.setBounds(720, 10, 343, 604);
 		employee_panel.add(account_panel);
@@ -290,6 +278,17 @@ public class Employee extends JPanel{
 		employee_btn_panel.setBorder(BorderFactory.createTitledBorder("Chức năng"));
 		employee_btn_panel.setLayout(null);
 		
+		Image addIcon = new ImageIcon("Assets/Icon/add.png").getImage();
+		addIcon = addIcon.getScaledInstance(41, 32, Image.SCALE_SMOOTH);
+		
+		Image deleteIcon = new ImageIcon("Assets/Icon/delete.png").getImage();
+		deleteIcon = deleteIcon.getScaledInstance(41, 32, Image.SCALE_SMOOTH);
+		
+		Image acceptIcon = new ImageIcon("Assets/Icon/accept.png").getImage();
+		acceptIcon = acceptIcon.getScaledInstance(41, 32, Image.SCALE_SMOOTH);
+		
+		Image clearIcon = new ImageIcon("Assets/Icon/clear.png").getImage();
+		clearIcon = clearIcon.getScaledInstance(41, 32, Image.SCALE_SMOOTH);
 		
 		JButton btnAddStaff = new JButton("");
 		btnAddStaff.setBounds(23, 20, 41, 32);
