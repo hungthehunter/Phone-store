@@ -46,16 +46,16 @@ public class Menu extends JFrame {
 		 
 
 	    
-		/*===== Color =====*/
+		/*==================== Begin: Color ====================*/
 		Color woodColor = new Color(210, 180, 140);
         Color darkGreen = new Color(0, 100, 0);
         Color buttonGreen = new Color(0, 150, 0);
         Color purple_light=new Color(202,207,255);
-        /*===== Color =====*/
+        /*==================== End: Color ====================*/
         
         
         
-        /*===== Sidebar =====*/		
+        /* ==================== Begin: Sidebar  ====================*/		
     	JPanel navbar_panel = new JPanel();
 		navbar_panel.setBounds(0, 0, 400, 845);
 		getContentPane().add(navbar_panel);
@@ -198,17 +198,17 @@ public class Menu extends JFrame {
 			navbar_panel.add(director_button);
 			
 			
-			/*===== Sidebar =====*/			
+			/* ==================== End: Sidebar  ====================*/			
 			
+		
+		
+			
+			/* ==================== Begin: Button  ====================*/	
 			JPanel contentPanel = new JPanel();
 			contentPanel.setBounds(401, 0, 1050, 852);
 			contentPanel.setBorder(null);
 		getContentPane().add(contentPanel);
 			contentPanel.setLayout(null);
-		
-			
-			/*===== Button =====*/	
-	   
 			Customer_button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -274,10 +274,10 @@ public class Menu extends JFrame {
 				}
 			});
 			
-			/*===== Button =====*/
+			/* ==================== End: Button  ====================*/
 			
 			
-			/*===== Dimension =====*/
+			/* ==================== Begin: Dimension  ====================*/
 			
 			 Dimension minimumSize_sidebar_panel = new Dimension(400, 845);
 			 Dimension referenceSize_sidebar_panel = new Dimension(400, 2000);
@@ -356,7 +356,7 @@ public class Menu extends JFrame {
 		        
 		         
 			
-			 /*===== Dimension =====*/
+			 /* ==================== End: Dimension ====================*/
 
 	}
 	public static void main(String[] args) {
