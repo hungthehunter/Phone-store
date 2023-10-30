@@ -20,6 +20,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class Customer extends JPanel {
@@ -39,10 +40,10 @@ public class Customer extends JPanel {
 	public Customer() {
 		setBackground(SystemColor.window);
 	
-		this.setSize(1450,900);
-		
+		this.setSize(1110,856);
+//		
 		this.setVisible(true);
-		
+//		
        this.setLayout(null);
 	
 
@@ -52,7 +53,7 @@ public class Customer extends JPanel {
         Color darkGreen = new Color(0, 100, 0);
         Color buttonGreen = new Color(0, 150, 0);
         Color purple_light=new Color(202,207,255);
-//		Image my_email=Toolkit.getDefaultToolkit().createImage(Customer.class.getResource("/planet.jpg"));
+
 		Image my_email=new ImageIcon("Assets/planet.jpg").getImage();//
 		my_email=my_email.getScaledInstance(359, 208, Image.SCALE_SMOOTH);
 		
@@ -87,13 +88,13 @@ public class Customer extends JPanel {
 		JPanel panel_content = new JPanel();
 		panel_content.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_content.setBackground(new Color(240, 240, 240));
-		panel_content.setBounds(0, 31, 1436, 814);
+		panel_content.setBounds(0, 31, 1034, 814);
 		add(panel_content);
 		panel_content.setLayout(null);
 		
 		JPanel personal_info_panel = new JPanel();
 		personal_info_panel.setBorder(new LineBorder(Color.BLACK));
-		personal_info_panel.setBounds(135, 10, 392, 233);
+		personal_info_panel.setBounds(121, 10, 392, 233);
 		panel_content.add(personal_info_panel);
 		personal_info_panel.setLayout(null);
 		
@@ -138,9 +139,12 @@ public class Customer extends JPanel {
 		customer_type_jcomboBox_1.setBounds(140, 165, 227, 44);
 		personal_info_panel.add(customer_type_jcomboBox_1);
 		
+	
+		
+		/*===== Searching =====*/
 		JPanel Searching_panel = new JPanel();
 		Searching_panel.setBorder(new LineBorder(Color.BLACK));
-		Searching_panel.setBounds(665, 10, 382, 704);
+		Searching_panel.setBounds(651, 10, 377, 705);
 		panel_content.add(Searching_panel);
 		Searching_panel.setLayout(null);
 		
@@ -150,7 +154,7 @@ public class Customer extends JPanel {
 		Searching_panel.add(ID_label);
 		
 		textField = new JTextField();
-		textField.setBounds(99, 25, 268, 44);
+		textField.setBounds(54, 25, 261, 44);
 		Searching_panel.add(textField);
 		textField.setColumns(10);
 		
@@ -161,7 +165,7 @@ public class Customer extends JPanel {
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(99, 104, 268, 44);
+		textField_1.setBounds(68, 104, 247, 44);
 		Searching_panel.add(textField_1);
 		
 		JLabel Birth_label = new JLabel("Day of birth :");
@@ -191,7 +195,7 @@ public class Customer extends JPanel {
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(99, 327, 268, 44);
+		textField_3.setBounds(83, 331, 238, 44);
 		Searching_panel.add(textField_3);
 		
 		JLabel Birth_label_1_1_1 = new JLabel("Phone  :");
@@ -201,27 +205,29 @@ public class Customer extends JPanel {
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(99, 409, 268, 44);
+		textField_4.setBounds(83, 414, 238, 44);
 		Searching_panel.add(textField_4);
 		
 		JLabel Birth_label_1_1_1_1 = new JLabel("Customer type  :");
 		Birth_label_1_1_1_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		Birth_label_1_1_1_1.setBounds(10, 507, 114, 13);
+		Birth_label_1_1_1_1.setBounds(10, 523, 114, 13);
 		Searching_panel.add(Birth_label_1_1_1_1);
 		
 		
 		JComboBox customer_type_jcomboBox = new JComboBox(customer_type_list);
 		customer_type_jcomboBox.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		customer_type_jcomboBox.setBounds(140, 493, 227, 44);
+		customer_type_jcomboBox.setBounds(124, 508, 227, 44);
 		Searching_panel.add(customer_type_jcomboBox);
 		
-		JLabel Birth_label_1_1_1_1_1 = new JLabel("Customer type  :");
+		JLabel Birth_label_1_1_1_1_1 = new JLabel("Comments  :");
 		Birth_label_1_1_1_1_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		Birth_label_1_1_1_1_1.setBounds(10, 648, 114, 21);
+		Birth_label_1_1_1_1_1.setBounds(10, 669, 114, 21);
 		Searching_panel.add(Birth_label_1_1_1_1_1);
+		/*===== Searching =====*/
+		
 		
 		textField_5 = new JTextField();
-		textField_5.setBounds(140, 568, 227, 101);
+		textField_5.setBounds(124, 589, 227, 101);
 		Searching_panel.add(textField_5);
 		textField_5.setColumns(10);
 		
@@ -240,25 +246,29 @@ public class Customer extends JPanel {
 		year_comboBox.setBounds(299, 181, 68, 34);
 		Searching_panel.add(year_comboBox);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(10, 274, 650, 540);
-		panel_content.add(scrollPane);
+		JScrollPane Customer_table = new JScrollPane();
+		Customer_table.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		Customer_table.setBounds(4, 277, 632, 526);
+		panel_content.add(Customer_table);
 		
 		table = new JTable();
-		table.setFont(new Font("Times New Roman", Font.BOLD, 17));
-		scrollPane.setViewportView(table);
+		table.setForeground(new Color(238, 130, 238));
+		table.setFont(new Font("Times New Roman", Font.BOLD, 16));
+
+	 
+		Customer_table.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"comment", "Customer Type", "Phone", "Address", "Gender", "Day of birth", "Name", "ID"
+				"Comment", "Customer Type", "Phone", "Address", "Gender", "Day of birth", "Name", "ID"
 			}
 		));
-		
+		  table.getColumnModel().getColumn(1).setPreferredWidth(100);
+		  table.getColumnModel().getColumn(5).setPreferredWidth(100);
 		JPanel function_panel = new JPanel();
 		function_panel.setBorder(new LineBorder(Color.BLACK));
-		function_panel.setBounds(671, 727, 376, 77);
+		function_panel.setBounds(651, 725, 377, 78);
 		panel_content.add(function_panel);
 		function_panel.setLayout(null);
 		
@@ -268,28 +278,28 @@ public class Customer extends JPanel {
 		
 		JButton add_button = new JButton("",new ImageIcon(add_icon));
 		
-		add_button.setBounds(27, 10, 72, 57);
+		add_button.setBounds(10, 10, 72, 57);
 		function_panel.add(add_button);
 		
 		Image accept_icon=new ImageIcon("Assets/Icon/edit.png").getImage();//
 		accept_icon=accept_icon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		
 		JButton accept_button = new JButton("",new ImageIcon(accept_icon));
-		accept_button.setBounds(109, 10, 72, 57);
+		accept_button.setBounds(106, 10, 72, 57);
 		function_panel.add(accept_button);
 		
 		Image delete_icon=new ImageIcon("Assets/Icon/delete.png").getImage();//
 		delete_icon=delete_icon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		
 		JButton delete_button = new JButton("",new ImageIcon(delete_icon));
-		delete_button.setBounds(200, 10, 72, 57);
+		delete_button.setBounds(201, 10, 72, 57);
 		function_panel.add(delete_button);
 		
 		Image clear_icon=new ImageIcon("Assets/Icon/clear.png").getImage();//
 		clear_icon=clear_icon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
 		
 		JButton clear_button = new JButton("",new ImageIcon(clear_icon));
-		clear_button.setBounds(282, 10, 72, 57);
+		clear_button.setBounds(295, 10, 72, 57);
 		function_panel.add(clear_button);
 		
 		Image customer_header_icon=new ImageIcon("Assets/Icon/homeLane.png").getImage();//
@@ -320,6 +330,12 @@ public class Customer extends JPanel {
 		
 		
 	}
+	
+    private static DefaultTableCellRenderer getRenderer(int fontSize) {
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setFont(new Font("Arial", Font.PLAIN, fontSize));
+        return renderer;
+    }
 
 }
 
