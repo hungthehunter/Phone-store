@@ -46,8 +46,8 @@ import javax.swing.JCheckBox;
 public class Employee extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	private JPanel staff_Staffs_panel;
-	private JTable staff_detail_table;
+	private JPanel employee_panel;
+	private JTable detail_table;
 	private JTextField txtPasswd;
 	private JTextField txtID;
 	private JTextField txtUser;
@@ -69,19 +69,19 @@ public class Employee extends JPanel{
 	public Employee(){
 		setLayout(new BorderLayout());
 		
-		staff_Staffs_panel = new JPanel();
+		employee_panel = new JPanel();
 		
-//		setContentPane(staff_Staffs_panel);
+//		setContentPane(employee_panel);
 		
-		staff_Staffs_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		staff_Staffs_panel.setBounds(2, 2, 1110, 856);
-		staff_Staffs_panel.setLayout(null);
+		employee_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		employee_panel.setBounds(2, 2, 1110, 856);
+		employee_panel.setLayout(null);
 		
-		JPanel staff_detail_panel = new JPanel();
-		staff_detail_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
-		staff_detail_panel.setBounds(5, 5, 704, 444);
-		staff_detail_panel.setBorder(BorderFactory.createTitledBorder("Thông tin chung"));
-		staff_Staffs_panel.add(staff_detail_panel);
+		JPanel detail_panel = new JPanel();
+		detail_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
+		detail_panel.setBounds(5, 5, 704, 444);
+		detail_panel.setBorder(BorderFactory.createTitledBorder("Thông tin chung"));
+		employee_panel.add(detail_panel);
 		
 		String[] detail_columns =  {"Mã NV", "Tên NV", "Ngày Sinh" , "Giới Tính" , "Ngày Vào Làm" , 
 											"Chức Vụ" , "Địa Chỉ" , "SDT" , "Hình Ảnh" , "Chú Thích"};
@@ -95,18 +95,18 @@ public class Employee extends JPanel{
 				{"" , "" , "" , "" , "" , "" , "" , "" , "" ,""} ,
 
 		};
-		DefaultTableModel staff_detailModel = new DefaultTableModel(detail_data, detail_columns){
+		DefaultTableModel detailModel = new DefaultTableModel(detail_data, detail_columns){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-		staff_detail_table = new JTable(staff_detailModel);
-		staff_detail_table.getTableHeader().setReorderingAllowed(false);
-		staff_detail_panel.setLayout(null);
-		JScrollPane staff_detail_scroll = new JScrollPane(staff_detail_table);
-		staff_detail_scroll.setBounds(12, 21, 677, 401);
-		staff_detail_panel.add(staff_detail_scroll);
+		detail_table = new JTable(detailModel);
+		detail_table.getTableHeader().setReorderingAllowed(false);
+		detail_panel.setLayout(null);
+		JScrollPane detail_scroll = new JScrollPane(detail_table);
+		detail_scroll.setBounds(12, 21, 677, 401);
+		detail_panel.add(detail_scroll);
 		
 		Image addIcon = new ImageIcon("Assets/Icon/add.png").getImage();
 		addIcon = addIcon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
@@ -122,7 +122,7 @@ public class Employee extends JPanel{
 		
 		JPanel account_panel = new JPanel();
 		account_panel.setBounds(720, 10, 343, 604);
-		staff_Staffs_panel.add(account_panel);
+		employee_panel.add(account_panel);
 		account_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
 		account_panel.setBorder(BorderFactory.createTitledBorder("Thông tin tài khoản"));
 		account_panel.setLayout(null);
@@ -255,7 +255,7 @@ public class Employee extends JPanel{
 		
 		JPanel search_panel = new JPanel();
 		search_panel.setBounds(15, 459, 257, 155);
-		staff_Staffs_panel.add(search_panel);
+		employee_panel.add(search_panel);
 		search_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
 		search_panel.setBorder(BorderFactory.createTitledBorder("Tìm kiếm"));
 		search_panel.setLayout(null);
@@ -283,18 +283,18 @@ public class Employee extends JPanel{
 		comboBox_1.setBounds(70, 100, 155, 25);
 		search_panel.add(comboBox_1);
 		
-		JPanel staff_staffs_btn_panel = new JPanel();
-		staff_staffs_btn_panel.setBounds(509, 459, 200, 155);
-		staff_Staffs_panel.add(staff_staffs_btn_panel);
-		staff_staffs_btn_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
-		staff_staffs_btn_panel.setBorder(BorderFactory.createTitledBorder("Chức năng"));
-		staff_staffs_btn_panel.setLayout(null);
+		JPanel employee_btn_panel = new JPanel();
+		employee_btn_panel.setBounds(509, 459, 200, 155);
+		employee_panel.add(employee_btn_panel);
+		employee_btn_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
+		employee_btn_panel.setBorder(BorderFactory.createTitledBorder("Chức năng"));
+		employee_btn_panel.setLayout(null);
 		
 		
 		JButton btnAddStaff = new JButton("");
 		btnAddStaff.setBounds(23, 20, 41, 32);
 		btnAddStaff.setIcon(new ImageIcon(addIcon));
-		staff_staffs_btn_panel.add(btnAddStaff);
+		employee_btn_panel.add(btnAddStaff);
 		
 		JButton btnDeleteStaff = new JButton("");
 		btnDeleteStaff.addActionListener(new ActionListener() {
@@ -303,12 +303,12 @@ public class Employee extends JPanel{
 		});
 		btnDeleteStaff.setBounds(23, 95, 41, 32);
 		btnDeleteStaff.setIcon(new ImageIcon(deleteIcon));
-		staff_staffs_btn_panel.add(btnDeleteStaff);
+		employee_btn_panel.add(btnDeleteStaff);
 		
 		JButton btnAcceptStaff = new JButton("");
 		btnAcceptStaff.setBounds(122, 20, 41, 32);
 		btnAcceptStaff.setIcon(new ImageIcon(acceptIcon));
-		staff_staffs_btn_panel.add(btnAcceptStaff);
+		employee_btn_panel.add(btnAcceptStaff);
 		
 		JButton btnClearStaff = new JButton("");
 		btnClearStaff.addActionListener(new ActionListener() {
@@ -317,15 +317,15 @@ public class Employee extends JPanel{
 		});
 		btnClearStaff.setBounds(122, 95, 41, 32);
 		btnClearStaff.setIcon(new ImageIcon(clearIcon));
-		staff_staffs_btn_panel.add(btnClearStaff);
+		employee_btn_panel.add(btnClearStaff);
 		
 		JPanel pic_panel = new JPanel();
 		pic_panel.setBounds(291, 459, 200, 155);
-		staff_Staffs_panel.add(pic_panel);
+		employee_panel.add(pic_panel);
 		pic_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
 		pic_panel.setBorder(BorderFactory.createTitledBorder("Hình ảnh"));
 		pic_panel.setLayout(null);
 
-		add(staff_Staffs_panel, BorderLayout.CENTER);
+		add(employee_panel, BorderLayout.CENTER);
 	}
 }
