@@ -2,11 +2,16 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
+import java.awt.TextArea;
 import java.awt.Toolkit;
 
 import javax.imageio.ImageIO;
@@ -67,264 +72,370 @@ public class Employee extends JPanel{
 	 */
 	
 	public Employee(){
-		setLayout(new BorderLayout());
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[] {400, 400, 400};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0};
+		gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
 		
-		employee_panel = new JPanel();
+		JPanel tablePanel = new JPanel();
+		tablePanel.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		GridBagConstraints gbc_tablePanel = new GridBagConstraints();
+		gbc_tablePanel.gridheight = 2;
+		gbc_tablePanel.weighty = 1.0;
+		gbc_tablePanel.weightx = 1.0;
+		gbc_tablePanel.gridwidth = 2;
+		gbc_tablePanel.insets = new Insets(5, 5, 5, 5);
+		gbc_tablePanel.fill = GridBagConstraints.BOTH;
+		gbc_tablePanel.gridx = 0;
+		gbc_tablePanel.gridy = 0;
+		add(tablePanel, gbc_tablePanel);
+		GridBagLayout gbl_tablePanel = new GridBagLayout();
+		gbl_tablePanel.columnWidths = new int[]{346, 0};
+		gbl_tablePanel.rowHeights = new int[]{16, 0, 83, 0};
+		gbl_tablePanel.columnWeights = new double[]{1.0, 0.0};
+		gbl_tablePanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		tablePanel.setLayout(gbl_tablePanel);
 		
-//		setContentPane(employee_panel);
 		
-		employee_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		employee_panel.setBounds(2, 2, 1110, 856);
-		employee_panel.setLayout(null);
+		JLabel lblTable = new JLabel("Thông Tin Nhân Viên");
+		GridBagConstraints gbc_lblTable = new GridBagConstraints();
+		gbc_lblTable.gridwidth = 2;
+		gbc_lblTable.anchor = GridBagConstraints.NORTH;
+		gbc_lblTable.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblTable.insets = new Insets(0, 0, 5, 0);
+		gbc_lblTable.gridx = 0;
+		gbc_lblTable.gridy = 0;
+		tablePanel.add(lblTable, gbc_lblTable);
+		lblTable.setFont(new Font("Verdana", Font.PLAIN, 12));
+		lblTable.setOpaque(true);
+		lblTable.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JPanel detail_panel = new JPanel();
-		detail_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
-		detail_panel.setBounds(5, 5, 704, 444);
-		detail_panel.setBorder(BorderFactory.createTitledBorder("Thông tin chung"));
-		employee_panel.add(detail_panel);
+		txtEmpSearch = new JTextField();
+		GridBagConstraints gbc_txtEmpSearch = new GridBagConstraints();
+		gbc_txtEmpSearch.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEmpSearch.insets = new Insets(0, 10, 5, 5);
+		gbc_txtEmpSearch.gridx = 0;
+		gbc_txtEmpSearch.gridy = 1;
+		tablePanel.add(txtEmpSearch, gbc_txtEmpSearch);
+		txtEmpSearch.setFont(new Font("Verdana", Font.PLAIN, 12));
+		txtEmpSearch.setColumns(12);
 		
-		String[] detail_columns =  {"Mã NV", "Tên NV", "Ngày Sinh" , "Giới Tính" , "Ngày Vào Làm" , 
-											"Chức Vụ" , "Địa Chỉ" , "SDT" , "Hình Ảnh" , "Chú Thích"};
-		Object[][] detail_data = {
-				{"1A" , "Nguyen Van A" , "12/12/2002" , "Nam" , "12/12/2023" , "Tiếp Tân", "52 Đường số 1" , "010101010101" , "pic" , "Test"} ,
-				{"" , "" , "" , "" , "" , "" , "" , "" , "" ,""} ,
-				{"" , "" , "" , "" , "" , "" , "" , "" , "" ,""} ,
-				{"" , "" , "" , "" , "" , "" , "" , "" , "" ,""} ,
-				{"" , "" , "" , "" , "" , "" , "" , "" , "" ,""} ,
-				{"" , "" , "" , "" , "" , "" , "" , "" , "" ,""} ,
-				{"" , "" , "" , "" , "" , "" , "" , "" , "" ,""} ,
+		JButton btnSearch = new JButton("Tìm kiếm");
+		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
+		gbc_btnSearch.insets = new Insets(0, 0, 5, 5);
+		gbc_btnSearch.gridx = 1;
+		gbc_btnSearch.gridy = 1;
+		tablePanel.add(btnSearch, gbc_btnSearch);
+		GridBagConstraints gbc_scrollEmployeeTable = new GridBagConstraints();
+		gbc_scrollEmployeeTable.insets = new Insets(5, 5, 5, 5);
+		
+		gbc_scrollEmployeeTable.gridwidth = 2;
+		gbc_scrollEmployeeTable.gridheight = 2;
+		gbc_scrollEmployeeTable.fill = GridBagConstraints.BOTH;
+		gbc_scrollEmployeeTable.gridx = 0;
+		gbc_scrollEmployeeTable.gridy = 2;
+		
+	    
+	    String[] columnNames1 = {"Mã Nhân Viên", "Tên Nhân Viên", "Ngày Sinh", "Giới Tính", "Email" , "Số Điện Thoại", "Địa Chỉ", "Chức Vụ", "Ghi Chú"};
+	    Object[][] data1 = {
+	         {"NVA", "Nguyễn Văn A", "09/12/2000", "Nam", "nva@gmail.com", "0909298272", "43/23 Đường Số 1", "Quản lý", ""},
+	         {"NVB", "Nguyễn Văn B", "01/12/2000", "Nam", "nvb@gmail.com", "0909292272", "43/23 Đường Số 4", "Nhân viên" , ""},
+	     };
+	     
+	    DefaultTableModel modelEmployee = new DefaultTableModel(data1, columnNames1) {
+	            @Override
+	            public boolean isCellEditable(int row, int column) {
+	                return false;
+	            }
+	     };
+	    JTable EmployeeTable = new JTable(modelEmployee);
+		EmployeeTable.getTableHeader().setReorderingAllowed(false);
+		JScrollPane scrollEmployeeTable = new JScrollPane(EmployeeTable);
+		tablePanel.add(scrollEmployeeTable, gbc_scrollEmployeeTable);
 
-		};
-		DefaultTableModel detailModel = new DefaultTableModel(detail_data, detail_columns){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-		detail_table = new JTable(detailModel);
-		detail_table.getTableHeader().setReorderingAllowed(false);
-		detail_panel.setLayout(null);
-		JScrollPane detail_scroll = new JScrollPane(detail_table);
-		detail_scroll.setBounds(12, 21, 677, 401);
-		detail_panel.add(detail_scroll);
 		
-		JPanel account_panel = new JPanel();
-		account_panel.setBounds(720, 10, 343, 604);
-		employee_panel.add(account_panel);
-		account_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
-		account_panel.setBorder(BorderFactory.createTitledBorder("Thông tin tài khoản"));
-		account_panel.setLayout(null);
+		JPanel inputPanel = new JPanel();
+		inputPanel.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		GridBagConstraints gbc_inputPanel = new GridBagConstraints();
+		gbc_inputPanel.insets = new Insets(5, 0, 5, 5);
+		gbc_inputPanel.gridheight = 2;
+		gbc_inputPanel.weighty = 1.0;
+		gbc_inputPanel.weightx = 1.0;
+		gbc_inputPanel.fill = GridBagConstraints.BOTH;
+		gbc_inputPanel.gridx = 2;
+		gbc_inputPanel.gridy = 0;
+		add(inputPanel, gbc_inputPanel);
+		GridBagLayout gbl_inputPanel = new GridBagLayout();
+		gbl_inputPanel.columnWidths = new int[] {0, 73, 69};
+		gbl_inputPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 72, 0, 0, 169, 0};
+		gbl_inputPanel.columnWeights = new double[]{0.0, 1.0, 1.0};
+		gbl_inputPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		inputPanel.setLayout(gbl_inputPanel);
 		
-		JLabel lblmaNV = new JLabel("Mã NV:");
-		lblmaNV.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblmaNV.setBounds(15, 30, 75, 13);
-		account_panel.add(lblmaNV);
+		JLabel lblInfo = new JLabel("Thông Tin Cá Nhân");
+		GridBagConstraints gbc_lblInfo = new GridBagConstraints();
+		gbc_lblInfo.insets = new Insets(10, 0, 10, 0);
+		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		gbc_lblInfo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblInfo.gridwidth = 3;
+		gbc_lblInfo.gridx = 0;
+		gbc_lblInfo.gridy = 0;
+		inputPanel.add(lblInfo, gbc_lblInfo);
 		
-		JLabel lvlTenNV = new JLabel("Tên NV:");
-		lvlTenNV.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lvlTenNV.setBounds(15, 81, 75, 13);
-		account_panel.add(lvlTenNV);
+		JLabel lblEmpId = new JLabel("Mã NV:");
+		lblEmpId.setFont(new Font("Verdana", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblEmpId = new GridBagConstraints();
+		gbc_lblEmpId.weightx = 1.0;
+		gbc_lblEmpId.insets = new Insets(0, 0, 10, 5);
+		gbc_lblEmpId.gridx = 0;
+		gbc_lblEmpId.gridy = 1;
+		inputPanel.add(lblEmpId, gbc_lblEmpId);
 		
-		JLabel lblBDay = new JLabel("Ngày sinh:");
-		lblBDay.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblBDay.setBounds(15, 132, 89, 13);
-		account_panel.add(lblBDay);
+		txtEmpId = new JTextField();
+		txtEmpId.setFont(new Font("Verdana", Font.PLAIN, 12));
+		GridBagConstraints gbc_txtEmpId = new GridBagConstraints();
+		gbc_txtEmpId.weightx = 1.0;
+		gbc_txtEmpId.gridwidth = 2;
+		gbc_txtEmpId.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpId.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEmpId.gridx = 1;
+		gbc_txtEmpId.gridy = 1;
+		inputPanel.add(txtEmpId, gbc_txtEmpId);
+		txtEmpId.setColumns(10);
+		
+		JLabel lblEmpName = new JLabel("Tên nhân viên:");
+		lblEmpName.setFont(new Font("Verdana", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblEmpName = new GridBagConstraints();
+		gbc_lblEmpName.insets = new Insets(0, 0, 10, 5);
+		gbc_lblEmpName.gridx = 0;
+		gbc_lblEmpName.gridy = 2;
+		inputPanel.add(lblEmpName, gbc_lblEmpName);
+		
+		txtEmpName = new JTextField();
+		txtEmpName.setFont(new Font("Verdana", Font.PLAIN, 12));
+		txtEmpName.setColumns(10);
+		GridBagConstraints gbc_txtEmpName = new GridBagConstraints();
+		gbc_txtEmpName.gridwidth = 2;
+		gbc_txtEmpName.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEmpName.gridx = 1;
+		gbc_txtEmpName.gridy = 2;
+		inputPanel.add(txtEmpName, gbc_txtEmpName);
+		
+		JLabel lblEmpBirth = new JLabel("Ngày sinh:");
+		lblEmpBirth.setFont(new Font("Verdana", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblEmpBirth = new GridBagConstraints();
+		gbc_lblEmpBirth.insets = new Insets(0, 0, 10, 5);
+		gbc_lblEmpBirth.gridx = 0;
+		gbc_lblEmpBirth.gridy = 3;
+		inputPanel.add(lblEmpBirth, gbc_lblEmpBirth);
+		
+		txtEmpBirth = new JTextField();
+		txtEmpBirth.setFont(new Font("Verdana", Font.PLAIN, 12));
+		txtEmpBirth.setColumns(10);
+		GridBagConstraints gbc_txtEmpBirth = new GridBagConstraints();
+		gbc_txtEmpBirth.gridwidth = 2;
+		gbc_txtEmpBirth.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpBirth.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEmpBirth.gridx = 1;
+		gbc_txtEmpBirth.gridy = 3;
+		inputPanel.add(txtEmpBirth, gbc_txtEmpBirth);
 		
 		JLabel lblGender = new JLabel("Giới tính:");
 		lblGender.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblGender.setBounds(15, 183, 89, 13);
-		account_panel.add(lblGender);
+		GridBagConstraints gbc_lblGender = new GridBagConstraints();
+		gbc_lblGender.insets = new Insets(0, 0, 10, 5);
+		gbc_lblGender.gridx = 0;
+		gbc_lblGender.gridy = 4;
+		inputPanel.add(lblGender, gbc_lblGender);
 		
-		JLabel lblDayIn = new JLabel("Ngày vào làm:");
-		lblDayIn.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblDayIn.setBounds(15, 234, 89, 13);
-		account_panel.add(lblDayIn);
+		JRadioButton rdbtnMale = new JRadioButton("Nam");
+		GridBagConstraints gbc_rdbtnMale = new GridBagConstraints();
+		gbc_rdbtnMale.insets = new Insets(0, 0, 10, 5);
+		gbc_rdbtnMale.gridx = 1;
+		gbc_rdbtnMale.gridy = 4;
+		inputPanel.add(rdbtnMale, gbc_rdbtnMale);
 		
-		JLabel lblPermission = new JLabel("Chức vụ:");
-		lblPermission.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblPermission.setBounds(15, 285, 75, 13);
-		account_panel.add(lblPermission);
+		JRadioButton rdbtnFemale = new JRadioButton("Nữ");
+		GridBagConstraints gbc_rdbtnFemale = new GridBagConstraints();
+		gbc_rdbtnFemale.insets = new Insets(0, 0, 10, 0);
+		gbc_rdbtnFemale.gridx = 2;
+		gbc_rdbtnFemale.gridy = 4;
+		inputPanel.add(rdbtnFemale, gbc_rdbtnFemale);
 		
-		JLabel lblAddr = new JLabel("Địa chỉ");
-		lblAddr.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblAddr.setBounds(15, 336, 75, 13);
-		account_panel.add(lblAddr);
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setFont(new Font("Verdana", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+		gbc_lblEmail.insets = new Insets(0, 0, 10, 5);
+		gbc_lblEmail.gridx = 0;
+		gbc_lblEmail.gridy = 5;
+		inputPanel.add(lblEmail, gbc_lblEmail);
 		
-		JLabel lblNum = new JLabel("SDT:");
-		lblNum.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblNum.setBounds(15, 387, 75, 13);
-		account_panel.add(lblNum);
+		txtEmpEmail = new JTextField();
+		txtEmpEmail.setFont(new Font("Verdana", Font.PLAIN, 12));
+		txtEmpEmail.setColumns(10);
+		GridBagConstraints gbc_txtEmpEmail = new GridBagConstraints();
+		gbc_txtEmpEmail.gridwidth = 2;
+		gbc_txtEmpEmail.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpEmail.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEmpEmail.gridx = 1;
+		gbc_txtEmpEmail.gridy = 5;
+		inputPanel.add(txtEmpEmail, gbc_txtEmpEmail);
 		
-		JButton lblImg = new JButton("Hình ảnh:");
-		lblImg.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblImg.setBounds(15, 432, 89, 25);
-		account_panel.add(lblImg);
+		JLabel lblEmpNum = new JLabel("SĐT:");
+		lblEmpNum.setFont(new Font("Verdana", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblEmpNum = new GridBagConstraints();
+		gbc_lblEmpNum.insets = new Insets(0, 0, 10, 5);
+		gbc_lblEmpNum.gridx = 0;
+		gbc_lblEmpNum.gridy = 6;
+		inputPanel.add(lblEmpNum, gbc_lblEmpNum);
 		
-		JLabel lblNote = new JLabel("Chú thích:");
-		lblNote.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblNote.setBounds(15, 498, 75, 13);
-		account_panel.add(lblNote);
+		txtEmpNum = new JTextField();
+		txtEmpNum.setFont(new Font("Verdana", Font.PLAIN, 12));
+		txtEmpNum.setColumns(10);
+		GridBagConstraints gbc_txtEmpNum = new GridBagConstraints();
+		gbc_txtEmpNum.gridwidth = 2;
+		gbc_txtEmpNum.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpNum.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEmpNum.gridx = 1;
+		gbc_txtEmpNum.gridy = 6;
+		inputPanel.add(txtEmpNum, gbc_txtEmpNum);
 		
-		txtmaNV = new JTextField();
-		txtmaNV.setFont(new Font("Verdana", Font.PLAIN, 12));
-		txtmaNV.setBounds(120, 22, 200, 25);
-		account_panel.add(txtmaNV);
+		JLabel lblAddrs = new JLabel("Địa chỉ:");
+		lblAddrs.setFont(new Font("Verdana", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblAddrs = new GridBagConstraints();
+		gbc_lblAddrs.insets = new Insets(0, 0, 10, 5);
+		gbc_lblAddrs.gridx = 0;
+		gbc_lblAddrs.gridy = 7;
+		inputPanel.add(lblAddrs, gbc_lblAddrs);
 		
-		txtTenNV = new JTextField();
-		txtTenNV.setFont(new Font("Verdana", Font.PLAIN, 12));
-		txtTenNV.setBounds(120, 73, 200, 25);
-		account_panel.add(txtTenNV);
+		txtEmpAddrs = new JTextField();
+		txtEmpAddrs.setFont(new Font("Verdana", Font.PLAIN, 12));
+		txtEmpAddrs.setColumns(10);
+		GridBagConstraints gbc_txtEmpAddrs = new GridBagConstraints();
+		gbc_txtEmpAddrs.gridwidth = 2;
+		gbc_txtEmpAddrs.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpAddrs.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEmpAddrs.gridx = 1;
+		gbc_txtEmpAddrs.gridy = 7;
+		inputPanel.add(txtEmpAddrs, gbc_txtEmpAddrs);
 		
-		txtDiaChi = new JTextField();
-		txtDiaChi.setFont(new Font("Verdana", Font.PLAIN, 12));
-		txtDiaChi.setBounds(120, 328, 200, 25);
-		account_panel.add(txtDiaChi);
+		JLabel lblEmpPos = new JLabel("Chức vụ:");
+		lblEmpPos.setFont(new Font("Verdana", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblEmpPos = new GridBagConstraints();
+		gbc_lblEmpPos.insets = new Insets(0, 0, 10, 5);
+		gbc_lblEmpPos.gridx = 0;
+		gbc_lblEmpPos.gridy = 8;
+		inputPanel.add(lblEmpPos, gbc_lblEmpPos);
 		
-		txtSDT = new JTextField();
-		txtSDT.setFont(new Font("Verdana", Font.PLAIN, 12));
-		txtSDT.setBounds(120, 379, 200, 25);
-		account_panel.add(txtSDT);
+		JComboBox cbBEmpPos = new JComboBox();
+		GridBagConstraints gbc_cbBEmpPos = new GridBagConstraints();
+		gbc_cbBEmpPos.gridwidth = 2;
+		gbc_cbBEmpPos.insets = new Insets(0, 0, 10, 5);
+		gbc_cbBEmpPos.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbBEmpPos.gridx = 1;
+		gbc_cbBEmpPos.gridy = 8;
+		inputPanel.add(cbBEmpPos, gbc_cbBEmpPos);
 		
-		txtImg = new JTextField();
-		txtImg.setFont(new Font("Verdana", Font.PLAIN, 12));
-		txtImg.setBounds(120, 432, 200, 25);
-		account_panel.add(txtImg);
+		JButton btnImage = new JButton("Image");
+		GridBagConstraints gbc_btnImage = new GridBagConstraints();
+		gbc_btnImage.insets = new Insets(0, 0, 5, 5);
+		gbc_btnImage.gridx = 0;
+		gbc_btnImage.gridy = 10;
+		inputPanel.add(btnImage, gbc_btnImage);
 		
-		JTextArea txtNote = new JTextArea("");
-		JScrollPane note_scroll = new JScrollPane(txtNote);
-		note_scroll.setBounds(120, 490, 200, 100);
-		account_panel.add(note_scroll);
+		txtImage = new JTextField();
+		txtImage.setFont(new Font("Verdana", Font.PLAIN, 12));
+		txtImage.setColumns(10);
+		GridBagConstraints gbc_txtImage = new GridBagConstraints();
+		gbc_txtImage.gridwidth = 2;
+		gbc_txtImage.insets = new Insets(0, 0, 5, 5);
+		gbc_txtImage.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtImage.gridx = 1;
+		gbc_txtImage.gridy = 10;
+		inputPanel.add(txtImage, gbc_txtImage);
 		
-		cbbBDay = new JComboBox();
-		//cbbBDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-		cbbBDay.setFont(new Font("Verdana", Font.PLAIN, 12));
-		cbbBDay.setBounds(120, 128, 46, 21);
-		account_panel.add(cbbBDay);
+		JLabel lblImage = new JLabel("Hình Ảnh");
+		lblImage.setFont(new Font("Verdana", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblImage = new GridBagConstraints();
+		gbc_lblImage.gridwidth = 3;
+		gbc_lblImage.insets = new Insets(0, 0, 5, 5);
+		gbc_lblImage.gridx = 0;
+		gbc_lblImage.gridy = 11;
+		inputPanel.add(lblImage, gbc_lblImage);
 		
-		cbbBMonth = new JComboBox();
-		cbbBMonth.setFont(new Font("Verdana", Font.PLAIN, 12));
-		cbbBMonth.setBounds(176, 128, 46, 21);
-		account_panel.add(cbbBMonth);
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridwidth = 3;
+		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 13;
+		inputPanel.add(panel, gbc_panel);
+		panel.setLayout(new BorderLayout(0, 0));
 		
-		cbbBYear = new JComboBox();
-		cbbBYear.setFont(new Font("Verdana", Font.PLAIN, 12));
-		cbbBYear.setBounds(232, 128, 88, 21);
-		account_panel.add(cbbBYear);
+		JLabel lblEmpNote = new JLabel("Ghi chú:");
+		lblEmpNote.setFont(new Font("Verdana", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblEmpNote = new GridBagConstraints();
+		gbc_lblEmpNote.anchor = GridBagConstraints.NORTH;
+		gbc_lblEmpNote.insets = new Insets(0, 0, 10, 5);
+		gbc_lblEmpNote.gridx = 0;
+		gbc_lblEmpNote.gridy = 14;
+		inputPanel.add(lblEmpNote, gbc_lblEmpNote);
 		
-		JRadioButton rdbtnNam = new JRadioButton("Nam");
-		rdbtnNam.setFont(new Font("Verdana", Font.PLAIN, 12));
-		rdbtnNam.setBounds(120, 180, 64, 21);
-		account_panel.add(rdbtnNam);
+		TextArea textArea = new TextArea();
+		textArea.setColumns(1);
+		textArea.setRows(4);
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.anchor = GridBagConstraints.NORTH;
+		gbc_textArea.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textArea.gridwidth = 2;
+		gbc_textArea.insets = new Insets(0, 0, 5, 5);
+		gbc_textArea.gridx = 1;
+		gbc_textArea.gridy = 14;
+		inputPanel.add(textArea, gbc_textArea);
 		
-		JRadioButton rdbtnNu = new JRadioButton("Nu");
-		rdbtnNu.setFont(new Font("Verdana", Font.PLAIN, 12));
-		rdbtnNu.setBounds(232, 180, 64, 21);
-		account_panel.add(rdbtnNu);
+		JPanel btnPanel = new JPanel();
+		GridBagConstraints gbc_btnPanel = new GridBagConstraints();
+		gbc_btnPanel.weightx = 1.0;
+		gbc_btnPanel.insets = new Insets(0, 5, 5, 5);
+		gbc_btnPanel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnPanel.gridwidth = 3;
+		gbc_btnPanel.gridx = 0;
+		gbc_btnPanel.gridy = 15;
+		inputPanel.add(btnPanel, gbc_btnPanel);
+		btnPanel.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JComboBox cbbWDay = new JComboBox();
-		cbbWDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-		cbbWDay.setFont(new Font("Verdana", Font.PLAIN, 12));
-		cbbWDay.setBounds(120, 230, 46, 21);
-		account_panel.add(cbbWDay);
+		Image iconAdd = new ImageIcon("Assets/Icon/add.png").getImage();
+		iconAdd = iconAdd.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		Image iconDelete = new ImageIcon("Assets/Icon/delete.png").getImage();
+		iconDelete = iconDelete.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		Image iconAccept = new ImageIcon("Assets/Icon/accept.png").getImage();
+		iconAccept = iconAccept.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		Image iconClear = new ImageIcon("Assets/Icon/accept.png").getImage();
+		iconClear = iconClear.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
 		
-		JComboBox cbbWMonth = new JComboBox();
-		cbbWMonth.setFont(new Font("Verdana", Font.PLAIN, 12));
-		cbbWMonth.setBounds(176, 230, 46, 21);
-		account_panel.add(cbbWMonth);
+		JButton btnAdd = new JButton("");
+		btnAdd.setIcon(new ImageIcon(iconAdd));
+		btnAdd.setPreferredSize(new Dimension(60, 40));
+		btnPanel.add(btnAdd);
 		
-		JComboBox cbbWYear = new JComboBox();
-		cbbWYear.setFont(new Font("Verdana", Font.PLAIN, 12));
-		cbbWYear.setBounds(232, 230, 88, 21);
-		account_panel.add(cbbWYear);
+		JButton btnDelete= new JButton("");
+		btnDelete.setIcon(new ImageIcon(iconDelete));
+		btnDelete.setPreferredSize(new Dimension(60, 40));
+		btnPanel.add(btnDelete);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(120, 281, 200, 25);
-		account_panel.add(comboBox);
+		JButton btnAccept = new JButton("");
+		btnAccept.setIcon(new ImageIcon(iconDelete));
+		btnAccept.setPreferredSize(new Dimension(60, 40));
+		btnPanel.add(btnAccept);
 		
-		JPanel search_panel = new JPanel();
-		search_panel.setBounds(15, 459, 257, 155);
-		employee_panel.add(search_panel);
-		search_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
-		search_panel.setBorder(BorderFactory.createTitledBorder("Tìm kiếm"));
-		search_panel.setLayout(null);
-		
-		JLabel lblSearchTenNV = new JLabel("Tên NV:");
-		lblSearchTenNV.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblSearchTenNV.setBounds(10, 59, 52, 21);
-		search_panel.add(lblSearchTenNV);
-		
-		JCheckBox cbbtnSearch = new JCheckBox("Tìm kiếm");
-		cbbtnSearch.setBounds(77, 17, 75, 32);
-		search_panel.add(cbbtnSearch);
-		
-		JLabel lblSearchChucVu = new JLabel("Chức vụ:");
-		lblSearchChucVu.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblSearchChucVu.setBounds(10, 104, 57, 21);
-		search_panel.add(lblSearchChucVu);
-		
-		textField = new JTextField();
-		textField.setFont(new Font("Verdana", Font.PLAIN, 12));
-		textField.setBounds(70, 55, 155, 25);
-		search_panel.add(textField);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(70, 100, 155, 25);
-		search_panel.add(comboBox_1);
-		
-		JPanel employee_btn_panel = new JPanel();
-		employee_btn_panel.setBounds(509, 459, 200, 155);
-		employee_panel.add(employee_btn_panel);
-		employee_btn_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
-		employee_btn_panel.setBorder(BorderFactory.createTitledBorder("Chức năng"));
-		employee_btn_panel.setLayout(null);
-		
-		Image addIcon = new ImageIcon("Assets/Icon/add.png").getImage();
-		addIcon = addIcon.getScaledInstance(41, 32, Image.SCALE_SMOOTH);
-		
-		Image deleteIcon = new ImageIcon("Assets/Icon/delete.png").getImage();
-		deleteIcon = deleteIcon.getScaledInstance(41, 32, Image.SCALE_SMOOTH);
-		
-		Image acceptIcon = new ImageIcon("Assets/Icon/accept.png").getImage();
-		acceptIcon = acceptIcon.getScaledInstance(41, 32, Image.SCALE_SMOOTH);
-		
-		Image clearIcon = new ImageIcon("Assets/Icon/clear.png").getImage();
-		clearIcon = clearIcon.getScaledInstance(41, 32, Image.SCALE_SMOOTH);
-		
-		JButton btnAddStaff = new JButton("");
-		btnAddStaff.setBounds(23, 20, 41, 32);
-		btnAddStaff.setIcon(new ImageIcon(addIcon));
-		employee_btn_panel.add(btnAddStaff);
-		
-		JButton btnDeleteStaff = new JButton("");
-		btnDeleteStaff.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnDeleteStaff.setBounds(23, 95, 41, 32);
-		btnDeleteStaff.setIcon(new ImageIcon(deleteIcon));
-		employee_btn_panel.add(btnDeleteStaff);
-		
-		JButton btnAcceptStaff = new JButton("");
-		btnAcceptStaff.setBounds(122, 20, 41, 32);
-		btnAcceptStaff.setIcon(new ImageIcon(acceptIcon));
-		employee_btn_panel.add(btnAcceptStaff);
-		
-		JButton btnClearStaff = new JButton("");
-		btnClearStaff.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnClearStaff.setBounds(122, 95, 41, 32);
-		btnClearStaff.setIcon(new ImageIcon(clearIcon));
-		employee_btn_panel.add(btnClearStaff);
-		
-		JPanel pic_panel = new JPanel();
-		pic_panel.setBounds(291, 459, 200, 155);
-		employee_panel.add(pic_panel);
-		pic_panel.setBorder(new LineBorder(new Color(192, 192, 192)));
-		pic_panel.setBorder(BorderFactory.createTitledBorder("Hình ảnh"));
-		pic_panel.setLayout(null);
-
-		add(employee_panel, BorderLayout.CENTER);
+		JButton btnClear = new JButton("");
+		btnClear.setIcon(new ImageIcon(iconClear));
+		btnClear.setPreferredSize(new Dimension(60, 40));
+		btnPanel.add(btnClear);
 	}
 }
