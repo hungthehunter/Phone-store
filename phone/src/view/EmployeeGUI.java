@@ -48,30 +48,24 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 
 @SuppressWarnings("unused")
-public class Employee extends JPanel{
+public class EmployeeGUI extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	private JPanel employee_panel;
-	private JTable detail_table;
-	private JTextField txtPasswd;
-	private JTextField txtID;
-	private JTextField txtUser;
-	private JTextField txtmaNV;
-	private JTextField txtTenNV;
-	private JTextField txtDiaChi;
-	private JTextField txtSDT;
-	private JTextField txtImg;
-	private JComboBox cbbBDay;
-	private JComboBox cbbBMonth;
-	private JComboBox cbbBYear;
-	private JTextField textField;
+	private JTextField txtEmpSearch;
+	private JTextField txtEmpId;
+	private JTextField txtEmpName;
+	private JTextField txtEmpAddrs;
+	private JTextField txtEmpNum;
+	private JTextField txtEmpEmail;
+	private JTextField txtEmpBirth;
+	private JTextField txtImage;
 	
 	/**
 	 * Create the frame.
 	 * @throws IOException 
 	 */
 	
-	public Employee(){
+	public EmployeeGUI(){
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {400, 400, 400};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0};
@@ -138,11 +132,12 @@ public class Employee extends JPanel{
 		gbc_scrollEmployeeTable.gridy = 2;
 		
 	    
-	    String[] columnNames1 = {"Mã Nhân Viên", "Tên Nhân Viên", "Ngày Sinh", "Giới Tính", "Email" , "Số Điện Thoại", "Địa Chỉ", "Chức Vụ", "Ghi Chú"};
-	    Object[][] data1 = {
-	         {"NVA", "Nguyễn Văn A", "09/12/2000", "Nam", "nva@gmail.com", "0909298272", "43/23 Đường Số 1", "Quản lý", ""},
-	         {"NVB", "Nguyễn Văn B", "01/12/2000", "Nam", "nvb@gmail.com", "0909292272", "43/23 Đường Số 4", "Nhân viên" , ""},
-	     };
+		 String[] columnNames1 = {"STT" ,"Mã Nhân Viên", "Tên Nhân Viên", "Ngày Sinh", "Giới Tính", "Email" , "Số Điện Thoại", "Địa Chỉ", "Chức Vụ", "Ghi Chú"};
+		    Object[][] data1 = {
+		         {"1" ,"NVA", "Nguyễn Văn A", "09/12/2000", "Nam", "nva@gmail.com", "0909298272", "43/23 Đường Số 1", "Quản lý", ""},
+		         {"2", "NVB", "Nguyễn Văn B", "01/12/2000", "Nam", "nvb@gmail.com", "0909292272", "43/23 Đường Số 4", "Nhân viên" , ""},
+		     };
+		     
 	     
 	    DefaultTableModel modelEmployee = new DefaultTableModel(data1, columnNames1) {
 	            @Override
@@ -169,9 +164,9 @@ public class Employee extends JPanel{
 		add(inputPanel, gbc_inputPanel);
 		GridBagLayout gbl_inputPanel = new GridBagLayout();
 		gbl_inputPanel.columnWidths = new int[] {0, 73, 69};
-		gbl_inputPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 72, 0, 0, 169, 0};
+		gbl_inputPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, -68, 64, 0};
 		gbl_inputPanel.columnWeights = new double[]{0.0, 1.0, 1.0};
-		gbl_inputPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_inputPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		inputPanel.setLayout(gbl_inputPanel);
 		
 		JLabel lblInfo = new JLabel("Thông Tin Cá Nhân");
@@ -198,7 +193,7 @@ public class Employee extends JPanel{
 		GridBagConstraints gbc_txtEmpId = new GridBagConstraints();
 		gbc_txtEmpId.weightx = 1.0;
 		gbc_txtEmpId.gridwidth = 2;
-		gbc_txtEmpId.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpId.insets = new Insets(0, 0, 10, 0);
 		gbc_txtEmpId.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtEmpId.gridx = 1;
 		gbc_txtEmpId.gridy = 1;
@@ -218,7 +213,7 @@ public class Employee extends JPanel{
 		txtEmpName.setColumns(10);
 		GridBagConstraints gbc_txtEmpName = new GridBagConstraints();
 		gbc_txtEmpName.gridwidth = 2;
-		gbc_txtEmpName.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpName.insets = new Insets(0, 0, 10, 0);
 		gbc_txtEmpName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtEmpName.gridx = 1;
 		gbc_txtEmpName.gridy = 2;
@@ -237,7 +232,7 @@ public class Employee extends JPanel{
 		txtEmpBirth.setColumns(10);
 		GridBagConstraints gbc_txtEmpBirth = new GridBagConstraints();
 		gbc_txtEmpBirth.gridwidth = 2;
-		gbc_txtEmpBirth.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpBirth.insets = new Insets(0, 0, 10, 0);
 		gbc_txtEmpBirth.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtEmpBirth.gridx = 1;
 		gbc_txtEmpBirth.gridy = 3;
@@ -278,7 +273,7 @@ public class Employee extends JPanel{
 		txtEmpEmail.setColumns(10);
 		GridBagConstraints gbc_txtEmpEmail = new GridBagConstraints();
 		gbc_txtEmpEmail.gridwidth = 2;
-		gbc_txtEmpEmail.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpEmail.insets = new Insets(0, 0, 10, 0);
 		gbc_txtEmpEmail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtEmpEmail.gridx = 1;
 		gbc_txtEmpEmail.gridy = 5;
@@ -297,7 +292,7 @@ public class Employee extends JPanel{
 		txtEmpNum.setColumns(10);
 		GridBagConstraints gbc_txtEmpNum = new GridBagConstraints();
 		gbc_txtEmpNum.gridwidth = 2;
-		gbc_txtEmpNum.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpNum.insets = new Insets(0, 0, 10, 0);
 		gbc_txtEmpNum.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtEmpNum.gridx = 1;
 		gbc_txtEmpNum.gridy = 6;
@@ -316,7 +311,7 @@ public class Employee extends JPanel{
 		txtEmpAddrs.setColumns(10);
 		GridBagConstraints gbc_txtEmpAddrs = new GridBagConstraints();
 		gbc_txtEmpAddrs.gridwidth = 2;
-		gbc_txtEmpAddrs.insets = new Insets(0, 0, 10, 5);
+		gbc_txtEmpAddrs.insets = new Insets(0, 0, 10, 0);
 		gbc_txtEmpAddrs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtEmpAddrs.gridx = 1;
 		gbc_txtEmpAddrs.gridy = 7;
@@ -333,7 +328,7 @@ public class Employee extends JPanel{
 		JComboBox cbBEmpPos = new JComboBox();
 		GridBagConstraints gbc_cbBEmpPos = new GridBagConstraints();
 		gbc_cbBEmpPos.gridwidth = 2;
-		gbc_cbBEmpPos.insets = new Insets(0, 0, 10, 5);
+		gbc_cbBEmpPos.insets = new Insets(0, 0, 10, 0);
 		gbc_cbBEmpPos.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbBEmpPos.gridx = 1;
 		gbc_cbBEmpPos.gridy = 8;
@@ -343,7 +338,7 @@ public class Employee extends JPanel{
 		GridBagConstraints gbc_btnImage = new GridBagConstraints();
 		gbc_btnImage.insets = new Insets(0, 0, 5, 5);
 		gbc_btnImage.gridx = 0;
-		gbc_btnImage.gridy = 10;
+		gbc_btnImage.gridy = 9;
 		inputPanel.add(btnImage, gbc_btnImage);
 		
 		txtImage = new JTextField();
@@ -351,19 +346,19 @@ public class Employee extends JPanel{
 		txtImage.setColumns(10);
 		GridBagConstraints gbc_txtImage = new GridBagConstraints();
 		gbc_txtImage.gridwidth = 2;
-		gbc_txtImage.insets = new Insets(0, 0, 5, 5);
+		gbc_txtImage.insets = new Insets(0, 0, 5, 0);
 		gbc_txtImage.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtImage.gridx = 1;
-		gbc_txtImage.gridy = 10;
+		gbc_txtImage.gridy = 9;
 		inputPanel.add(txtImage, gbc_txtImage);
 		
 		JLabel lblImage = new JLabel("Hình Ảnh");
 		lblImage.setFont(new Font("Verdana", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblImage = new GridBagConstraints();
 		gbc_lblImage.gridwidth = 3;
-		gbc_lblImage.insets = new Insets(0, 0, 5, 5);
+		gbc_lblImage.insets = new Insets(0, 0, 5, 0);
 		gbc_lblImage.gridx = 0;
-		gbc_lblImage.gridy = 11;
+		gbc_lblImage.gridy = 10;
 		inputPanel.add(lblImage, gbc_lblImage);
 		
 		JPanel panel = new JPanel();
@@ -372,7 +367,7 @@ public class Employee extends JPanel{
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 13;
+		gbc_panel.gridy = 12;
 		inputPanel.add(panel, gbc_panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
@@ -382,29 +377,28 @@ public class Employee extends JPanel{
 		gbc_lblEmpNote.anchor = GridBagConstraints.NORTH;
 		gbc_lblEmpNote.insets = new Insets(0, 0, 10, 5);
 		gbc_lblEmpNote.gridx = 0;
-		gbc_lblEmpNote.gridy = 14;
+		gbc_lblEmpNote.gridy = 13;
 		inputPanel.add(lblEmpNote, gbc_lblEmpNote);
 		
 		TextArea textArea = new TextArea();
 		textArea.setColumns(1);
 		textArea.setRows(4);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
-		gbc_textArea.anchor = GridBagConstraints.NORTH;
 		gbc_textArea.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textArea.anchor = GridBagConstraints.NORTH;
 		gbc_textArea.gridwidth = 2;
-		gbc_textArea.insets = new Insets(0, 0, 5, 5);
+		gbc_textArea.insets = new Insets(0, 0, 5, 0);
 		gbc_textArea.gridx = 1;
-		gbc_textArea.gridy = 14;
+		gbc_textArea.gridy = 13;
 		inputPanel.add(textArea, gbc_textArea);
 		
 		JPanel btnPanel = new JPanel();
 		GridBagConstraints gbc_btnPanel = new GridBagConstraints();
-		gbc_btnPanel.weightx = 1.0;
-		gbc_btnPanel.insets = new Insets(0, 5, 5, 5);
+		gbc_btnPanel.insets = new Insets(0, 5, 0, 0);
 		gbc_btnPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPanel.gridwidth = 3;
 		gbc_btnPanel.gridx = 0;
-		gbc_btnPanel.gridy = 15;
+		gbc_btnPanel.gridy = 14;
 		inputPanel.add(btnPanel, gbc_btnPanel);
 		btnPanel.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -415,7 +409,7 @@ public class Employee extends JPanel{
 		iconDelete = iconDelete.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
 		Image iconAccept = new ImageIcon("Assets/Icon/accept.png").getImage();
 		iconAccept = iconAccept.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
-		Image iconClear = new ImageIcon("Assets/Icon/accept.png").getImage();
+		Image iconClear = new ImageIcon("Assets/Icon/clear.png").getImage();
 		iconClear = iconClear.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
 		
 		JButton btnAdd = new JButton("");
@@ -429,7 +423,7 @@ public class Employee extends JPanel{
 		btnPanel.add(btnDelete);
 		
 		JButton btnAccept = new JButton("");
-		btnAccept.setIcon(new ImageIcon(iconDelete));
+		btnAccept.setIcon(new ImageIcon(iconAccept));
 		btnAccept.setPreferredSize(new Dimension(60, 40));
 		btnPanel.add(btnAccept);
 		
