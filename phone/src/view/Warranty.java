@@ -1,8 +1,7 @@
 package view;
 
 import java.awt.EventQueue;
-
-
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,16 +13,23 @@ import javax.swing.JLabel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
+import java.awt.TextArea;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ImageIcon;
@@ -31,188 +37,269 @@ import javax.swing.ImageIcon;
 public class Warranty extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel warranty_panel;
-	private JTextField txtIMEI;
-	private JTable warranty_detail_table;
-	private JTable warranty_inf_table;
-	private JTextField txtMaCTBH;
-	private JTextField txtMaBH;
-	private JTextField txtNgayBH;
+	private JTextField txtSearch;
+	private GridBagConstraints gbc_lblWarrantyInfo;
+	private JTextField txtWarrantyId;
+	private JTextField txtCustomerId;
+	private JTextField txtProductName;
+	private JTextField txtDateReceived;
+	private JTextField txtDateReturned;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					test frame = new test();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Warranty() {
-		setLayout(new BorderLayout());
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[] {700, 400};
+		gridBagLayout.rowHeights = new int[]{615, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0};
+		gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
 		
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setSize(1450, 800);
-//		setLocationRelativeTo(null);
-		warranty_panel = new JPanel();
-//		setContentPane(warranty_panel);
+		JPanel tablePanel = new JPanel();
+		tablePanel.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		GridBagConstraints gbc_tablePanel = new GridBagConstraints();
+		gbc_tablePanel.gridheight = 2;
+		gbc_tablePanel.insets = new Insets(5, 5, 5, 5);
+		gbc_tablePanel.fill = GridBagConstraints.BOTH;
+		gbc_tablePanel.gridx = 0;
+		gbc_tablePanel.gridy = 0;
+		add(tablePanel, gbc_tablePanel);
+		GridBagLayout gbl_tablePanel = new GridBagLayout();
+		gbl_tablePanel.columnWidths = new int[]{450, 0, 0};
+		gbl_tablePanel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_tablePanel.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gbl_tablePanel.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		tablePanel.setLayout(gbl_tablePanel);
 		
-		warranty_panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		JLabel lblInfo = new JLabel("Thông Tin Chung");
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.gridwidth = 2;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
+		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfo.setFont(new Font("Verdana", Font.PLAIN, 12));
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
+		tablePanel.add(lblInfo, gbc_lblNewLabel);
 		
-		warranty_panel.setBounds(2, 2, 1071, 856);
-		warranty_panel.setLayout(null);
 		
-		JLabel lblIMEI = new JLabel("Ma IMEI");
-		lblIMEI.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblIMEI.setBounds(207, 74, 47, 16);
-		warranty_panel.add(lblIMEI);
-		
-		txtIMEI = new JTextField();
-		txtIMEI.setBounds(270, 73, 223, 22);
-		warranty_panel.add(txtIMEI);
-		txtIMEI.setColumns(10);
-			
-		Image searchIcon = new ImageIcon("Assets/search.png").getImage();
-		searchIcon = searchIcon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-		
-		JButton btnSearch = new JButton("");
-		btnSearch.setBounds(517, 61, 44, 40);
-		btnSearch.setIcon(new ImageIcon(searchIcon));
-		warranty_panel.add(btnSearch);
-		
-		String[] warranty_detail_columns =  {"STT", "Mã BH", "Khách Hàng" , "Tên Sản Phẩm" , "Ngày Bảo Hành" , "Hạn Bảo Hành"};
-		Object[][] warranty_detail_data = {
-				{"1" , "Nokia" , "2323" , "2323" , "2323" , "2323"} ,
-				{"" , "" , "" , "" , "" , ""} ,
-				{"" , "" , "" , "" , "" , ""}
-		};
-		DefaultTableModel warranty_detailModel = new DefaultTableModel(warranty_detail_data, warranty_detail_columns) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-		warranty_detail_table = new JTable(warranty_detailModel);
-		warranty_detail_table.getTableHeader().setReorderingAllowed(false);
-		JScrollPane warranty_detail_scroll = new JScrollPane(warranty_detail_table);
-		warranty_detail_scroll.setBounds(10, 137, 1026, 134);
-		warranty_detail_scroll.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		warranty_panel.add(warranty_detail_scroll);
 
-		String[] inf_columns =  {"Mã BH", "Mã CTBH", "Ngày BH" , "Nội dung" , "Ghi chú"};
-		Object[][] inf_data = {
-				{"1" , "uy3" , "2323" , "2323" , "2323"} ,
-				{"" , "" , "" , "" , "" , ""} ,
-				{"" , "" , "" , "" , "" , ""}
-		};
-		DefaultTableModel warranty_infModel = new DefaultTableModel(inf_data, inf_columns){
+				
+		String[] infoColumn = {"Mã Bảo Hành", "Mã Khách Hàng", "Tên Sản Phẩm", "Ngày Bảo Hành", "Ngày Trả" , "Ghi Chú"};
+        Object[][] infoData = {
+            {"NOKIA1", "NVA", "LSP001", "1/11/2023", "8/11/2023" , ""},
+            {"PHONE2", "CCV", "LSP002", "9/2/2022", "9/11/2022" , ""},
+        };
+
+        DefaultTableModel Infomodel = new DefaultTableModel(infoData, infoColumn) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-		warranty_inf_table = new JTable(warranty_infModel);
-		warranty_inf_table.getTableHeader().setReorderingAllowed(false);
-		JScrollPane warranty_inf_scroll = new JScrollPane(warranty_inf_table);
-		warranty_inf_scroll.setBounds(21, 378, 723, 331);
-		warranty_panel.add(warranty_inf_scroll);
-		
-		JLabel lblCTBH = new JLabel("Mã CTBH:");
-		lblCTBH.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblCTBH.setBounds(793, 445, 60, 16);
-		warranty_panel.add(lblCTBH);
-		
-		JTextArea txtInf = new JTextArea();
-		txtInf.setFont(new Font("Verdana", Font.PLAIN, 12));
-		JScrollPane infScroll = new JScrollPane(txtInf);
-		infScroll.setBounds(876, 594, 160, 28);
-		infScroll.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		warranty_panel.add(infScroll);
-		
-		JTextArea txtNote = new JTextArea();
-		JScrollPane noteScroll = new JScrollPane(txtNote);
-		noteScroll.setBounds(876, 654, 160, 68);
-		noteScroll.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		warranty_panel.add(noteScroll);
-		
-		Image addIcon = new ImageIcon("Assets/add.png").getImage();
-		addIcon = addIcon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
+
+        JTable InfoTable = new JTable(Infomodel);
+		GridBagConstraints gbc_table_1 = new GridBagConstraints();
+		gbc_table_1.insets = new Insets(5, 5, 5, 5);
+		gbc_table_1.gridwidth = 2;
+		gbc_table_1.fill = GridBagConstraints.BOTH;
+		gbc_table_1.gridx = 0;
+		gbc_table_1.gridy = 2;
+        InfoTable.getTableHeader().setReorderingAllowed(false);
+        
+        txtSearch = new JTextField();
+        txtSearch.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_txtSearch = new GridBagConstraints();
+        gbc_txtSearch.insets = new Insets(5, 5, 5, 5);
+        gbc_txtSearch.fill = GridBagConstraints.HORIZONTAL;
+        gbc_txtSearch.gridx = 0;
+        gbc_txtSearch.gridy = 1;
+        tablePanel.add(txtSearch, gbc_txtSearch);
+        txtSearch.setColumns(10);
+        
+        JButton btnSearch = new JButton("Tìm kiếm");
+        btnSearch.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_btnSearch = new GridBagConstraints();
+        gbc_btnSearch.insets = new Insets(5, 5, 5, 5);
+        gbc_btnSearch.gridx = 1;
+        gbc_btnSearch.gridy = 1;
+        tablePanel.add(btnSearch, gbc_btnSearch);
+        JScrollPane scrollInfoTable = new JScrollPane(InfoTable);
+        tablePanel.add(scrollInfoTable, gbc_table_1);
+        
+        JPanel detailPanel = new JPanel();
+        detailPanel.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        GridBagConstraints gbc_detailPanel = new GridBagConstraints();
+        gbc_detailPanel.insets = new Insets(5, 0, 0, 5);
+        gbc_detailPanel.fill = GridBagConstraints.BOTH;
+        gbc_detailPanel.gridx = 1;
+        gbc_detailPanel.gridy = 0;
+        add(detailPanel, gbc_detailPanel);
+        GridBagLayout gbl_detailPanel = new GridBagLayout();
+        gbl_detailPanel.columnWidths = new int[]{0, 0, 0};
+        gbl_detailPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+        gbl_detailPanel.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+        gbl_detailPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        detailPanel.setLayout(gbl_detailPanel);
+        
+        JLabel lblWarrantyInfo = new JLabel("Thông Tin Bảo Hành");
+        lblWarrantyInfo.setFont(new Font("Verdana", Font.PLAIN, 12));
+        gbc_lblWarrantyInfo = new GridBagConstraints();
+        gbc_lblWarrantyInfo.gridwidth = 2;
+        gbc_lblWarrantyInfo.insets = new Insets(5, 5, 20, 0);
+        gbc_lblWarrantyInfo.gridx = 0;
+        gbc_lblWarrantyInfo.gridy = 0;
+        detailPanel.add(lblWarrantyInfo, gbc_lblWarrantyInfo);
+        
+        JLabel lblWarrantyId = new JLabel("Mã bảo hành:");
+        lblWarrantyId.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblWarrantyId = new GridBagConstraints();
+        gbc_lblWarrantyId.insets = new Insets(15, 0, 25, 5);
+        gbc_lblWarrantyId.gridx = 0;
+        gbc_lblWarrantyId.gridy = 1;
+        detailPanel.add(lblWarrantyId, gbc_lblWarrantyId);
+        
+        txtWarrantyId = new JTextField();
+        txtWarrantyId.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_txtWarrantyId = new GridBagConstraints();
+        gbc_txtWarrantyId.insets = new Insets(15, 0, 25, 5);
+        gbc_txtWarrantyId.fill = GridBagConstraints.HORIZONTAL;
+        gbc_txtWarrantyId.gridx = 1;
+        gbc_txtWarrantyId.gridy = 1;
+        detailPanel.add(txtWarrantyId, gbc_txtWarrantyId);
+        txtWarrantyId.setColumns(10);
+        
+        JLabel lblCustomerId = new JLabel("Mã khách hàng:");
+        lblCustomerId.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblCustomerId = new GridBagConstraints();
+        gbc_lblCustomerId.insets = new Insets(15, 0, 25, 5);
+        gbc_lblCustomerId.gridx = 0;
+        gbc_lblCustomerId.gridy = 2;
+        detailPanel.add(lblCustomerId, gbc_lblCustomerId);
+        
+        txtCustomerId = new JTextField();
+        txtCustomerId.setColumns(10);
+        txtCustomerId.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_txtCustomerId = new GridBagConstraints();
+        gbc_txtCustomerId.insets = new Insets(15, 0, 25, 5);
+        gbc_txtCustomerId.fill = GridBagConstraints.HORIZONTAL;
+        gbc_txtCustomerId.gridx = 1;
+        gbc_txtCustomerId.gridy = 2;
+        detailPanel.add(txtCustomerId, gbc_txtCustomerId);
+        
+        JLabel lblProductName = new JLabel("Tên sản phẩm:");
+        lblProductName.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblProductName = new GridBagConstraints();
+        gbc_lblProductName.insets = new Insets(15, 0, 25, 5);
+        gbc_lblProductName.gridx = 0;
+        gbc_lblProductName.gridy = 3;
+        detailPanel.add(lblProductName, gbc_lblProductName);
+        
+        txtProductName = new JTextField();
+        txtProductName.setColumns(10);
+        txtProductName.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_txtProductName = new GridBagConstraints();
+        gbc_txtProductName.insets = new Insets(15, 0, 25, 5);
+        gbc_txtProductName.fill = GridBagConstraints.HORIZONTAL;
+        gbc_txtProductName.gridx = 1;
+        gbc_txtProductName.gridy = 3;
+        detailPanel.add(txtProductName, gbc_txtProductName);
+        
+        JLabel lblDateReceived = new JLabel("Ngày bảo hành:");
+        lblDateReceived.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblDateReceived = new GridBagConstraints();
+        gbc_lblDateReceived.insets = new Insets(15, 0, 25, 5);
+        gbc_lblDateReceived.gridx = 0;
+        gbc_lblDateReceived.gridy = 4;
+        detailPanel.add(lblDateReceived, gbc_lblDateReceived);
+        
+        txtDateReceived = new JTextField();
+        txtDateReceived.setColumns(10);
+        txtDateReceived.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_txtDateReceived = new GridBagConstraints();
+        gbc_txtDateReceived.insets = new Insets(15, 0, 25, 5);
+        gbc_txtDateReceived.fill = GridBagConstraints.HORIZONTAL;
+        gbc_txtDateReceived.gridx = 1;
+        gbc_txtDateReceived.gridy = 4;
+        detailPanel.add(txtDateReceived, gbc_txtDateReceived);
+        
+        JLabel lblDateReturned = new JLabel("Ngày trả:");
+        lblDateReturned.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblDateReturned = new GridBagConstraints();
+        gbc_lblDateReturned.insets = new Insets(15, 0, 25, 5);
+        gbc_lblDateReturned.gridx = 0;
+        gbc_lblDateReturned.gridy = 5;
+        detailPanel.add(lblDateReturned, gbc_lblDateReturned);
+        
+        txtDateReturned = new JTextField();
+        txtDateReturned.setColumns(10);
+        txtDateReturned.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_txtDateReturned = new GridBagConstraints();
+        gbc_txtDateReturned.insets = new Insets(15, 0, 25, 5);
+        gbc_txtDateReturned.fill = GridBagConstraints.HORIZONTAL;
+        gbc_txtDateReturned.gridx = 1;
+        gbc_txtDateReturned.gridy = 5;
+        detailPanel.add(txtDateReturned, gbc_txtDateReturned);
+        
+        JLabel lblNote = new JLabel("Ghi chú:");
+        lblNote.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblNote = new GridBagConstraints();
+        gbc_lblNote.anchor = GridBagConstraints.NORTH;
+        gbc_lblNote.insets = new Insets(15, 0, 25, 5);
+        gbc_lblNote.gridx = 0;
+        gbc_lblNote.gridy = 6;
+        detailPanel.add(lblNote, gbc_lblNote);
+        
+        TextArea txtNote = new TextArea();
+        txtNote.setRows(5);
+        txtNote.setFont(new Font("Verdana", Font.PLAIN, 12));
+        txtNote.setColumns(1);
+        GridBagConstraints gbc_txtNote = new GridBagConstraints();
+        gbc_txtNote.insets = new Insets(15, 0, 25, 5);
+        gbc_txtNote.fill = GridBagConstraints.HORIZONTAL;
+        gbc_txtNote.gridx = 1;
+        gbc_txtNote.gridy = 6;
+        detailPanel.add(txtNote, gbc_txtNote);
+        
+        JPanel btnPanel = new JPanel();
+        btnPanel.setBorder(new LineBorder(Color.LIGHT_GRAY));      
+        GridBagConstraints gbc_btnPanel = new GridBagConstraints();
+        gbc_btnPanel.fill = GridBagConstraints.BOTH;
+        gbc_btnPanel.insets = new Insets(5, 0, 5, 5);
+        gbc_btnPanel.gridx = 1;
+        gbc_btnPanel.gridy = 1;
+        add(btnPanel, gbc_btnPanel);
+        
+        Image iconAdd = new ImageIcon("Assets/Icon/add.png").getImage();
+		iconAdd = iconAdd.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		Image iconDelete = new ImageIcon("Assets/Icon/delete.png").getImage();
+		iconDelete = iconDelete.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		Image iconAccept = new ImageIcon("Assets/Icon/accept.png").getImage();
+		iconAccept = iconAccept.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		Image iconClear = new ImageIcon("Assets/Icon/clear.png").getImage();
+		iconClear = iconClear.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btnAdd = new JButton("");
-		btnAdd.setBounds(1055, 526, 44, 40);
-		btnAdd.setIcon(new ImageIcon(addIcon));
-		warranty_panel.add(btnAdd);
+		btnAdd.setIcon(new ImageIcon(iconAdd));
+		btnAdd.setPreferredSize(new Dimension(60, 40));
+		btnPanel.add(btnAdd);
 		
-		Image deleteIcon = new ImageIcon("Assets/delete.png").getImage();
-		deleteIcon = deleteIcon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-		
-		JButton btnDelete = new JButton("");
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnDelete.setBounds(1055, 590, 44, 40);
-		btnDelete.setIcon(new ImageIcon(deleteIcon));
-		warranty_panel.add(btnDelete);
-		
-		Image acceptIcon = new ImageIcon("Assets/accept.png").getImage();
-		acceptIcon = acceptIcon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
+		JButton btnDelete= new JButton("");
+		btnDelete.setIcon(new ImageIcon(iconDelete));
+		btnDelete.setPreferredSize(new Dimension(60, 40));
+		btnPanel.add(btnDelete);
 		
 		JButton btnAccept = new JButton("");
-		btnAccept.setBounds(1055, 650, 44, 40);
-		btnAccept.setIcon(new ImageIcon(acceptIcon));
-		warranty_panel.add(btnAccept);
+		btnAccept.setIcon(new ImageIcon(iconAccept));
+		btnAccept.setPreferredSize(new Dimension(60, 40));
+		btnPanel.add(btnAccept);
 		
-		JLabel lblmaBH = new JLabel("Mã BH:");
-		lblmaBH.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblmaBH.setBounds(793, 492, 44, 16);
-		warranty_panel.add(lblmaBH);
-		
-		JLabel lblngayBH = new JLabel("Ngày BH:");
-		lblngayBH.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblngayBH.setBounds(793, 535, 57, 16);
-		warranty_panel.add(lblngayBH);
-		
-		
-		txtMaCTBH = new JTextField();
-		txtMaCTBH.setFont(new Font("Verdana", Font.PLAIN, 12));
-		txtMaCTBH.setBounds(876, 442, 160, 22);
-		warranty_panel.add(txtMaCTBH);
-		txtMaCTBH.setColumns(10);
-		
-		txtMaBH = new JTextField();
-		txtMaBH.setFont(new Font("Verdana", Font.PLAIN, 12));
-		txtMaBH.setColumns(10);
-		txtMaBH.setBounds(876, 489, 160, 22);
-		warranty_panel.add(txtMaBH);
-		
-		txtNgayBH = new JTextField();
-		txtNgayBH.setFont(new Font("Verdana", Font.PLAIN, 12));
-		txtNgayBH.setColumns(10);
-		txtNgayBH.setBounds(876, 532, 160, 22);
-		warranty_panel.add(txtNgayBH);
-		
-		JLabel lblInf = new JLabel("Nội dung:");
-		lblInf.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblInf.setBounds(793, 596, 58, 16);
-		warranty_panel.add(lblInf);
-		
-		JLabel lblNote = new JLabel("Ghi chú:");
-		lblNote.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblNote.setBounds(793, 657, 50, 16);
-		warranty_panel.add(lblNote);
-		
-		add(warranty_panel, BorderLayout.CENTER);
+		JButton btnClear = new JButton("");
+		btnClear.setIcon(new ImageIcon(iconClear));
+		btnClear.setPreferredSize(new Dimension(60, 40));
+		btnPanel.add(btnClear);
 	}
 }
