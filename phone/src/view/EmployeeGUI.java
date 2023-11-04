@@ -68,15 +68,15 @@ public class EmployeeGUI extends JPanel{
 	public EmployeeGUI(){
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {400, 400, 400};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 306, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0};
-		gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JPanel tablePanel = new JPanel();
 		tablePanel.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		GridBagConstraints gbc_tablePanel = new GridBagConstraints();
-		gbc_tablePanel.gridheight = 2;
+		gbc_tablePanel.gridheight = 3;
 		gbc_tablePanel.weighty = 1.0;
 		gbc_tablePanel.weightx = 1.0;
 		gbc_tablePanel.gridwidth = 2;
@@ -154,7 +154,7 @@ public class EmployeeGUI extends JPanel{
 		JPanel inputPanel = new JPanel();
 		inputPanel.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		GridBagConstraints gbc_inputPanel = new GridBagConstraints();
-		gbc_inputPanel.insets = new Insets(5, 0, 5, 5);
+		gbc_inputPanel.insets = new Insets(5, 0, 5, 0);
 		gbc_inputPanel.gridheight = 2;
 		gbc_inputPanel.weighty = 1.0;
 		gbc_inputPanel.weightx = 1.0;
@@ -363,11 +363,12 @@ public class EmployeeGUI extends JPanel{
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridheight = 2;
 		gbc_panel.gridwidth = 3;
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 12;
+		gbc_panel.gridy = 11;
 		inputPanel.add(panel, gbc_panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
@@ -387,21 +388,10 @@ public class EmployeeGUI extends JPanel{
 		gbc_textArea.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textArea.anchor = GridBagConstraints.NORTH;
 		gbc_textArea.gridwidth = 2;
-		gbc_textArea.insets = new Insets(0, 0, 5, 0);
+		gbc_textArea.insets = new Insets(0, 0, 5, 5);
 		gbc_textArea.gridx = 1;
 		gbc_textArea.gridy = 13;
 		inputPanel.add(textArea, gbc_textArea);
-		
-		JPanel btnPanel = new JPanel();
-		GridBagConstraints gbc_btnPanel = new GridBagConstraints();
-		gbc_btnPanel.insets = new Insets(0, 5, 0, 0);
-		gbc_btnPanel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnPanel.gridwidth = 3;
-		gbc_btnPanel.gridx = 0;
-		gbc_btnPanel.gridy = 14;
-		inputPanel.add(btnPanel, gbc_btnPanel);
-		btnPanel.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		Image iconAdd = new ImageIcon("Assets/Icon/add.png").getImage();
 		iconAdd = iconAdd.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
@@ -411,6 +401,16 @@ public class EmployeeGUI extends JPanel{
 		iconAccept = iconAccept.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
 		Image iconClear = new ImageIcon("Assets/Icon/clear.png").getImage();
 		iconClear = iconClear.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		
+		JPanel btnPanel = new JPanel();
+		GridBagConstraints gbc_btnPanel = new GridBagConstraints();
+		gbc_btnPanel.insets = new Insets(0, 0, 5, 5);
+		gbc_btnPanel.fill = GridBagConstraints.BOTH;
+		gbc_btnPanel.gridx = 2;
+		gbc_btnPanel.gridy = 2;
+		add(btnPanel, gbc_btnPanel);
+		btnPanel.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btnAdd = new JButton("");
 		btnAdd.setIcon(new ImageIcon(iconAdd));
