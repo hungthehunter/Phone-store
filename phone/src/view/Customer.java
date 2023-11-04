@@ -1,42 +1,46 @@
 package view;
 
-import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Dimension;
+import javax.swing.table.DefaultTableModel;
 
-public class Staff extends JPanel {
-	private JTextField textField_staff_searching;
-	private JTextField textField_staff_id;
-	private JTextField textField_staff_name;
+public class Customer extends JPanel {
+	private JTextField textField_customer_searching;
+	private JTextField textField_customer_id;
+	private JTextField textField_customer_name;
 	private JTextField textField_phone;
 	private JTextField textField_address;
 	private JTextField textField_email;
 	private JTextField textField_password;
 	private JTextField textField_comment;
 	private JTable table;
-	public Staff() {
+	/**
+	 * Create the panel.
+	 */
+	public Customer() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{138, 547, 0};
 		gridBagLayout.rowHeights = new int[]{428, 0};
@@ -44,28 +48,28 @@ public class Staff extends JPanel {
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JPanel panel_table_staff = new JPanel();
-		panel_table_staff.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_panel_table_staff = new GridBagConstraints();
-		gbc_panel_table_staff.fill = GridBagConstraints.BOTH;
-		gbc_panel_table_staff.gridx = 1;
-		gbc_panel_table_staff.gridy = 0;
-		add(panel_table_staff, gbc_panel_table_staff);
-		panel_table_staff.setLayout(new BorderLayout(0, 0));
+		JPanel panel_table_customer = new JPanel();
+		panel_table_customer.setBorder(new LineBorder(new Color(0, 0, 0)));
+		GridBagConstraints gbc_panel_table_customer = new GridBagConstraints();
+		gbc_panel_table_customer.fill = GridBagConstraints.BOTH;
+		gbc_panel_table_customer.gridx = 1;
+		gbc_panel_table_customer.gridy = 0;
+		add(panel_table_customer, gbc_panel_table_customer);
+		panel_table_customer.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_9 = new JLabel("Thông tin nhân viên");
+		JLabel lblNewLabel_9 = new JLabel("Thông tin khách hàng");
 		lblNewLabel_9.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		panel_table_staff.add(lblNewLabel_9, BorderLayout.NORTH);
+		panel_table_customer.add(lblNewLabel_9, BorderLayout.NORTH);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		panel_table_staff.add(scrollPane, BorderLayout.CENTER);
+		panel_table_customer.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"ID nh\u00E2n vi\u00EAn", "H\u1ECD t\u00EAn", "Gi\u1EDBi t\u00EDnh", "S\u0110T", "\u0110\u1ECBa ch\u1EC9", "V\u1ECB tr\u00ED", "Email", "Password", "Ng\u00E0y sinh", "Ghi ch\u00FA"
+				"ID", "H\u1ECD t\u00EAn", "Gi\u1EDBi t\u00EDnh", "S\u0110T", "\u0110\u1ECBa ch\u1EC9", "V\u1ECB tr\u00ED", "Email", "Password", "Ng\u00E0y sinh", "Ghi ch\u00FA"
 			}
 		));
 		scrollPane.setViewportView(table);
@@ -85,118 +89,118 @@ public class Staff extends JPanel {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel label_staff_searching = new JLabel("Tìm kiếm nhân viên");
-		label_staff_searching.setFont(new Font("Times New Roman", Font.BOLD, 16));
-//		label_staff_searching.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-		GridBagConstraints gbc_label_staff_searching = new GridBagConstraints();
-		gbc_label_staff_searching.fill = GridBagConstraints.HORIZONTAL;
-		gbc_label_staff_searching.insets = new Insets(0, 5, 10, 5);
-		gbc_label_staff_searching.gridx = 0;
-		gbc_label_staff_searching.gridy = 0;
-		panel.add(label_staff_searching, gbc_label_staff_searching);
+		JLabel label_customer_searching = new JLabel("Tìm kiếm khách hàng");
+		label_customer_searching.setFont(new Font("Times New Roman", Font.BOLD, 16));
+//		label_customer_searching.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		GridBagConstraints gbc_label_customer_searching = new GridBagConstraints();
+		gbc_label_customer_searching.fill = GridBagConstraints.HORIZONTAL;
+		gbc_label_customer_searching.insets = new Insets(0, 5, 10, 5);
+		gbc_label_customer_searching.gridx = 0;
+		gbc_label_customer_searching.gridy = 0;
+		panel.add(label_customer_searching, gbc_label_customer_searching);
 		
 		   Border lineBorder = BorderFactory.createLineBorder(Color.BLUE); // Line border
 	        Border loweredBevelBorder = BorderFactory.createLoweredBevelBorder(); // Lowered bevel border
 	        Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder(); // Raised bevel border
 	        Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10); // Empty border with padding
 		
-		textField_staff_searching = new JTextField();
-		textField_staff_searching.setBorder(lineBorder);
-		textField_staff_searching.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		GridBagConstraints gbc_textField_staff_searching = new GridBagConstraints();
-		gbc_textField_staff_searching.ipady = 15;
-		gbc_textField_staff_searching.gridwidth = 3;
-		gbc_textField_staff_searching.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_staff_searching.insets = new Insets(0, 5, 5, 5);
-		gbc_textField_staff_searching.gridx = 0;
-		gbc_textField_staff_searching.gridy = 1;
-		panel.add(textField_staff_searching, gbc_textField_staff_searching);
-		textField_staff_searching.setColumns(10);
+		textField_customer_searching = new JTextField();
+		textField_customer_searching.setBorder(lineBorder);
+		textField_customer_searching.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		GridBagConstraints gbc_textField_customer_searching = new GridBagConstraints();
+		gbc_textField_customer_searching.ipady = 15;
+		gbc_textField_customer_searching.gridwidth = 3;
+		gbc_textField_customer_searching.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_customer_searching.insets = new Insets(0, 5, 5, 5);
+		gbc_textField_customer_searching.gridx = 0;
+		gbc_textField_customer_searching.gridy = 1;
+		panel.add(textField_customer_searching, gbc_textField_customer_searching);
+		textField_customer_searching.setColumns(10);
 		
-		JButton button_staff_searching = new JButton("Tìm ");
-		GridBagConstraints gbc_button_staff_searching = new GridBagConstraints();
-		gbc_button_staff_searching.fill = GridBagConstraints.BOTH;
-		gbc_button_staff_searching.insets = new Insets(0, 0, 5, 5);
-		gbc_button_staff_searching.gridx = 3;
-		gbc_button_staff_searching.gridy = 1;
-		panel.add(button_staff_searching, gbc_button_staff_searching);
-		button_staff_searching.addActionListener(new ActionListener() {
+		JButton button_customer_searching = new JButton("Tìm ");
+		GridBagConstraints gbc_button_customer_searching = new GridBagConstraints();
+		gbc_button_customer_searching.fill = GridBagConstraints.BOTH;
+		gbc_button_customer_searching.insets = new Insets(0, 0, 5, 5);
+		gbc_button_customer_searching.gridx = 3;
+		gbc_button_customer_searching.gridy = 1;
+		panel.add(button_customer_searching, gbc_button_customer_searching);
+		button_customer_searching.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		
-		JLabel label_staff_adding = new JLabel("Thêm nhân viên mới");
-		label_staff_adding.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		GridBagConstraints gbc_label_staff_adding = new GridBagConstraints();
-		gbc_label_staff_adding.fill = GridBagConstraints.HORIZONTAL;
-		gbc_label_staff_adding.insets = new Insets(0, 5, 10, 5);
-		gbc_label_staff_adding.gridx = 0;
-		gbc_label_staff_adding.gridy = 2;
-		panel.add(label_staff_adding, gbc_label_staff_adding);
-//		label_staff_adding.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		JLabel lblThmKhchHng = new JLabel("Thêm khách hàng mới");
+		lblThmKhchHng.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		GridBagConstraints gbc_lblThmKhchHng = new GridBagConstraints();
+		gbc_lblThmKhchHng.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblThmKhchHng.insets = new Insets(0, 5, 10, 5);
+		gbc_lblThmKhchHng.gridx = 0;
+		gbc_lblThmKhchHng.gridy = 2;
+		panel.add(lblThmKhchHng, gbc_lblThmKhchHng);
+//		label_customer_adding.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		
-		JLabel label_staff_id = new JLabel("Mã nhân viên");
-		label_staff_id.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		GridBagConstraints gbc_label_staff_id = new GridBagConstraints();
-		gbc_label_staff_id.anchor = GridBagConstraints.WEST;
-		gbc_label_staff_id.insets = new Insets(0, 5, 5, 5);
-		gbc_label_staff_id.gridx = 0;
-		gbc_label_staff_id.gridy = 3;
-		panel.add(label_staff_id, gbc_label_staff_id);
+		JLabel lblMKhchHng = new JLabel("Mã khách hàng");
+		lblMKhchHng.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		GridBagConstraints gbc_lblMKhchHng = new GridBagConstraints();
+		gbc_lblMKhchHng.anchor = GridBagConstraints.WEST;
+		gbc_lblMKhchHng.insets = new Insets(0, 5, 5, 5);
+		gbc_lblMKhchHng.gridx = 0;
+		gbc_lblMKhchHng.gridy = 3;
+		panel.add(lblMKhchHng, gbc_lblMKhchHng);
 		
-		JLabel label_staff_gender = new JLabel("Giới tính");
-		label_staff_gender.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		GridBagConstraints gbc_label_staff_gender = new GridBagConstraints();
-		gbc_label_staff_gender.anchor = GridBagConstraints.WEST;
-		gbc_label_staff_gender.insets = new Insets(0, 0, 5, 5);
-		gbc_label_staff_gender.gridx = 2;
-		gbc_label_staff_gender.gridy = 3;
-		panel.add(label_staff_gender, gbc_label_staff_gender);
+		JLabel label_customer_gender = new JLabel("Giới tính");
+		label_customer_gender.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		GridBagConstraints gbc_label_customer_gender = new GridBagConstraints();
+		gbc_label_customer_gender.anchor = GridBagConstraints.WEST;
+		gbc_label_customer_gender.insets = new Insets(0, 0, 5, 5);
+		gbc_label_customer_gender.gridx = 2;
+		gbc_label_customer_gender.gridy = 3;
+		panel.add(label_customer_gender, gbc_label_customer_gender);
 		
-		textField_staff_id = new JTextField();
-		textField_staff_id.setBorder(lineBorder);
-		GridBagConstraints gbc_textField_staff_id = new GridBagConstraints();
-		gbc_textField_staff_id.gridwidth = 2;
-		gbc_textField_staff_id.ipady = 10;
-		gbc_textField_staff_id.insets = new Insets(0, 0, 15, 5);
-		gbc_textField_staff_id.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_staff_id.gridx = 0;
-		gbc_textField_staff_id.gridy = 4;
-		panel.add(textField_staff_id, gbc_textField_staff_id);
-		textField_staff_id.setColumns(10);
+		textField_customer_id = new JTextField();
+		textField_customer_id.setBorder(lineBorder);
+		GridBagConstraints gbc_textField_customer_id = new GridBagConstraints();
+		gbc_textField_customer_id.gridwidth = 2;
+		gbc_textField_customer_id.ipady = 10;
+		gbc_textField_customer_id.insets = new Insets(0, 0, 15, 5);
+		gbc_textField_customer_id.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_customer_id.gridx = 0;
+		gbc_textField_customer_id.gridy = 4;
+		panel.add(textField_customer_id, gbc_textField_customer_id);
+		textField_customer_id.setColumns(10);
 
 	      
-		JRadioButton radioButton_staff_gender_male = new JRadioButton("Nam");
-		GridBagConstraints gbc_radioButton_staff_gender_male = new GridBagConstraints();
-		gbc_radioButton_staff_gender_male.anchor = GridBagConstraints.WEST;
-		gbc_radioButton_staff_gender_male.ipady = 10;
-		gbc_radioButton_staff_gender_male.insets = new Insets(0, 0, 15, 5);
-		gbc_radioButton_staff_gender_male.gridx = 2;
-		gbc_radioButton_staff_gender_male.gridy = 4;
-		panel.add(radioButton_staff_gender_male, gbc_radioButton_staff_gender_male);
+		JRadioButton radioButton_customer_gender_male = new JRadioButton("Nam");
+		GridBagConstraints gbc_radioButton_customer_gender_male = new GridBagConstraints();
+		gbc_radioButton_customer_gender_male.anchor = GridBagConstraints.WEST;
+		gbc_radioButton_customer_gender_male.ipady = 10;
+		gbc_radioButton_customer_gender_male.insets = new Insets(0, 0, 15, 5);
+		gbc_radioButton_customer_gender_male.gridx = 2;
+		gbc_radioButton_customer_gender_male.gridy = 4;
+		panel.add(radioButton_customer_gender_male, gbc_radioButton_customer_gender_male);
 		
-		JRadioButton radioButton_staff_gender_female = new JRadioButton("Nữ");
-		GridBagConstraints gbc_radioButton_staff_gender_female = new GridBagConstraints();
-		gbc_radioButton_staff_gender_female.anchor = GridBagConstraints.WEST;
-		gbc_radioButton_staff_gender_female.insets = new Insets(0, 0, 15, 0);
-		gbc_radioButton_staff_gender_female.gridx = 3;
-		gbc_radioButton_staff_gender_female.gridy = 4;
-		panel.add(radioButton_staff_gender_female, gbc_radioButton_staff_gender_female);
+		JRadioButton radioButton_customer_gender_female = new JRadioButton("Nữ");
+		GridBagConstraints gbc_radioButton_customer_gender_female = new GridBagConstraints();
+		gbc_radioButton_customer_gender_female.anchor = GridBagConstraints.WEST;
+		gbc_radioButton_customer_gender_female.insets = new Insets(0, 0, 15, 0);
+		gbc_radioButton_customer_gender_female.gridx = 3;
+		gbc_radioButton_customer_gender_female.gridy = 4;
+		panel.add(radioButton_customer_gender_female, gbc_radioButton_customer_gender_female);
 		
 		
 		ButtonGroup buttonGroup = new ButtonGroup();
-		 buttonGroup.add(radioButton_staff_gender_male);
-		 buttonGroup.add(radioButton_staff_gender_female);
+		 buttonGroup.add(radioButton_customer_gender_male);
+		 buttonGroup.add(radioButton_customer_gender_female);
 	       
 	       
-		JLabel label_name = new JLabel("Họ tên nhân viên");
-		label_name.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		GridBagConstraints gbc_label_name = new GridBagConstraints();
-		gbc_label_name.anchor = GridBagConstraints.WEST;
-		gbc_label_name.insets = new Insets(0, 5, 5, 5);
-		gbc_label_name.gridx = 0;
-		gbc_label_name.gridy = 5;
-		panel.add(label_name, gbc_label_name);
+		JLabel lblHTnKhch = new JLabel("Họ tên khách hàng");
+		lblHTnKhch.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		GridBagConstraints gbc_lblHTnKhch = new GridBagConstraints();
+		gbc_lblHTnKhch.anchor = GridBagConstraints.WEST;
+		gbc_lblHTnKhch.insets = new Insets(0, 5, 5, 5);
+		gbc_lblHTnKhch.gridx = 0;
+		gbc_lblHTnKhch.gridy = 5;
+		panel.add(lblHTnKhch, gbc_lblHTnKhch);
 		
 		JLabel label_phone = new JLabel("Số điện thoại");
 		label_phone.setFont(new Font("Times New Roman", Font.BOLD, 12));
@@ -207,17 +211,17 @@ public class Staff extends JPanel {
 		gbc_label_phone.gridy = 5;
 		panel.add(label_phone, gbc_label_phone);
 		
-		textField_staff_name = new JTextField();
-		textField_staff_name.setBorder(lineBorder);
-		GridBagConstraints gbc_textField_staff_name = new GridBagConstraints();
-		gbc_textField_staff_name.gridwidth = 2;
-		gbc_textField_staff_name.ipady = 10;
-		gbc_textField_staff_name.insets = new Insets(0, 5, 15, 5);
-		gbc_textField_staff_name.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_staff_name.gridx = 0;
-		gbc_textField_staff_name.gridy = 6;
-		panel.add(textField_staff_name, gbc_textField_staff_name);
-		textField_staff_name.setColumns(10);
+		textField_customer_name = new JTextField();
+		textField_customer_name.setBorder(lineBorder);
+		GridBagConstraints gbc_textField_customer_name = new GridBagConstraints();
+		gbc_textField_customer_name.gridwidth = 2;
+		gbc_textField_customer_name.ipady = 10;
+		gbc_textField_customer_name.insets = new Insets(0, 5, 15, 5);
+		gbc_textField_customer_name.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_customer_name.gridx = 0;
+		gbc_textField_customer_name.gridy = 6;
+		panel.add(textField_customer_name, gbc_textField_customer_name);
+		textField_customer_name.setColumns(10);
 		
 		textField_phone = new JTextField();
 		textField_phone.setBorder(lineBorder);
@@ -262,17 +266,17 @@ public class Staff extends JPanel {
 		textField_address.setColumns(10);
 		
 		
-		String[] staff_type_list=new String[] {"Quản lý","Nhân viên"};
-		JComboBox jcomboBox_staff_type = new JComboBox( staff_type_list);
-		jcomboBox_staff_type.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		GridBagConstraints gbc_jcomboBox_staff_type = new GridBagConstraints();
-		gbc_jcomboBox_staff_type.gridwidth = 2;
-		gbc_jcomboBox_staff_type.ipady = 10;
-		gbc_jcomboBox_staff_type.insets = new Insets(0, 0, 15, 5);
-		gbc_jcomboBox_staff_type.fill = GridBagConstraints.HORIZONTAL;
-		gbc_jcomboBox_staff_type.gridx = 2;
-		gbc_jcomboBox_staff_type.gridy = 8;
-		panel.add(jcomboBox_staff_type, gbc_jcomboBox_staff_type);
+		String[] customer_type_list=new String[] {"Quản lý","Nhân viên"};
+		JComboBox jcomboBox_customer_type = new JComboBox( customer_type_list);
+		jcomboBox_customer_type.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		GridBagConstraints gbc_jcomboBox_customer_type = new GridBagConstraints();
+		gbc_jcomboBox_customer_type.gridwidth = 2;
+		gbc_jcomboBox_customer_type.ipady = 10;
+		gbc_jcomboBox_customer_type.insets = new Insets(0, 0, 15, 5);
+		gbc_jcomboBox_customer_type.fill = GridBagConstraints.HORIZONTAL;
+		gbc_jcomboBox_customer_type.gridx = 2;
+		gbc_jcomboBox_customer_type.gridy = 8;
+		panel.add(jcomboBox_customer_type, gbc_jcomboBox_customer_type);
 		
 		JLabel label_email = new JLabel("Email");
 		label_email.setFont(new Font("Times New Roman", Font.BOLD, 12));
@@ -412,20 +416,6 @@ public class Staff extends JPanel {
 		btnNewButton_3.setPreferredSize(new Dimension(60, 40));
 		btnNewButton_3.setIcon(new ImageIcon(iconDelete));
 		panelFeature.add(btnNewButton_3);
-		  
-
-		
-	
-		
-	
-	  
-		
-	
-		
-	
-		
-
-
 	}
 
 }
