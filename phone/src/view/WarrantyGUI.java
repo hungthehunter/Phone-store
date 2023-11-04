@@ -145,7 +145,7 @@ public class Warranty extends JPanel {
         detailPanel.setLayout(gbl_detailPanel);
         
         JLabel lblWarrantyInfo = new JLabel("Thông Tin Bảo Hành");
-        lblWarrantyInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblWarrantyInfo.setFont(new Font("Verdana", Font.PLAIN, 12));
         gbc_lblWarrantyInfo = new GridBagConstraints();
         gbc_lblWarrantyInfo.gridwidth = 2;
         gbc_lblWarrantyInfo.insets = new Insets(5, 5, 20, 0);
@@ -162,6 +162,7 @@ public class Warranty extends JPanel {
         detailPanel.add(lblWarrantyId, gbc_lblWarrantyId);
         
         txtWarrantyId = new JTextField();
+        txtWarrantyId.setFont(new Font("Verdana", Font.PLAIN, 12));
         GridBagConstraints gbc_txtWarrantyId = new GridBagConstraints();
         gbc_txtWarrantyId.insets = new Insets(15, 0, 25, 5);
         gbc_txtWarrantyId.fill = GridBagConstraints.HORIZONTAL;
@@ -170,16 +171,17 @@ public class Warranty extends JPanel {
         detailPanel.add(txtWarrantyId, gbc_txtWarrantyId);
         txtWarrantyId.setColumns(10);
         
-        JLabel lblWarrantyId_1 = new JLabel("Mã khách hàng:");
-        lblWarrantyId_1.setFont(new Font("Verdana", Font.PLAIN, 12));
-        GridBagConstraints gbc_lblWarrantyId_1 = new GridBagConstraints();
-        gbc_lblWarrantyId_1.insets = new Insets(15, 0, 25, 5);
-        gbc_lblWarrantyId_1.gridx = 0;
-        gbc_lblWarrantyId_1.gridy = 2;
-        detailPanel.add(lblWarrantyId_1, gbc_lblWarrantyId_1);
+        JLabel lblCustomerId = new JLabel("Mã khách hàng:");
+        lblCustomerId.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblCustomerId = new GridBagConstraints();
+        gbc_lblCustomerId.insets = new Insets(15, 0, 25, 5);
+        gbc_lblCustomerId.gridx = 0;
+        gbc_lblCustomerId.gridy = 2;
+        detailPanel.add(lblCustomerId, gbc_lblCustomerId);
         
         txtCustomerId = new JTextField();
         txtCustomerId.setColumns(10);
+        txtCustomerId.setFont(new Font("Verdana", Font.PLAIN, 12));
         GridBagConstraints gbc_txtCustomerId = new GridBagConstraints();
         gbc_txtCustomerId.insets = new Insets(15, 0, 25, 5);
         gbc_txtCustomerId.fill = GridBagConstraints.HORIZONTAL;
@@ -187,16 +189,17 @@ public class Warranty extends JPanel {
         gbc_txtCustomerId.gridy = 2;
         detailPanel.add(txtCustomerId, gbc_txtCustomerId);
         
-        JLabel lblWarrantyId_2 = new JLabel("Tên sản phẩm:");
-        lblWarrantyId_2.setFont(new Font("Verdana", Font.PLAIN, 12));
-        GridBagConstraints gbc_lblWarrantyId_2 = new GridBagConstraints();
-        gbc_lblWarrantyId_2.insets = new Insets(15, 0, 25, 5);
-        gbc_lblWarrantyId_2.gridx = 0;
-        gbc_lblWarrantyId_2.gridy = 3;
-        detailPanel.add(lblWarrantyId_2, gbc_lblWarrantyId_2);
+        JLabel lblProductName = new JLabel("Tên sản phẩm:");
+        lblProductName.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblProductName = new GridBagConstraints();
+        gbc_lblProductName.insets = new Insets(15, 0, 25, 5);
+        gbc_lblProductName.gridx = 0;
+        gbc_lblProductName.gridy = 3;
+        detailPanel.add(lblProductName, gbc_lblProductName);
         
         txtProductName = new JTextField();
         txtProductName.setColumns(10);
+        txtProductName.setFont(new Font("Verdana", Font.PLAIN, 12));
         GridBagConstraints gbc_txtProductName = new GridBagConstraints();
         gbc_txtProductName.insets = new Insets(15, 0, 25, 5);
         gbc_txtProductName.fill = GridBagConstraints.HORIZONTAL;
@@ -204,16 +207,17 @@ public class Warranty extends JPanel {
         gbc_txtProductName.gridy = 3;
         detailPanel.add(txtProductName, gbc_txtProductName);
         
-        JLabel lblWarrantyId_3 = new JLabel("Ngày bảo hành:");
-        lblWarrantyId_3.setFont(new Font("Verdana", Font.PLAIN, 12));
-        GridBagConstraints gbc_lblWarrantyId_3 = new GridBagConstraints();
-        gbc_lblWarrantyId_3.insets = new Insets(15, 0, 25, 5);
-        gbc_lblWarrantyId_3.gridx = 0;
-        gbc_lblWarrantyId_3.gridy = 4;
-        detailPanel.add(lblWarrantyId_3, gbc_lblWarrantyId_3);
+        JLabel lblDateReceived = new JLabel("Ngày bảo hành:");
+        lblDateReceived.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblDateReceived = new GridBagConstraints();
+        gbc_lblDateReceived.insets = new Insets(15, 0, 25, 5);
+        gbc_lblDateReceived.gridx = 0;
+        gbc_lblDateReceived.gridy = 4;
+        detailPanel.add(lblDateReceived, gbc_lblDateReceived);
         
         txtDateReceived = new JTextField();
         txtDateReceived.setColumns(10);
+        txtDateReceived.setFont(new Font("Verdana", Font.PLAIN, 12));
         GridBagConstraints gbc_txtDateReceived = new GridBagConstraints();
         gbc_txtDateReceived.insets = new Insets(15, 0, 25, 5);
         gbc_txtDateReceived.fill = GridBagConstraints.HORIZONTAL;
@@ -221,16 +225,17 @@ public class Warranty extends JPanel {
         gbc_txtDateReceived.gridy = 4;
         detailPanel.add(txtDateReceived, gbc_txtDateReceived);
         
-        JLabel lblWarrantyId_4 = new JLabel("Ngày trả:");
-        lblWarrantyId_4.setFont(new Font("Verdana", Font.PLAIN, 12));
-        GridBagConstraints gbc_lblWarrantyId_4 = new GridBagConstraints();
-        gbc_lblWarrantyId_4.insets = new Insets(15, 0, 25, 5);
-        gbc_lblWarrantyId_4.gridx = 0;
-        gbc_lblWarrantyId_4.gridy = 5;
-        detailPanel.add(lblWarrantyId_4, gbc_lblWarrantyId_4);
+        JLabel lblDateReturned = new JLabel("Ngày trả:");
+        lblDateReturned.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblDateReturned = new GridBagConstraints();
+        gbc_lblDateReturned.insets = new Insets(15, 0, 25, 5);
+        gbc_lblDateReturned.gridx = 0;
+        gbc_lblDateReturned.gridy = 5;
+        detailPanel.add(lblDateReturned, gbc_lblDateReturned);
         
         txtDateReturned = new JTextField();
         txtDateReturned.setColumns(10);
+        txtDateReturned.setFont(new Font("Verdana", Font.PLAIN, 12));
         GridBagConstraints gbc_txtDateReturned = new GridBagConstraints();
         gbc_txtDateReturned.insets = new Insets(15, 0, 25, 5);
         gbc_txtDateReturned.fill = GridBagConstraints.HORIZONTAL;
@@ -238,17 +243,18 @@ public class Warranty extends JPanel {
         gbc_txtDateReturned.gridy = 5;
         detailPanel.add(txtDateReturned, gbc_txtDateReturned);
         
-        JLabel lblWarrantyId_4_1 = new JLabel("Ghi chú:");
-        lblWarrantyId_4_1.setFont(new Font("Verdana", Font.PLAIN, 12));
-        GridBagConstraints gbc_lblWarrantyId_4_1 = new GridBagConstraints();
-        gbc_lblWarrantyId_4_1.anchor = GridBagConstraints.NORTH;
-        gbc_lblWarrantyId_4_1.insets = new Insets(15, 0, 25, 5);
-        gbc_lblWarrantyId_4_1.gridx = 0;
-        gbc_lblWarrantyId_4_1.gridy = 6;
-        detailPanel.add(lblWarrantyId_4_1, gbc_lblWarrantyId_4_1);
+        JLabel lblNote = new JLabel("Ghi chú:");
+        lblNote.setFont(new Font("Verdana", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblNote = new GridBagConstraints();
+        gbc_lblNote.anchor = GridBagConstraints.NORTH;
+        gbc_lblNote.insets = new Insets(15, 0, 25, 5);
+        gbc_lblNote.gridx = 0;
+        gbc_lblNote.gridy = 6;
+        detailPanel.add(lblNote, gbc_lblNote);
         
         TextArea txtNote = new TextArea();
         txtNote.setRows(5);
+        txtNote.setFont(new Font("Verdana", Font.PLAIN, 12));
         txtNote.setColumns(1);
         GridBagConstraints gbc_txtNote = new GridBagConstraints();
         gbc_txtNote.insets = new Insets(15, 0, 25, 5);
