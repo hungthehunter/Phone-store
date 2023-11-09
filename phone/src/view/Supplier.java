@@ -26,6 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class Supplier extends JPanel {
 
@@ -63,18 +64,28 @@ public class Supplier extends JPanel {
 		lblInfo.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		panel_table_supplier.add(lblInfo, BorderLayout.NORTH);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		panel_table_supplier.add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Mã Nhà Cung Cấp", "Họ Và Tên", "Giới Tính", "Số Điện Thoại", "Địa Chỉ", "Sản Phẩm Giao Dịch", "Email", "Ngày Giao Dịch", "Ghi Chú"
-			}
-		));
-		scrollPane.setViewportView(table);
+		String[] columnNames = {"Mã Nhà Cung Cấp", "Họ Và Tên", "Giới Tính", "Số Điện Thoại", "Địa Chỉ", "Sản Phẩm Giao Dịch", "Email", "Ngày Giao Dịch", "Ghi Chú"};
+		Object[][] data = {
+		         {"NVA", "Nguyen Van A", "Nam", "09092382938", "43/12 Duong so 1", "Nokia", "nva@gmail.com", "09/12/2021", "test"},
+		         {"NVB", "Nguyen Van B", "Nam", "09092121311", "32 Go Vap" , "Iphone", "nvb@gmail.com", "23/01/2021", "new"},		     
+		};
+		
+		DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+		table = new JTable(model);
+		table.setFont(new Font("Verdana", Font.PLAIN, 12));
+		table.getTableHeader().setReorderingAllowed(false);
+		JTableHeader header = table.getTableHeader();
+		header.setFont(new Font("Verdana", Font.PLAIN, 12));
+		JScrollPane scrollPane = new JScrollPane(table);
+		panel_table_supplier.add(scrollPane, BorderLayout.CENTER);
+
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -126,10 +137,7 @@ public class Supplier extends JPanel {
 		gbc_btnSearch.gridx = 3;
 		gbc_btnSearch.gridy = 1;
 		panel.add(btnSearch, gbc_btnSearch);
-		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		
 		JLabel lblInput = new JLabel("Thêm nhà cung cấp mới");
 		lblInput.setFont(new Font("Times New Roman", Font.BOLD, 16));
@@ -258,7 +266,6 @@ public class Supplier extends JPanel {
 		panel.add(addressText, gbc_addressText);
 		addressText.setColumns(10);
 		
-		
 		String[] supplier_type_list=new String[] {"Nokia", "Samsung Galaxy Prime J7"};
 		
 		JLabel label_email = new JLabel("Email");
@@ -374,12 +381,13 @@ public class Supplier extends JPanel {
 		Image iconAdd = new ImageIcon("Assets/Icon/add.png").getImage();
 		iconAdd = iconAdd.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
 	
-	Image delete_icon=new ImageIcon("Assets/Icon/delete.png").getImage();//
-	delete_icon=delete_icon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
-	Image iconEdit = new ImageIcon("Assets/Icon/edit.png").getImage();
-	iconEdit = iconEdit.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
-	Image iconClear = new ImageIcon("Assets/Icon/clear.png").getImage();
-	iconClear = iconClear.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		Image delete_icon=new ImageIcon("Assets/Icon/delete.png").getImage();//
+		delete_icon=delete_icon.getScaledInstance(45, 36, Image.SCALE_SMOOTH);
+		Image iconEdit = new ImageIcon("Assets/Icon/edit.png").getImage();
+		iconEdit = iconEdit.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		Image iconClear = new ImageIcon("Assets/Icon/clear.png").getImage();
+		iconClear = iconClear.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		
 		JButton btnAdd = new JButton("");
 		btnAdd.setPreferredSize(new Dimension(60, 40));
 		btnAdd.setIcon(new ImageIcon(iconAdd));
