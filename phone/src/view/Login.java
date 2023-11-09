@@ -1,39 +1,29 @@
 package view;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.CardLayout;
-import java.awt.Dimension;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JCheckBox;
 import java.awt.Color;
 import java.awt.Cursor;
-
-import javax.swing.JButton;
-import java.awt.SystemColor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Toolkit;
-import javax.swing.SwingConstants;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.border.MatteBorder;
 
-
-import javax.swing.border.LineBorder;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 public class Login extends JFrame {
 	private JTextField textField;
@@ -266,7 +256,7 @@ public class Login extends JFrame {
 public static void main(String[] args) {
 	System.setProperty("sun.java2d.uiScale", "1.0");
 try {
-	testFrame loginBr=new testFrame();
+	Login loginBr=new Login();
 	loginBr.setSize(650, 350);
 	loginBr.setUndecorated(true);
 	loginBr.setVisible(true);	

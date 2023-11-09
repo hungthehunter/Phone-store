@@ -154,7 +154,7 @@ public class Menu extends JFrame {
             contentPanel.removeAll();
             switch (text) {
             case "Products": {
-            	menuProduct menuProduct = new menuProduct();
+            	Product menuProduct = new Product();
             	contentPanel.add(menuProduct);
             	contentPanel.revalidate();
             	contentPanel.repaint();
@@ -213,7 +213,7 @@ public class Menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					testmenu frame = new testmenu();
+					Menu frame = new Menu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
