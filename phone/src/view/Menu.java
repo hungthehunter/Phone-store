@@ -162,7 +162,7 @@ public class Menu extends JFrame {
             }
             
             case "Customer":{
-            	Customer customer = new Customer();
+            	testPanel customer = new testPanel();
             	contentPanel.add(customer);
             	contentPanel.revalidate();
             	contentPanel.repaint();

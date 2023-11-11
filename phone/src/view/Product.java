@@ -193,7 +193,7 @@ public class Product extends JPanel {
 		panelProductInfo.setLayout(gbl_panelProductInfo);
 		
 		JLabel lblNewLabel_1 = new JLabel("Thông Tin Sản Phẩm");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		lblNewLabel_1.setForeground(borderColor);
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.weightx = 1.0;
@@ -460,7 +460,7 @@ public class Product extends JPanel {
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.weighty = 1.0;
 		gbc_panel.weightx = 0.5;
-		gbc_panel.insets = new Insets(0, 20, 5, 5);
+		gbc_panel.insets = new Insets(0, 25, 5, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 0;

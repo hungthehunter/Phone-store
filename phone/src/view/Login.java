@@ -263,20 +263,20 @@ public class Login extends JFrame {
 
 	}
 	
-public static void main(String[] args) {
-	System.setProperty("sun.java2d.uiScale", "1.0");
-try {
-	Login loginBr=new Login();
-	loginBr.setSize(650, 350);
-	loginBr.setUndecorated(true);
-	loginBr.setVisible(true);	
-	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    int x = (screenSize.width - loginBr.getWidth()) / 2;
-    int y = (screenSize.height - loginBr.getHeight()) / 2;
-    loginBr.setLocation(x, y);
-	
-} catch (Exception e) {
-	e.printStackTrace();
-}
-}
+	public static void main(String[] args) {
+		System.setProperty("sun.java2d.uiScale", "1.0");
+		try {
+			Login loginBr=new Login();
+			loginBr.setSize(650, 350);
+			loginBr.setUndecorated(true);
+			loginBr.setVisible(true);	
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		    int x = (screenSize.width - loginBr.getWidth()) / 2;
+		    int y = (screenSize.height - loginBr.getHeight()) / 2;
+		    loginBr.setLocation(x, y);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
