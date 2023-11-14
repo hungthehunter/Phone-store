@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -38,8 +39,9 @@ public class Supplier extends JPanel {
 	private JTextField phoneText;
 	private JTextField addressText;
 	private JTextField emailText;
-	private JTextField noteText;
-	private JTable table;
+	private JTextArea noteText;
+	private JTable infoTable;
+	private JTextField searchText;
 
 	/**
 	 * Create the panel.
