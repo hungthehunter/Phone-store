@@ -1,45 +1,36 @@
+package database;
 
-	package database;
-	import java.sql.Connection;
-	import com.mysql.jdbc.Driver;
-	import java.sql.DriverManager;
-	import java.sql.SQLException;
-	public class JDBCmySQL {
-	public static Connection getConection() {
-		Connection c=null;
-	try {
-		DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-		String url="jdbc:mySQL://localhost:3306/phone";
-		String username="root";
-		String password="Grandy-092358";
-		c= DriverManager.getConnection(url, username, password);
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-		
-		return c;
-	}
-	public static void DisConection(Connection c) {
-	try {
-		if(c!=null) {
-			c.close();
-		}
-	} catch (Exception e) {
-		// TODO: handle exception
-		e.printStackTrace();
-	}
-	}
-	
-	public static void printInfo(Connection c) {
-		if(c!=null) {
-			try {
-				java.sql.DatabaseMetaData dtbm=c.getMetaData();
-				System.out.print(dtbm.getDatabaseProductName());
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-	}
+import java.sql.Connection;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
 
+public class JDBCmySQL {
+
+    public static Connection getConnection() {
+        Connection result = null;
+        try {
+            // Dang ky MySQL Driver voi DriverManager
+            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+            //Cac thong so
+            String url = "jdbc:mySQL://localhost:3306/pmqldt";
+            String userName = "root";
+            String password = "";
+            //Tao ket noi 
+            result = DriverManager.getConnection(url, userName, password);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Không thể kết nối đến cơ sở dữ liệu !", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        return result;
+    }
+
+    public static void closeConnection(Connection c) {
+        try {
+            if (c != null) {
+                c.close();
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+}
