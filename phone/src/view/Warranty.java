@@ -70,7 +70,7 @@ public class Warranty extends JPanel {
 		tablePanel.setBorder(null);
 		GridBagConstraints gbc_tablePanel = new GridBagConstraints();
 		gbc_tablePanel.weighty = 1.0;
-		gbc_tablePanel.weightx = 0.7;
+		gbc_tablePanel.weightx = 0.6;
 		gbc_tablePanel.gridheight = 2;
 		gbc_tablePanel.insets = new Insets(20, 20, 20, 5);
 		gbc_tablePanel.fill = GridBagConstraints.BOTH;
@@ -164,7 +164,7 @@ public class Warranty extends JPanel {
         gbc_detailPanel.gridy = 0;
         add(detailPanel, gbc_detailPanel);
         GridBagLayout gbl_detailPanel = new GridBagLayout();
-        gbl_detailPanel.columnWidths = new int[]{0, 0, 0};
+        gbl_detailPanel.columnWidths = new int[] {100, 100, 0};
         gbl_detailPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 52, 0};
         gbl_detailPanel.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
         gbl_detailPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -174,6 +174,7 @@ public class Warranty extends JPanel {
         lblWarrantyInfo.setFont(new Font("Verdana", Font.BOLD, 15));
         lblWarrantyInfo.setForeground(textColor);
         gbc_lblWarrantyInfo = new GridBagConstraints();
+        gbc_lblWarrantyInfo.weightx = 1.0;
         gbc_lblWarrantyInfo.gridwidth = 2;
         gbc_lblWarrantyInfo.insets = new Insets(5, 5, 20, 0);
         gbc_lblWarrantyInfo.gridx = 0;
@@ -196,7 +197,7 @@ public class Warranty extends JPanel {
         warrantyIdText.setBorder(new LineBorder(borderColor, 2, true));	
         warrantyIdText.setForeground(textColor);
         GridBagConstraints gbc_txtWarrantyId = new GridBagConstraints();
-        gbc_txtWarrantyId.weightx = 0.8;
+        gbc_txtWarrantyId.weightx = 0.6;
         gbc_txtWarrantyId.weighty = 0.1;
         gbc_txtWarrantyId.ipady = 5;
         gbc_txtWarrantyId.insets = new Insets(10, 0, 25, 5);
