@@ -9,5 +9,10 @@
 	<classpathentry kind="src" path="Assets"/>
 	<classpathentry kind="lib" path="/testing"/>
 	<classpathentry kind="lib" path="/Phone-store"/>
+	<classpathentry kind="lib" path="C:/Users/kotak/OneDrive/Máy tính/Phone-store-workSpace/Phone-store/phone/lib/mysql-connector-java-8.0.30.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
