@@ -5,11 +5,30 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+import bus.CategoryBUS;
+import dao.CategoryDAO;
+import dto.CategoryDTO;
+import service.Validation;
+
 import javax.swing.JButton;
 
 import java.awt.Color;
@@ -17,23 +36,37 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
 
-public class Category extends JPanel {
+public class Category extends JPanel implements MouseListener, KeyListener{
 
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
+	private JTextField cateFindTxt;
 	private JTable table;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField cateNameTxt;
 	private JTextField textField_3;
 	private JTable table_1;
+	private DefaultTableModel categoryModel;
+	private JButton btnAddCate;
+	private JButton btnEditCate;
+	private JButton btnDeleteCate;
+	private JButton btnRefreshCate;
+	CategoryBUS categoryBUS = new CategoryBUS();
+	ArrayList<CategoryDTO> listCategory = categoryBUS.getALL();
+	private JTextField cateIdTxt;
 
 	/**
 	 * Create the panel.
 	 */
 	public Category() {
+		initComponent();
+		loadDataTable(listCategory);
+	}
+
+	public void initComponent() {
 		Color myColor = new Color(34, 33, 75);
 		Color backGroundColor = Color.white;
 		Color borderColor = myColor;
@@ -58,9 +91,9 @@ public class Category extends JPanel {
 		gbc_panelCategoryTable.gridy = 0;
 		add(panelCategoryTable, gbc_panelCategoryTable);
 		GridBagLayout gbl_panelCategoryTable = new GridBagLayout();
-		gbl_panelCategoryTable.columnWidths = new int[]{0, 0, 0};
+		gbl_panelCategoryTable.columnWidths = new int[]{0, 0, 0, 0};
 		gbl_panelCategoryTable.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_panelCategoryTable.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gbl_panelCategoryTable.columnWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panelCategoryTable.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panelCategoryTable.setLayout(gbl_panelCategoryTable);
 		
@@ -70,48 +103,68 @@ public class Category extends JPanel {
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.weighty = 0.1;
 		gbc_lblNewLabel.weightx = 1.0;
-		gbc_lblNewLabel.gridwidth = 2;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.gridwidth = 3;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
 		panelCategoryTable.add(lblNewLabel, gbc_lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBorder(new LineBorder(borderColor, 2, true));
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.ipady = 5;
-		gbc_textField.weighty = 0.1;
-		gbc_textField.weightx = 0.9;
-		gbc_textField.insets = new Insets(0, 5, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 0;
-		gbc_textField.gridy = 1;
-		panelCategoryTable.add(textField, gbc_textField);
-		textField.setColumns(10);
+		cateFindTxt = new JTextField();
+		cateFindTxt.setBorder(new LineBorder(borderColor, 2, true));
+		cateFindTxt.setColumns(10);
+		cateFindTxt.addKeyListener(this);
+		GridBagConstraints gbc_cateFindTxt = new GridBagConstraints();
+		gbc_cateFindTxt.ipady = 5;
+		gbc_cateFindTxt.weighty = 0.1;
+		gbc_cateFindTxt.weightx = 0.8;
+		gbc_cateFindTxt.insets = new Insets(0, 5, 5, 5);
+		gbc_cateFindTxt.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cateFindTxt.gridx = 0;
+		gbc_cateFindTxt.gridy = 1;
+		panelCategoryTable.add(cateFindTxt, gbc_cateFindTxt);
 		
-		JButton btnNewButton = new JButton("Tìm Kiếm");
-        Image iconSearch = new ImageIcon("Assets/Icon/searching.png").getImage();
-        iconSearch = iconSearch.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-        btnNewButton.setIcon(new ImageIcon(iconSearch));
-        btnNewButton.setBorder(new LineBorder(borderColor, 2, true));
-		btnNewButton.setForeground(Color.white);
-		btnNewButton.setBackground(buttonColor);
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.weighty = 0.1;
-		gbc_btnNewButton.weightx = 0.1;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.gridx = 1;
-		gbc_btnNewButton.gridy = 1;
-		panelCategoryTable.add(btnNewButton, gbc_btnNewButton);
+		JButton btnFindCate = new JButton("Xuất Excel");
+        Image iconExcel = new ImageIcon("Assets/Icon/excel.png").getImage();
+        iconExcel = iconExcel.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        btnFindCate.setIcon(new ImageIcon(iconExcel));
+        btnFindCate.setBorder(new LineBorder(borderColor, 2, true));
+		btnFindCate.setForeground(Color.white);
+		btnFindCate.setBackground(buttonColor);
+		btnFindCate.addMouseListener(this);
+		
+		GridBagConstraints gbc_btnFindCate = new GridBagConstraints();
+		gbc_btnFindCate.weighty = 0.1;
+		gbc_btnFindCate.weightx = 0.1;
+		gbc_btnFindCate.insets = new Insets(0, 0, 5, 5);
+		gbc_btnFindCate.gridx = 1;
+		gbc_btnFindCate.gridy = 1;
+		panelCategoryTable.add(btnFindCate, gbc_btnFindCate);
+		
+		JButton btnFindCate_1 = new JButton("Nhập Excel");
+		iconExcel = iconExcel.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        btnFindCate_1.setIcon(new ImageIcon(iconExcel));
+        btnFindCate_1.setBorder(new LineBorder(borderColor, 2, true));
+        btnFindCate_1.setForeground(Color.white);
+        btnFindCate_1.setBackground(buttonColor);
+        btnFindCate_1.addMouseListener(this);
+		
+		
+		GridBagConstraints gbc_btnFindCate_1 = new GridBagConstraints();
+		gbc_btnFindCate_1.weighty = 0.1;
+		gbc_btnFindCate_1.weightx = 0.1;
+		gbc_btnFindCate_1.insets = new Insets(0, 0, 5, 0);
+		gbc_btnFindCate_1.gridx = 2;
+		gbc_btnFindCate_1.gridy = 1;
+		panelCategoryTable.add(btnFindCate_1, gbc_btnFindCate_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new LineBorder(borderColor, 2));
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 5, 5, 5);
+		gbc_scrollPane.insets = new Insets(0, 5, 0, 5);
 		gbc_scrollPane.weighty = 0.8;
 		gbc_scrollPane.weightx = 1.0;
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridwidth = 2;
+		gbc_scrollPane.gridwidth = 3;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 2;
 		panelCategoryTable.add(scrollPane, gbc_scrollPane);
@@ -121,13 +174,28 @@ public class Category extends JPanel {
 
 	     };
 	     
-	     DefaultTableModel model = new DefaultTableModel(data, columnNames) {
-	            @Override
-	            public boolean isCellEditable(int row, int column) {
-	                return false;
-	            }
-	        };
-       table = new JTable(model);	
+//	     DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+//	            @Override
+//	            public boolean isCellEditable(int row, int column) {
+//	                return false;
+//	            }
+//	        };
+	   categoryModel = new DefaultTableModel();
+	   categoryModel = new DefaultTableModel(data, columnNames) {
+           @Override
+           public boolean isCellEditable(int row, int column) {
+               return false;
+           }
+       };
+	   categoryModel.setColumnIdentifiers(columnNames);
+	   
+       table = new JTable(categoryModel);
+       table.addMouseListener(this);
+       DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+       centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+       TableColumnModel columnModel = table.getColumnModel();
+       columnModel.getColumn(0).setCellRenderer(centerRenderer);
+       columnModel.getColumn(1).setCellRenderer(centerRenderer);
        table.setBorder(new LineBorder(borderColor, 2, false));
        table.getTableHeader().setBorder(new LineBorder(borderColor, 2, false));
        table.getTableHeader().setReorderingAllowed(false);
@@ -176,17 +244,16 @@ public class Category extends JPanel {
 		gbc_lblNewLabel_2.gridy = 1;
 		panelCategoryInfo.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		textField_1 = new JTextField();
-		textField_1.setBorder(new LineBorder(borderColor, 2, true));
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.ipady = 5;
-		gbc_textField_1.weightx = 0.9;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 1;
-		panelCategoryInfo.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		cateIdTxt = new JTextField();
+		cateIdTxt.setColumns(10);
+		cateIdTxt.setEditable(false);
+		cateIdTxt.setFocusable(false);
+		GridBagConstraints gbc_cateIdTxt = new GridBagConstraints();
+		gbc_cateIdTxt.insets = new Insets(0, 0, 5, 0);
+		gbc_cateIdTxt.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cateIdTxt.gridx = 1;
+		gbc_cateIdTxt.gridy = 1;
+		panelCategoryInfo.add(cateIdTxt, gbc_cateIdTxt);
 		
 		JLabel lblNewLabel_3 = new JLabel("Tên SP:");
 		lblNewLabel_3.setFont(new Font("Times New Roman", Font.BOLD, 12));
@@ -198,17 +265,17 @@ public class Category extends JPanel {
 		gbc_lblNewLabel_3.gridy = 2;
 		panelCategoryInfo.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-		textField_2 = new JTextField();
-		textField_2.setBorder(new LineBorder(borderColor, 2, true));
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.ipady = 5;
-		gbc_textField_2.weightx = 0.8;
-		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 2;
-		panelCategoryInfo.add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		cateNameTxt = new JTextField();
+		cateNameTxt.setBorder(new LineBorder(borderColor, 2, true));
+		GridBagConstraints gbc_cateNameTxt = new GridBagConstraints();
+		gbc_cateNameTxt.ipady = 5;
+		gbc_cateNameTxt.weightx = 0.9;
+		gbc_cateNameTxt.insets = new Insets(0, 0, 5, 0);
+		gbc_cateNameTxt.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cateNameTxt.gridx = 1;
+		gbc_cateNameTxt.gridy = 2;
+		panelCategoryInfo.add(cateNameTxt, gbc_cateNameTxt);
+		cateNameTxt.setColumns(10);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
@@ -217,59 +284,62 @@ public class Category extends JPanel {
 		gbc_panel_3.weightx = 1.0;
 		gbc_panel_3.weighty = 0.3;
 		gbc_panel_3.gridwidth = 2;
-		gbc_panel_3.insets = new Insets(10, 5, 10, 5);
+		gbc_panel_3.insets = new Insets(10, 5, 10, 0);
 		gbc_panel_3.gridx = 0;
 		gbc_panel_3.gridy = 3;
 		panelCategoryInfo.add(panel_3, gbc_panel_3);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnNewButton_1 = new JButton("Thêm");
-     	btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 12));
-     	btnNewButton_1.setBorder(new LineBorder(borderColor, 2, true));
+		btnAddCate = new JButton("Thêm");
+     	btnAddCate.setFont(new Font("Times New Roman", Font.BOLD, 12));
+     	btnAddCate.setBorder(new LineBorder(borderColor, 2, true));
      	Image iconAdd = new ImageIcon("Assets/Icon/add.png").getImage();
      	iconAdd = iconAdd.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		btnNewButton_1.setPreferredSize(new Dimension(100, 40));
-		btnNewButton_1.setBackground(buttonColor);
-		btnNewButton_1.setForeground(Color.white);
-		btnNewButton_1.setFocusPainted(false);
-		btnNewButton_1.setIcon(new ImageIcon(iconAdd));
-		panel_3.add(btnNewButton_1);
-		
-		JButton btnNewButton_3 = new JButton("Sửa");
-		btnNewButton_3.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		btnNewButton_3.setBorder(new LineBorder(borderColor, 2, true));
+		btnAddCate.setPreferredSize(new Dimension(100, 40));
+		btnAddCate.setBackground(buttonColor);
+		btnAddCate.setForeground(Color.white);
+		btnAddCate.setFocusPainted(false);
+		btnAddCate.setIcon(new ImageIcon(iconAdd));
+		btnAddCate.addMouseListener(this);
+		panel_3.add(btnAddCate);
+		btnEditCate = new JButton("Sửa");
+		btnEditCate.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		btnEditCate.setBorder(new LineBorder(borderColor, 2, true));
      	Image iconEdit = new ImageIcon("Assets/Icon/edit.png").getImage();
      	iconEdit = iconEdit.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-     	btnNewButton_3.setPreferredSize(new Dimension(100, 40));
-     	btnNewButton_3.setBackground(buttonColor);
-     	btnNewButton_3.setForeground(Color.white);
-     	btnNewButton_3.setFocusPainted(false);
-     	btnNewButton_3.setIcon(new ImageIcon(iconEdit));
-		panel_3.add(btnNewButton_3);
+     	btnEditCate.setPreferredSize(new Dimension(100, 40));
+     	btnEditCate.setBackground(buttonColor);
+     	btnEditCate.setForeground(Color.white);
+     	btnEditCate.setFocusPainted(false);
+     	btnEditCate.setIcon(new ImageIcon(iconEdit));
+     	btnEditCate.addMouseListener(this);
+		panel_3.add(btnEditCate);
 		
-		JButton btnNewButton_4 = new JButton("Xóa");
-		btnNewButton_4.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		btnNewButton_4.setBorder(new LineBorder(borderColor, 2, true));
+		btnDeleteCate = new JButton("Xóa");
+		btnDeleteCate.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		btnDeleteCate.setBorder(new LineBorder(borderColor, 2, true));
      	Image iconDelete = new ImageIcon("Assets/Icon/delete.png").getImage();
      	iconDelete = iconDelete.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-     	btnNewButton_4.setPreferredSize(new Dimension(100, 40));
-     	btnNewButton_4.setBackground(buttonColor);
-     	btnNewButton_4.setForeground(Color.white);
-     	btnNewButton_4.setFocusPainted(false);
-     	btnNewButton_4.setIcon(new ImageIcon(iconDelete));
-		panel_3.add(btnNewButton_4);
+     	btnDeleteCate.setPreferredSize(new Dimension(100, 40));
+     	btnDeleteCate.setBackground(buttonColor);
+     	btnDeleteCate.setForeground(Color.white);
+     	btnDeleteCate.setFocusPainted(false);
+     	btnDeleteCate.setIcon(new ImageIcon(iconDelete));
+     	btnDeleteCate.addMouseListener(this);
+		panel_3.add(btnDeleteCate);
 		
-		JButton btnNewButton_2 = new JButton("Mới");
-		btnNewButton_2.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		btnNewButton_2.setBorder(new LineBorder(borderColor, 2, true));
+		btnRefreshCate = new JButton("Mới");
+		btnRefreshCate.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		btnRefreshCate.setBorder(new LineBorder(borderColor, 2, true));
      	Image iconRefresh = new ImageIcon("Assets/Icon/clear.png").getImage();
      	iconRefresh = iconRefresh.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-     	btnNewButton_2.setPreferredSize(new Dimension(100, 40));
-     	btnNewButton_2.setBackground(buttonColor);
-     	btnNewButton_2.setForeground(Color.white);
-     	btnNewButton_2.setFocusPainted(false);
-     	btnNewButton_2.setIcon(new ImageIcon(iconRefresh));
-		panel_3.add(btnNewButton_2);
+     	btnRefreshCate.setPreferredSize(new Dimension(100, 40));
+     	btnRefreshCate.setBackground(buttonColor);
+     	btnRefreshCate.setForeground(Color.white);
+     	btnRefreshCate.setFocusPainted(false);
+     	btnRefreshCate.setIcon(new ImageIcon(iconRefresh));
+     	btnRefreshCate.addMouseListener(this);
+		panel_3.add(btnRefreshCate);
 		
 		JPanel panelProductTable = new JPanel();
 		panelProductTable.setBackground(Color.WHITE);
@@ -283,9 +353,9 @@ public class Category extends JPanel {
 		gbc_panelProductTable.gridy = 1;
 		add(panelProductTable, gbc_panelProductTable);
 		GridBagLayout gbl_panelProductTable = new GridBagLayout();
-		gbl_panelProductTable.columnWidths = new int[]{0, 0, 0};
+		gbl_panelProductTable.columnWidths = new int[]{0, 0};
 		gbl_panelProductTable.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_panelProductTable.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gbl_panelProductTable.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gbl_panelProductTable.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panelProductTable.setLayout(gbl_panelProductTable);
 		
@@ -293,10 +363,9 @@ public class Category extends JPanel {
 		lblNewLabel_4.setForeground(textColor);
 		lblNewLabel_4.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-		gbc_lblNewLabel_4.gridwidth = 2;
 		gbc_lblNewLabel_4.weighty = 0.1;
 		gbc_lblNewLabel_4.weightx = 1.0;
-		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_4.gridx = 0;
 		gbc_lblNewLabel_4.gridy = 0;
 		panelProductTable.add(lblNewLabel_4, gbc_lblNewLabel_4);
@@ -306,25 +375,13 @@ public class Category extends JPanel {
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.ipady = 5;
 		gbc_textField_3.weighty = 0.1;
-		gbc_textField_3.weightx = 0.9;
-		gbc_textField_3.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_3.weightx = 1.0;
+		gbc_textField_3.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_3.gridx = 0;
 		gbc_textField_3.gridy = 1;
 		panelProductTable.add(textField_3, gbc_textField_3);
 		textField_3.setColumns(10);
-		
-		JButton btnNewButton_5 = new JButton("Tìm Kiếm");
-		btnNewButton_5.setIcon(new ImageIcon(iconSearch));
-		btnNewButton_5.setBorder(new LineBorder(borderColor, 2, true));
-		btnNewButton_5.setForeground(Color.white);
-		btnNewButton_5.setBackground(buttonColor);
-		GridBagConstraints gbc_btnNewButton_5 = new GridBagConstraints();
-		gbc_btnNewButton_5.weightx = 0.1;
-		gbc_btnNewButton_5.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_5.gridx = 1;
-		gbc_btnNewButton_5.gridy = 1;
-		panelProductTable.add(btnNewButton_5, gbc_btnNewButton_5);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBorder(new LineBorder(borderColor, 2, true));
@@ -332,8 +389,6 @@ public class Category extends JPanel {
 		gbc_scrollPane_1.weighty = 0.8;
 		gbc_scrollPane_1.weightx = 1.0;
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.gridwidth = 2;
-		gbc_scrollPane_1.insets = new Insets(0, 0, 0, 5);
 		gbc_scrollPane_1.gridx = 0;
 		gbc_scrollPane_1.gridy = 2;
 		panelProductTable.add(scrollPane_1, gbc_scrollPane_1);
@@ -358,5 +413,135 @@ public class Category extends JPanel {
       scrollPane_1.setViewportView(table_1);
 
 	}
+	
+	public void loadDataTable(ArrayList<CategoryDTO> result) {
+		categoryModel.setRowCount(0);
+		for (CategoryDTO c : result) {
+			categoryModel.addRow(new Object[] {
+					c.getCategoryId(), c.getCategoryName()
+			});
+		}
+	}
+	
+	  public int getRowSelected() {
+	        int index = table.getSelectedRow();
+	        if (index == -1) {
+	            JOptionPane.showMessageDialog(this, "Vui lòng chọn loại sản phẩm!");
+	        }
+	        return index;
+	    }
+	
 
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource() == btnAddCate) {
+            if (Validation.isEmpty(cateNameTxt.getText())) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên loại sản phẩm mới");
+            } else {
+                String categoryName = cateNameTxt.getText();                
+                if (categoryBUS.checkDup(categoryName)) {
+                    int id = CategoryDAO.getInstance().getAutoIncrement();
+                    categoryBUS.add(categoryName);
+                    loadDataTable(listCategory);
+                    cateNameTxt.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Loại sản phẩm đã tồn tại !");
+                }
+            }
+        } else if (e.getSource() == btnDeleteCate) {
+            int index = getRowSelected();
+            if (index != -1) {
+            	categoryBUS.delete(listCategory.get(index));
+                loadDataTable(listCategory);
+                cateNameTxt.setText("");
+            }
+        } else if (e.getSource() == btnEditCate) {
+            int index = getRowSelected();
+            if (index != -1) {
+                if (Validation.isEmpty(cateNameTxt.getText())) {
+                    JOptionPane.showMessageDialog(this, "Vui lòng nhập loại sản phẩm mới");
+                } else {
+                    String categoryName = cateNameTxt.getText();
+                    if (categoryBUS.checkDup(categoryName)) {
+                    	categoryBUS.update(new CategoryDTO(listCategory.get(index).getCategoryId(), categoryName));
+                        loadDataTable(listCategory);
+                        cateNameTxt.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Thương hiệu đã tồn tại !");
+                    }
+                }
+            }
+        } else if (e.getSource() == table) {        
+            int index = table.getSelectedRow();
+            cateIdTxt.setText(String.valueOf(listCategory.get(index).getCategoryId()));
+            cateNameTxt.setText(listCategory.get(index).getCategoryName());
+        } else if (e.getSource() == btnRefreshCate) {
+        	loadDataTable(listCategory);
+        	cateIdTxt.setText("");
+            cateNameTxt.setText("");     
+            cateFindTxt.setText("");
+        }
+		
+	}
+	
+	public void filterTable(String searchText) {
+	    searchText = searchText.toLowerCase();
+	    ArrayList<CategoryDTO> filteredList = new ArrayList<>();
+
+	    for (CategoryDTO c : listCategory) {
+	        if (c.getCategoryName().toLowerCase().contains(searchText) || String.valueOf(c.getCategoryId()).toLowerCase().contains(searchText)) {
+	            filteredList.add(c);
+	        }
+	    }
+
+	    loadDataTable(filteredList);
+	}
+    
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+        try {
+            filterTable(cateFindTxt.getText());
+        } catch (Exception  ex) {
+            Logger.getLogger(testPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		
+	}
 }
