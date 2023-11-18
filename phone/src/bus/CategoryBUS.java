@@ -62,9 +62,9 @@ public class CategoryBUS {
     public ArrayList<CategoryDTO> search(String text) {
         text = text.toLowerCase();
         ArrayList<CategoryDTO> result = new ArrayList<>();
-        for (CategoryDTO i : this.listCate) {
-            if (Integer.toString(i.getCategoryId()).toLowerCase().contains(text) || i.getCategoryName().toLowerCase().contains(text)) {
-                result.add(i);
+        for (CategoryDTO c : this.listCate) {
+            if (Integer.toString(c.getCategoryId()).toLowerCase().contains(text) || c.getCategoryName().toLowerCase().contains(text)) {
+                result.add(c);
             }
         }
         return result;
