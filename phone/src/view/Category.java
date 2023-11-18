@@ -173,14 +173,7 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	     Object[][] data = {
 
 	     };
-	     
-//	     DefaultTableModel model = new DefaultTableModel(data, columnNames) {
-//	            @Override
-//	            public boolean isCellEditable(int row, int column) {
-//	                return false;
-//	            }
-//	        };
-	   categoryModel = new DefaultTableModel();
+	    
 	   categoryModel = new DefaultTableModel(data, columnNames) {
            @Override
            public boolean isCellEditable(int row, int column) {
@@ -485,19 +478,6 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 		
 	}
 	
-	public void filterTable(String searchText) {
-	    searchText = searchText.toLowerCase();
-	    ArrayList<CategoryDTO> filteredList = new ArrayList<>();
-
-	    for (CategoryDTO c : listCategory) {
-	        if (c.getCategoryName().toLowerCase().contains(searchText) || String.valueOf(c.getCategoryId()).toLowerCase().contains(searchText)) {
-	            filteredList.add(c);
-	        }
-	    }
-
-	    loadDataTable(filteredList);
-	}
-    
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -538,7 +518,10 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
         try {
-            filterTable(cateFindTxt.getText());
+//            filterTable(cateFindTxt.getText());
+    	    ArrayList<CategoryDTO> filteredList = new ArrayList<>();
+        	filteredList = categoryBUS.search(cateFindTxt.getText());
+        	loadDataTable(filteredList);
         } catch (Exception  ex) {
             Logger.getLogger(testPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
