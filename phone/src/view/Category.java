@@ -25,8 +25,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import bus.CategoryBUS;
+import bus.ProductBUS;
 import dao.CategoryDAO;
 import dto.CategoryDTO;
+import dto.ProductDTO;
 import service.Validation;
 
 import javax.swing.JButton;
@@ -49,13 +51,15 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	private JTextField cateNameTxt;
 	private JTextField textField_3;
 	private JTable table_1;
-	private DefaultTableModel categoryModel;
+	private DefaultTableModel categoryModel, productModel;
 	private JButton btnAddCate;
 	private JButton btnEditCate;
 	private JButton btnDeleteCate;
 	private JButton btnRefreshCate;
 	CategoryBUS categoryBUS = new CategoryBUS();
 	ArrayList<CategoryDTO> listCategory = categoryBUS.getALL();
+	ProductBUS productBUS = new ProductBUS();
+	ArrayList<ProductDTO> listProduct = productBUS.getALL();
 	private JTextField cateIdTxt;
 
 	/**
@@ -64,6 +68,7 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	public Category() {
 		initComponent();
 		loadDataTable(listCategory);
+		loadDataProductTable(listProduct);
 	}
 
 	public void initComponent() {
@@ -173,7 +178,14 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	     Object[][] data = {
 
 	     };
-	    
+	     
+//	     DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+//	            @Override
+//	            public boolean isCellEditable(int row, int column) {
+//	                return false;
+//	            }
+//	        };
+	   categoryModel = new DefaultTableModel();
 	   categoryModel = new DefaultTableModel(data, columnNames) {
            @Override
            public boolean isCellEditable(int row, int column) {
@@ -364,6 +376,7 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 		panelProductTable.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
 		textField_3 = new JTextField();
+		textField_3.addKeyListener(this);
 		textField_3.setBorder(new LineBorder(borderColor, 2, true));
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.ipady = 5;
@@ -391,13 +404,21 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 
 	     };
 	     
-	     DefaultTableModel model1 = new DefaultTableModel(data1, columnNames1) {
+	    productModel = new DefaultTableModel(data1, columnNames1) {
 	            @Override
 	            public boolean isCellEditable(int row, int column) {
 	                return false;
 	            }
 	        };
-      table_1 = new JTable(model1);	
+      table_1 = new JTable(productModel);
+      table_1.getColumnModel().getColumn(0).setPreferredWidth(50);
+      table_1.getColumnModel().getColumn(1).setPreferredWidth(150);
+      table_1.getColumnModel().getColumn(2).setPreferredWidth(100);
+      
+      TableColumnModel columnProductModel = table_1.getColumnModel();
+      columnProductModel.getColumn(0).setCellRenderer(centerRenderer);
+      columnProductModel.getColumn(1).setCellRenderer(centerRenderer);
+      columnProductModel.getColumn(2).setCellRenderer(centerRenderer);
       table_1.setBorder(new LineBorder(borderColor, 2, false));
       table_1.getTableHeader().setBorder(new LineBorder(borderColor, 2, false));
       table_1.getTableHeader().setReorderingAllowed(false);
@@ -413,6 +434,16 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 			categoryModel.addRow(new Object[] {
 					c.getCategoryId(), c.getCategoryName()
 			});
+		}
+	}
+	
+	public void loadDataProductTable(ArrayList<ProductDTO> result) {
+		productModel.setRowCount(0);
+		for (ProductDTO p : result) {
+			productModel.addRow(new Object[] {
+					p.getProductId(), p.getProductName(), p.getCategoryName()
+			});
+			System.out.println(p.getProductName());
 		}
 	}
 	
@@ -432,11 +463,12 @@ public class Category extends JPanel implements MouseListener, KeyListener{
             if (Validation.isEmpty(cateNameTxt.getText())) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập tên loại sản phẩm mới");
             } else {
-                String categoryName = cateNameTxt.getText();                
-                if (categoryBUS.checkDup(categoryName)) {
-                    int id = CategoryDAO.getInstance().getAutoIncrement();
+                String categoryName = cateNameTxt.getText().trim();                
+                int id = CategoryDAO.getInstance().getAutoIncrement();
+                if (categoryBUS.checkDup(categoryName, id)) {
                     categoryBUS.add(categoryName);
                     loadDataTable(listCategory);
+                    cateIdTxt.setText("");
                     cateNameTxt.setText("");
                 } else {
                     JOptionPane.showMessageDialog(this, "Loại sản phẩm đã tồn tại !");
@@ -447,6 +479,7 @@ public class Category extends JPanel implements MouseListener, KeyListener{
             if (index != -1) {
             	categoryBUS.delete(listCategory.get(index));
                 loadDataTable(listCategory);
+                cateIdTxt.setText("");
                 cateNameTxt.setText("");
             }
         } else if (e.getSource() == btnEditCate) {
@@ -455,13 +488,15 @@ public class Category extends JPanel implements MouseListener, KeyListener{
                 if (Validation.isEmpty(cateNameTxt.getText())) {
                     JOptionPane.showMessageDialog(this, "Vui lòng nhập loại sản phẩm mới");
                 } else {
-                    String categoryName = cateNameTxt.getText();
-                    if (categoryBUS.checkDup(categoryName)) {
+                    String categoryName = cateNameTxt.getText().trim();             
+                    int id = CategoryDAO.getInstance().getAutoIncrement();                    
+                    if (categoryBUS.checkDup(categoryName, id)) {
                     	categoryBUS.update(new CategoryDTO(listCategory.get(index).getCategoryId(), categoryName));
                         loadDataTable(listCategory);
+                        cateIdTxt.setText("");
                         cateNameTxt.setText("");
                     } else {
-                        JOptionPane.showMessageDialog(this, "Thương hiệu đã tồn tại !");
+                        JOptionPane.showMessageDialog(this, "Loại sản phẩm đã tồn tại !");
                     }
                 }
             }
@@ -477,7 +512,35 @@ public class Category extends JPanel implements MouseListener, KeyListener{
         }
 		
 	}
+		
 	
+	public void filterTable(String searchText) {
+	    searchText = searchText.toLowerCase();
+	    ArrayList<CategoryDTO> filteredList = new ArrayList<>();
+
+	    for (CategoryDTO c : listCategory) {
+	        if (c.getCategoryName().toLowerCase().contains(searchText) || String.valueOf(c.getCategoryId()).toLowerCase().contains(searchText)) {
+	            filteredList.add(c);
+	        }
+	    }
+
+	    loadDataTable(filteredList);
+	}
+	
+	public void filterProductTable(String searchText) {
+	    searchText = searchText.toLowerCase();
+	    ArrayList<ProductDTO> filteredList = new ArrayList<>();
+
+	    for (ProductDTO p : listProduct) {
+	        if (p.getProductName().toLowerCase().contains(searchText) || String.valueOf(p.getProductId()).toLowerCase().contains(searchText) 
+	        		&& p.getCategoryName().toLowerCase().contains(searchText)) {
+	            filteredList.add(p);
+	        }
+	    }
+
+	    loadDataProductTable(filteredList);
+	}
+    
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -518,12 +581,10 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
         try {
-//            filterTable(cateFindTxt.getText());
-    	    ArrayList<CategoryDTO> filteredList = new ArrayList<>();
-        	filteredList = categoryBUS.search(cateFindTxt.getText());
-        	loadDataTable(filteredList);
+            filterTable(cateFindTxt.getText());
+            filterProductTable(textField_3.getText());
         } catch (Exception  ex) {
-            Logger.getLogger(testPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, ex);
         }
 		
 	}
