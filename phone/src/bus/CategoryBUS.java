@@ -83,11 +83,12 @@ public class CategoryBUS {
         return this.listCate.get(this.getIndexById(categoryId)).getCategoryName();
     }
 
-    public boolean checkDup(String name) {
+    public boolean checkDup(String name, int categoryIdToExclude) {
         boolean check = true;
         int i = 0;
         while (i < this.listCate.size() && check == true) {
-            if (this.listCate.get(i).getCategoryName().toLowerCase().contains(name.toLowerCase())) {
+            if (this.listCate.get(i).getCategoryName().toLowerCase().contains(name.toLowerCase())
+            		&& this.listCate.get(i).getCategoryId() != categoryIdToExclude) {
             	System.out.println(listCate.get(i).getCategoryName());
                 check = false;
             } else {
