@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -38,12 +39,10 @@ import service.Validation;
 import service.ExcelExporter;
 
 import javax.swing.border.MatteBorder;
-import javax.swing.plaf.FileChooserUI;
 
 public class Supplier extends JPanel implements MouseListener, KeyListener{
 
 	private static final long serialVersionUID = 1L;
-	private JTextField supplierSearchText;
 	private JTextField SupplierIdText;
 	private JTextField supplierNameText;
 	private JTextField supplierPhoneText;
@@ -61,6 +60,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 	private DefaultTableModel supplierModel;
 	private JButton btnExport;
 	private JButton btnImport;
+	private JLabel lblSearch;
 
 	/**
 	 * Create the panel.
@@ -79,7 +79,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		
 		setBackground(backGroundColor);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{552, 648, 0};
+		gridBagLayout.columnWidths = new int[]{614, 648, 0};
 		gridBagLayout.rowHeights = new int[]{428, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
@@ -95,16 +95,17 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		gbc_panel_table_supplier.gridy = 0;
 		add(panel_table_supplier, gbc_panel_table_supplier);
 		GridBagLayout gbl_panel_table_supplier = new GridBagLayout();
-		gbl_panel_table_supplier.columnWidths = new int[]{543, 75, 90, 0};
+		gbl_panel_table_supplier.columnWidths = new int[]{0, 543, 75, 90, 0};
 		gbl_panel_table_supplier.rowHeights = new int[]{20, 0, 552, 0};
-		gbl_panel_table_supplier.columnWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_table_supplier.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_table_supplier.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel_table_supplier.setLayout(gbl_panel_table_supplier);
 		
 		JLabel lblInfo = new JLabel("Thông tin nhà cung cấp");
-		lblInfo.setFont(new Font("Verdana", Font.BOLD, 15));
+		lblInfo.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		lblInfo.setForeground(textColor);
 		GridBagConstraints gbc_lblInfo = new GridBagConstraints();
+		gbc_lblInfo.gridwidth = 2;
 		gbc_lblInfo.anchor = GridBagConstraints.NORTH;
 		gbc_lblInfo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblInfo.insets = new Insets(0, 0, 5, 5);
@@ -134,16 +135,27 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 	    columnModel.getColumn(3).setCellRenderer(centerRenderer);
 	    columnModel.getColumn(4).setCellRenderer(centerRenderer);
 	    columnModel.getColumn(5).setCellRenderer(centerRenderer);
-		infoTable.setFont(new Font("Verdana", Font.PLAIN, 12));
+	    
+		infoTable.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		infoTable.setBorder(new LineBorder(borderColor, 2, false));
 		infoTable.getTableHeader().setBorder(new LineBorder(borderColor, 2, false));
 		infoTable.getTableHeader().setBackground(borderColor);
 		infoTable.getTableHeader().setForeground(Color.white);
 		infoTable.getTableHeader().setReorderingAllowed(false);
 		infoTable.addMouseListener(this);
+		
+		lblSearch = new JLabel("Tìm kiếm");
+		lblSearch.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblSearch.setForeground(textColor);
+		GridBagConstraints gbc_lblSearch = new GridBagConstraints();
+		gbc_lblSearch.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSearch.anchor = GridBagConstraints.EAST;
+		gbc_lblSearch.gridx = 0;
+		gbc_lblSearch.gridy = 1;
+		panel_table_supplier.add(lblSearch, gbc_lblSearch);
 		JScrollPane scrollPane = new JScrollPane(infoTable);	
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridwidth = 3;
+		gbc_scrollPane.gridwidth = 4;
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 2;
@@ -154,13 +166,13 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		gbc_searchText.ipady = 5;
 		gbc_searchText.fill = GridBagConstraints.HORIZONTAL;
 		gbc_searchText.insets = new Insets(0, 0, 5, 5);
-		gbc_searchText.gridx = 0;
+		gbc_searchText.gridx = 1;
 		gbc_searchText.gridy = 1;
 		panel_table_supplier.add(searchText, gbc_searchText);
 		searchText.setBorder(new LineBorder(borderColor, 2, true));	
 		searchText.setForeground(textColor);
 		searchText.addKeyListener(this);
-		searchText.setFont(new Font("Verdana", Font.PLAIN, 12));
+		searchText.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		searchText.setColumns(10);
 		
 		Image iconExcel = new ImageIcon("Assets/Icon/excel.png").getImage();
@@ -177,7 +189,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		gbc_btnExport.ipady = 5;
 		gbc_btnExport.ipadx = 5;
 		gbc_btnExport.insets = new Insets(0, 5, 5, 5);
-		gbc_btnExport.gridx = 1;
+		gbc_btnExport.gridx = 2;
 		gbc_btnExport.gridy = 1;
 		panel_table_supplier.add(btnExport, gbc_btnExport);
 		
@@ -191,8 +203,8 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		GridBagConstraints gbc_btnImport = new GridBagConstraints();
 		gbc_btnImport.ipady = 5;
 		gbc_btnImport.ipadx = 5;
-		gbc_btnImport.insets = new Insets(0, 5, 5, 5);
-		gbc_btnImport.gridx = 2;
+		gbc_btnImport.insets = new Insets(0, 5, 5, 0);
+		gbc_btnImport.gridx = 3;
 		gbc_btnImport.gridy = 1;
 		panel_table_supplier.add(btnImport, gbc_btnImport);
 		
@@ -214,7 +226,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		inputPanel.setLayout(gbl_inputPanel);
 		
 		JLabel lblInput = new JLabel("Thêm nhà cung cấp mới");
-		lblInput.setFont(new Font("Verdana", Font.BOLD, 15));
+		lblInput.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		lblInput.setForeground(textColor);
 		GridBagConstraints gbc_lblInput = new GridBagConstraints();
 		gbc_lblInput.fill = GridBagConstraints.HORIZONTAL;
@@ -224,7 +236,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		inputPanel.add(lblInput, gbc_lblInput);
 		
 		JLabel lblSupplierId = new JLabel("Mã nhà cung cấp");
-		lblSupplierId.setFont(new Font("Verdana", Font.BOLD, 12));
+		lblSupplierId.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblSupplierId.setForeground(textColor);
 		GridBagConstraints gbc_lblSupplierId = new GridBagConstraints();
 		gbc_lblSupplierId.fill = GridBagConstraints.HORIZONTAL;
@@ -235,10 +247,10 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		
 		SupplierIdText = new JTextField();
 		SupplierIdText.setBorder(new LineBorder(borderColor, 2, true));	
+		SupplierIdText.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		SupplierIdText.setForeground(textColor);
 		SupplierIdText.setEditable(false);
 		SupplierIdText.setFocusable(false);
-		SupplierIdText.setFont(new Font("Verdana", Font.PLAIN, 12));
 		GridBagConstraints gbc_SupplierIdText = new GridBagConstraints();
 		gbc_SupplierIdText.weighty = 0.1;
 		gbc_SupplierIdText.gridwidth = 3;
@@ -254,7 +266,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		ButtonGroup buttonGroup = new ButtonGroup();
 	         
 		JLabel lblSupplierName = new JLabel("Họ tên nhà cung cấp");
-		lblSupplierName.setFont(new Font("Verdana", Font.BOLD, 12));
+		lblSupplierName.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblSupplierName.setForeground(textColor);
 		GridBagConstraints gbc_lblSupplierName = new GridBagConstraints();
 		gbc_lblSupplierName.weightx = 0.3;
@@ -267,7 +279,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		supplierNameText = new JTextField();
 		supplierNameText.setBorder(new LineBorder(borderColor, 2, true));	
 		supplierNameText.setForeground(textColor);
-		supplierNameText.setFont(new Font("Verdana", Font.PLAIN, 12));
+		supplierNameText.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		GridBagConstraints gbc_supplierNameText = new GridBagConstraints();
 		gbc_supplierNameText.weighty = 0.1;
 		gbc_supplierNameText.gridwidth = 3;
@@ -280,7 +292,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		supplierNameText.setColumns(10);
 		
 		JLabel lblPhone = new JLabel("Số điện thoại");
-		lblPhone.setFont(new Font("Verdana", Font.BOLD, 12));
+		lblPhone.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblPhone.setForeground(textColor);
 		GridBagConstraints gbc_lblPhone = new GridBagConstraints();
 		gbc_lblPhone.anchor = GridBagConstraints.WEST;
@@ -292,7 +304,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		supplierPhoneText = new JTextField();
 		supplierPhoneText.setBorder(new LineBorder(borderColor, 2, true));	
 		supplierPhoneText.setForeground(textColor);
-		supplierPhoneText.setFont(new Font("Verdana", Font.PLAIN, 12));
+		supplierPhoneText.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		GridBagConstraints gbc_supplierPhoneText = new GridBagConstraints();
 		gbc_supplierPhoneText.weighty = 0.1;
 		gbc_supplierPhoneText.gridwidth = 3;
@@ -307,7 +319,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		String[] supplier_type_list=new String[] {"Nokia", "Samsung Galaxy Prime J7"};
 		
 		JLabel lblAddress = new JLabel("Địa chỉ");
-		lblAddress.setFont(new Font("Verdana", Font.BOLD, 12));
+		lblAddress.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblAddress.setForeground(textColor);
 		GridBagConstraints gbc_lblAddress = new GridBagConstraints();
 		gbc_lblAddress.anchor = GridBagConstraints.WEST;
@@ -319,7 +331,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		supplierAdressText = new JTextField();
 		supplierAdressText.setBorder(new LineBorder(borderColor, 2, true));	
 		supplierAdressText.setForeground(textColor);
-		supplierAdressText.setFont(new Font("Verdana", Font.PLAIN, 12));
+		supplierAdressText.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		GridBagConstraints gbc_supplierAdressText = new GridBagConstraints();
 		gbc_supplierAdressText.weighty = 0.1;
 		gbc_supplierAdressText.gridwidth = 3;
@@ -332,7 +344,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		supplierAdressText.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setFont(new Font("Verdana", Font.BOLD, 12));
+		lblEmail.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblEmail.setForeground(textColor);
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.gridwidth = 2;
@@ -345,7 +357,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		supplierEmailText = new JTextField();
 		supplierEmailText.setBorder(new LineBorder(borderColor, 2, true));	
 		supplierEmailText.setForeground(new Color(34, 33, 75));
-		supplierEmailText.setFont(new Font("Verdana", Font.PLAIN, 12));
+		supplierEmailText.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		supplierEmailText.setColumns(10);
 		GridBagConstraints gbc_supplierEmailText = new GridBagConstraints();
 		gbc_supplierEmailText.weighty = 0.1;
@@ -362,7 +374,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		String []year_list=new String[]{"2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023"};
 		
 		JLabel lblNote = new JLabel("Ghi chú");
-		lblNote.setFont(new Font("Verdana", Font.BOLD, 12));
+		lblNote.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		GridBagConstraints gbc_lblNote = new GridBagConstraints();
 		gbc_lblNote.anchor = GridBagConstraints.WEST;
 		gbc_lblNote.insets = new Insets(0, 5, 5, 5);
@@ -385,7 +397,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 
 		noteText = new JTextArea();
 		noteText.setForeground(textColor);
-		noteText.setFont(new Font("Verdana", Font.PLAIN, 12));
+		noteText.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		noteText.setBorder(new LineBorder(borderColor ,2 ,true));
 		noteScroll.setViewportView(noteText);
 		noteText.setColumns(10);
@@ -414,7 +426,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		btnAdd = new JButton("Thêm");
 		btnAdd.setPreferredSize(new Dimension(100, 40));
 		btnAdd.setIcon(new ImageIcon(iconAdd));
-		btnAdd.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnAdd.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		btnAdd.setBorder(new LineBorder(borderColor, 2, true));
 		btnAdd.setBackground(buttonColor);
 		btnAdd.setForeground(Color.white);
@@ -425,7 +437,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		btnDelete = new JButton("Xóa");
 		btnDelete.setPreferredSize(new Dimension(100, 40));
 		btnDelete.setIcon(new ImageIcon(delete_icon));
-		btnDelete.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnDelete.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		btnDelete.setBorder(new LineBorder(borderColor, 2, true));
 		btnDelete.setBackground(buttonColor);
 		btnDelete.setForeground(Color.white);
@@ -436,7 +448,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		btnEdit = new JButton("Sửa");
 		btnEdit.setPreferredSize(new Dimension(100, 40));
 		btnEdit.setIcon(new ImageIcon(iconEdit));
-		btnEdit.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnEdit.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		btnEdit.setBorder(new LineBorder(borderColor, 2, true));
 		btnEdit.setBackground(buttonColor);
 		btnEdit.setForeground(Color.white);
@@ -447,7 +459,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 		btnClear = new JButton("Mới");
 		btnClear.setPreferredSize(new Dimension(100, 40));
 		btnClear.setIcon(new ImageIcon(iconClear));
-		btnClear.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnClear.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		btnClear.setBorder(new LineBorder(borderColor, 2, true));
 		btnClear.setBackground(buttonColor);
 		btnClear.setForeground(Color.white);
