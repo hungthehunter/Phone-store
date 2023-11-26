@@ -1,11 +1,11 @@
 package dao;
 
 import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.sql.Connection;
 
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,8 +18,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import com.mysql.cj.result.Row;
 
 import database.JDBCmySQL;
 import dto.SupplierDTO;
@@ -182,9 +180,11 @@ public class SupplierDAO implements DAOInterface<SupplierDTO>{
 			Sheet firstSheet = workbook.getSheetAt(0);
 			Iterator<org.apache.poi.ss.usermodel.Row> rowIterator = firstSheet.iterator();
 			 
+			String sqlCheckDuplicate = "SELECT COUNT(*) FROM supplier WHERE supplierPhone = ?";
 			String sql = "INSERT INTO `supplier`(`supplierName` , `supplierPhone` , `supplierAddress` , `email` , `note`) "
 					+ "VALUES (?,?,?,?,?)";
 			PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+			PreparedStatement pstCheckDuplicate = con.prepareStatement(sqlCheckDuplicate);
 			
 			int count = 0;
 			
@@ -196,7 +196,6 @@ public class SupplierDAO implements DAOInterface<SupplierDTO>{
                 Iterator<Cell> cellIterator = ((org.apache.poi.ss.usermodel.Row) nextRow).cellIterator();
  
                 while (cellIterator.hasNext()) {
-                	SupplierDTO s = new SupplierDTO();
                     Cell cell = cellIterator.next();
                     int columnIndex = cell.getColumnIndex();
                     
@@ -206,6 +205,18 @@ public class SupplierDAO implements DAOInterface<SupplierDTO>{
                         pst.setString(1, supplierName);
                     case 2:
                         String supplierPhone = cell.getStringCellValue();
+//                        pstCheckDuplicate.setString(1, supplierPhone);
+//                        ResultSet resultSet = pstCheckDuplicate.executeQuery();
+//                        resultSet.next();
+//                        int rowCount = resultSet.getInt(1);
+//
+//                        if (rowCount > 0) {
+//                            System.out.println("Duplicate phone number: " + supplierPhone);
+//                            // You can handle duplicates here, for example, skip the row or log the issue.
+//                            // For now, I'm skipping this row.
+//                            rowIterator.remove(); // Skip the entire row
+//                            continue;
+//                        }
                         pst.setString(2, supplierPhone);
                     case 3:
                         String supplierAddress = cell.getStringCellValue();
@@ -240,4 +251,114 @@ public class SupplierDAO implements DAOInterface<SupplierDTO>{
 		}
 	}
 
+//	public void importDatabase(FileInputStream inputStream) {
+//	    int batchSize = 20;
+//	    try {
+//	        Connection con = JDBCmySQL.getConnection();
+//
+//	        Workbook workbook = new XSSFWorkbook(inputStream);
+//	        Sheet firstSheet = workbook.getSheetAt(0);
+//	        Iterator<org.apache.poi.ss.usermodel.Row> rowIterator = firstSheet.iterator();
+//
+//	        String sqlCheckDuplicate = "SELECT COUNT(*) FROM supplier WHERE supplierPhone = ?";
+//	        String sqlInsert = "INSERT INTO supplier (supplierName, supplierPhone, supplierAddress, email, note) VALUES (?, ?, ?, ?, ?)";
+//
+//	        PreparedStatement pstCheckDuplicate = con.prepareStatement(sqlCheckDuplicate);
+//	        PreparedStatement pstInsert = con.prepareStatement(sqlInsert);
+//
+//	        int count = 0;
+//
+//	        rowIterator.next(); // skip the header row
+//	        rowIterator.next(); // skip the second header row
+//
+//	        while (rowIterator.hasNext()) {
+//	            org.apache.poi.ss.usermodel.Row nextRow = rowIterator.next();
+//	            Iterator<Cell> cellIterator = nextRow.cellIterator();
+//
+//	            // Extracting data from each cell
+//	            while (cellIterator.hasNext()) {
+//	                Cell cell = cellIterator.next();
+//	                int columnIndex = cell.getColumnIndex();
+//
+//	                switch (columnIndex) {
+//	                    case 1:
+//	                        String supplierName = cell.getStringCellValue();
+//	                        pstInsert.setString(1, supplierName);
+//	                        break;
+//	                    case 2:
+//	                        String supplierPhone = cell.getStringCellValue();
+//
+//	                        // Check if the phone number already exists in the database
+//	                        pstCheckDuplicate.setString(1, supplierPhone);
+//	                        ResultSet resultSet = pstCheckDuplicate.executeQuery();
+//	                        resultSet.next();
+//	                        int rowCount = resultSet.getInt(1);
+//
+//	                        if (rowCount > 0) {
+//	                            System.out.println("Duplicate phone number: " + supplierPhone);
+//	                            // You can handle duplicates here, for example, skip the row or log the issue.
+//	                            // For now, I'm skipping this row.
+//	                            continue;
+//	                        }
+
+//	                        pstInsert.setString(2, supplierPhone);
+	                        
+//	                    case 2:
+//	                        String supplierPhone = cell.getStringCellValue();
+//
+//	                        // Check if the phone number already exists in the database
+//	                        pstCheckDuplicate.setString(1, supplierPhone);
+//	                        ResultSet resultSet = pstCheckDuplicate.executeQuery();
+//	                        resultSet.next();
+//	                        int rowCount = resultSet.getInt(1);
+//
+//	                        if (rowCount > 0) {
+//	                            System.out.println("Duplicate phone number: " + supplierPhone);
+//	                            // You can handle duplicates here, for example, skip the row or log the issue.
+//	                            // For now, I'm skipping this row.
+//	                            continue;
+//	                        }
+//
+//	                        // If the phone number is not a duplicate, proceed to insert
+//	                        pstInsert.setString(2, supplierPhone);
+//	                        break;
+//	                    case 3:
+//	                        String supplierAddress = cell.getStringCellValue();
+//	                        pstInsert.setString(3, supplierAddress);
+//	                        break;
+//	                    case 4:
+//	                        String email = cell.getStringCellValue();
+//	                        pstInsert.setString(4, email);
+//	                        break;
+//	                    case 5:
+//	                        String note = cell.getStringCellValue();
+//	                        pstInsert.setString(5, note);
+//	                        break;
+//	                }
+//	            }
+//
+//	            // Add the insert query to the batch
+//	pstInsert.addBatch();
+//
+//	            if (++count % batchSize == 0) {
+//	                // Execute the batch if the batch size is reached
+//	                pstInsert.executeBatch();
+//	            }
+//	        }
+//
+//	        // Execute the remaining insert queries in the batch
+//	        pstInsert.executeBatch();
+//
+//	        // Close resources
+//	        workbook.close();
+//	        JDBCmySQL.closeConnection(con);
+//
+//	    } catch (IOException e) {
+//	        System.out.println("Không đọc được file");
+//	        e.printStackTrace();
+//	    } catch (SQLException e) {
+//	        System.out.println("Lỗi dữ liệu");
+//	        e.printStackTrace();
+//	    }
+//	}
 }

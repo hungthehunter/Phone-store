@@ -1,29 +1,17 @@
 package view;
 
-import java.awt.BorderLayout;
-
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +19,6 @@ import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -43,12 +30,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import bus.SupplierBUS;
 import dao.SupplierDAO;
@@ -501,14 +482,20 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 			if(Validation.isEmpty(supplierNameText.getText())) {				
 				JOptionPane.showMessageDialog(this, "Vui lòng nhập tên nhà cung cấp mới");
 			}
-			else {
+			else if(!Validation.isEmail(supplierEmailText.getText())) {
+				JOptionPane.showMessageDialog(this, "Vui lòng đúng định dạng email");
+			}
+			else if(!Validation.isNumber(supplierPhoneText.getText())) {
+				JOptionPane.showMessageDialog(this, "Vui lòng đúng định dạng số điện thoại");
+			}
+			else {	
 				String supplierName = supplierNameText.getText().trim();
                 String supplierPhone = supplierPhoneText.getText().trim();
 				String supplierAddress = supplierAdressText.getText().trim();
 				String supplierEmail = supplierEmailText.getText().trim();
 	            String supplierNote = noteText.getText().trim();
 	            int id = SupplierDAO.getInstance().getAutoIncrement();	            
-				if(supplierBUS.checkDup(supplierPhone)) {
+				if(supplierBUS.checkDup(supplierPhone, id)) {
 					supplierBUS.add(supplierName, supplierPhone, supplierAddress, supplierEmail, supplierNote);
 					loadDataTable(listSupplier);
 					supplierNameText.setText("");
@@ -536,14 +523,20 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
             if (index != -1) {
                 if (Validation.isEmpty(supplierNameText.getText())) {
                     JOptionPane.showMessageDialog(this, "Nhà cung cấp đã tồn tại (SDT trùng)!");
-                } else {
+                } 
+                else if(!Validation.isEmail(supplierEmailText.getText())) {
+    				JOptionPane.showMessageDialog(this, "Vui lòng đúng định dạng email");
+    			}
+    			else if(!Validation.isNumber(supplierPhoneText.getText())) {
+    				JOptionPane.showMessageDialog(this, "Vui lòng đúng định dạng số điện thoại");
+    			} else {
                     String supplierName = supplierNameText.getText().trim();
                     String supplierPhone = supplierPhoneText.getText().trim();
     				String supplierAddress = supplierAdressText.getText().trim();
     				String supplierEmail = supplierEmailText.getText().trim();
     	            String supplierNote = noteText.getText().trim();
     	            int id = SupplierDAO.getInstance().getAutoIncrement();	    
-                    if (supplierBUS.checkDup(supplierPhone)) {
+                    if (supplierBUS.checkDup(supplierPhone , id)) {
                     	supplierBUS.update(new SupplierDTO(listSupplier.get(index).getSupplierId(), supplierName, supplierPhone, 
                     			supplierAddress, supplierEmail,  supplierNote));
                         loadDataTable(listSupplier);
@@ -641,7 +634,7 @@ public class Supplier extends JPanel implements MouseListener, KeyListener{
 			filterList = supplierBUS.search(searchText.getText());
 			loadDataTable(filterList);
 		} catch (Exception  ex) {
-            Logger.getLogger(testPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Supplier.class.getName()).log(Level.SEVERE, null, ex);
         }
 	}	
 }

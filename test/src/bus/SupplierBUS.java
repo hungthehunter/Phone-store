@@ -1,22 +1,9 @@
 package bus;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.swing.JFileChooser;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import dao.SupplierDAO;
 import dto.SupplierDTO;
 
@@ -89,11 +76,14 @@ public class SupplierBUS {
 		return result;
 	}
 	
-    public boolean checkDup(String phone) {
+    public boolean checkDup(String phone , int supplierIdToExclude) { 
 	    boolean check = true;
 	    int i = 0;
 	    while (i < this.listSupp.size() && check == true) {
-	        if (this.listSupp.get(i).getPhone().toLowerCase().contains(phone.toLowerCase())) {
+	        if (this.listSupp.get(i).getSupplierId() == supplierIdToExclude) {
+	            i++;
+	        }
+	        else if (this.listSupp.get(i).getPhone() == phone.toLowerCase()) {
 	            check = false;
 	        } else {
 	            i++;
@@ -101,6 +91,7 @@ public class SupplierBUS {
 	    }
 	    return check;
 	}
+
     
     public void importExcel () { 	
     	JFileChooser fileChooser = new JFileChooser();
