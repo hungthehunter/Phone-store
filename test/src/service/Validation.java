@@ -1,5 +1,6 @@
 package service;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validation {
@@ -34,5 +35,12 @@ public class Validation {
 			result = false;
 		}
 		return result;
+	}
+	
+	public static boolean isValidMobileNo(String str) {
+        // Biểu thức chính quy: (0|91)?[7-9][0-9]{9}
+        Pattern ptrn = Pattern.compile("(0|91)?[7-9][0-9]{9}");
+        Matcher match = ptrn.matcher(str);
+        return match.matches(); // Sử dụng match.matches() thay vì so sánh với str
 	}
 }
