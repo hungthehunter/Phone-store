@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.EventQueue;
-
 import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
@@ -10,19 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
-
-import bus.WarrantyBUS;
-import dao.CategoryDAO;
-import dao.WarrantyDAO;
-import dto.CategoryDTO;
-import dto.WarrantyDTO;
-import service.Validation;
-
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -35,7 +23,6 @@ import java.awt.TextArea;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import java.awt.Font;
@@ -47,11 +34,6 @@ import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ImageIcon;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 @SuppressWarnings("unused")
 public class Warranty extends JPanel {
 
@@ -63,24 +45,12 @@ public class Warranty extends JPanel {
 	private JTextField productNameText;
 	private JTextField dateReceivedText;
 	private JTextField dateReturnedText;
-	private JTextField warrantyFeeText;
-	private DefaultTableModel WarrantyModel;
-	WarrantyBUS warrantyBUS = new WarrantyBUS();
-	ArrayList<WarrantyDTO> listWarranty = warrantyBUS.getALL();
-	private JButton btnAdd;
-	private JButton btnDelete;
-	private JButton btnEdit;
-	private JButton btnClear;
 
 
 	/**
 	 * Create the frame.
 	 */
 	public Warranty() {
-		initComponent();
-		loadDataTable(listWarranty);
-	}
-	public void initComponent() {
 		Color myColor = new Color(34, 33, 75);
 		Color backGroundColor = Color.white;
 		Color borderColor = myColor;
@@ -126,36 +96,24 @@ public class Warranty extends JPanel {
 		gbc_lblNewLabel.gridy = 0;
 		tablePanel.add(lblInfo, gbc_lblNewLabel);
 				
-		String[] infoColumn = {"Mã Bảo Hành", "Mã Khách Hàng", "Tên Sản Phẩm", "Ngày Bảo Hành", "Ngày Trả", "Phí", "Trạng Thái", "Ghi Chú", "Xóa"};
+		String[] infoColumn = {"STT", "Mã Bảo Hành", "Mã Khách Hàng", "Tên Sản Phẩm", "Ngày Bảo Hành", "Ngày Trả" , "Ghi Chú"};
         Object[][] infoData = {
-//            {"NOKIA1", "NVA", "LSP001", "1/11/2023", "8/11/2023" , "$30", "1", "", "0"},
-//            {"PHONE2", "CCV", "LSP002", "9/12/2022", "9/11/2022" ,  "$20", "0", "", "0"},
+            {"1", "NOKIA1", "NVA", "LSP001", "1/11/2023", "8/11/2023" , ""},
+            {"2", "PHONE2", "CCV", "LSP002", "9/2/2022", "9/11/2022" , ""},
         };
 
-        WarrantyModel = new DefaultTableModel(infoData, infoColumn) {
+        DefaultTableModel Infomodel = new DefaultTableModel(infoData, infoColumn) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        JTable infoTable = new JTable(WarrantyModel);
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        TableColumnModel columnModel = infoTable.getColumnModel();
-        columnModel.getColumn(0).setCellRenderer(centerRenderer);
-        columnModel.getColumn(1).setCellRenderer(centerRenderer);
-        columnModel.getColumn(2).setCellRenderer(centerRenderer);
-        columnModel.getColumn(3).setCellRenderer(centerRenderer);
-        columnModel.getColumn(4).setCellRenderer(centerRenderer);
-        columnModel.getColumn(5).setCellRenderer(centerRenderer);
-        columnModel.getColumn(6).setCellRenderer(centerRenderer);
-        columnModel.getColumn(7).setCellRenderer(centerRenderer);
-        columnModel.getColumn(8).setCellRenderer(centerRenderer);
-        infoTable.setBorder(new LineBorder(borderColor, 2, false));
-        infoTable.getTableHeader().setBorder(new LineBorder(borderColor, 2, false));
-        infoTable.getTableHeader().setBackground(borderColor);
-        infoTable.getTableHeader().setForeground(Color.white);
+        JTable InfoTable = new JTable(Infomodel);
+        InfoTable.setBorder(new LineBorder(borderColor, 2, false));
+        InfoTable.getTableHeader().setBorder(new LineBorder(borderColor, 2, false));
+        InfoTable.getTableHeader().setBackground(borderColor);
+        InfoTable.getTableHeader().setForeground(Color.white);
 		GridBagConstraints gbc_table_1 = new GridBagConstraints();
 		gbc_table_1.gridheight = 2;
 		gbc_table_1.insets = new Insets(5, 5, 5, 0);
@@ -163,8 +121,8 @@ public class Warranty extends JPanel {
 		gbc_table_1.fill = GridBagConstraints.BOTH;
 		gbc_table_1.gridx = 0;
 		gbc_table_1.gridy = 2;
-        infoTable.getTableHeader().setReorderingAllowed(false);
-        JScrollPane scrollInfoTable = new JScrollPane(infoTable);
+        InfoTable.getTableHeader().setReorderingAllowed(false);
+        JScrollPane scrollInfoTable = new JScrollPane(InfoTable);
         tablePanel.add(scrollInfoTable, gbc_table_1);
         
         searchText = new JTextField();
@@ -207,9 +165,9 @@ public class Warranty extends JPanel {
         add(detailPanel, gbc_detailPanel);
         GridBagLayout gbl_detailPanel = new GridBagLayout();
         gbl_detailPanel.columnWidths = new int[] {100, 100, 0};
-        gbl_detailPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 52, 0};
+        gbl_detailPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 52, 0};
         gbl_detailPanel.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
-        gbl_detailPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gbl_detailPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         detailPanel.setLayout(gbl_detailPanel);
         
         JLabel lblWarrantyInfo = new JLabel("Thông Tin Bảo Hành");
@@ -242,7 +200,7 @@ public class Warranty extends JPanel {
         gbc_txtWarrantyId.weightx = 0.6;
         gbc_txtWarrantyId.weighty = 0.1;
         gbc_txtWarrantyId.ipady = 5;
-        gbc_txtWarrantyId.insets = new Insets(10, 0, 25, 0);
+        gbc_txtWarrantyId.insets = new Insets(10, 0, 25, 5);
         gbc_txtWarrantyId.fill = GridBagConstraints.HORIZONTAL;
         gbc_txtWarrantyId.gridx = 1;
         gbc_txtWarrantyId.gridy = 1;
@@ -266,7 +224,7 @@ public class Warranty extends JPanel {
         GridBagConstraints gbc_txtCustomerId = new GridBagConstraints();
         gbc_txtCustomerId.weighty = 0.1;
         gbc_txtCustomerId.ipady = 5;
-        gbc_txtCustomerId.insets = new Insets(10, 0, 25, 0);
+        gbc_txtCustomerId.insets = new Insets(10, 0, 25, 5);
         gbc_txtCustomerId.fill = GridBagConstraints.HORIZONTAL;
         gbc_txtCustomerId.gridx = 1;
         gbc_txtCustomerId.gridy = 2;
@@ -289,7 +247,7 @@ public class Warranty extends JPanel {
         GridBagConstraints gbc_txtProductName = new GridBagConstraints();
         gbc_txtProductName.weighty = 0.1;
         gbc_txtProductName.ipady = 5;
-        gbc_txtProductName.insets = new Insets(10, 0, 25, 0);
+        gbc_txtProductName.insets = new Insets(10, 0, 25, 5);
         gbc_txtProductName.fill = GridBagConstraints.HORIZONTAL;
         gbc_txtProductName.gridx = 1;
         gbc_txtProductName.gridy = 3;
@@ -312,7 +270,7 @@ public class Warranty extends JPanel {
         GridBagConstraints gbc_txtDateReceived = new GridBagConstraints();
         gbc_txtDateReceived.weighty = 0.1;
         gbc_txtDateReceived.ipady = 5;
-        gbc_txtDateReceived.insets = new Insets(10, 0, 25, 0);
+        gbc_txtDateReceived.insets = new Insets(10, 0, 25, 5);
         gbc_txtDateReceived.fill = GridBagConstraints.HORIZONTAL;
         gbc_txtDateReceived.gridx = 1;
         gbc_txtDateReceived.gridy = 4;
@@ -335,34 +293,11 @@ public class Warranty extends JPanel {
         GridBagConstraints gbc_txtDateReturned = new GridBagConstraints();
         gbc_txtDateReturned.weighty = 0.1;
         gbc_txtDateReturned.ipady = 5;
-        gbc_txtDateReturned.insets = new Insets(10, 0, 25, 0);
+        gbc_txtDateReturned.insets = new Insets(10, 0, 25, 5);
         gbc_txtDateReturned.fill = GridBagConstraints.HORIZONTAL;
         gbc_txtDateReturned.gridx = 1;
         gbc_txtDateReturned.gridy = 5;
         detailPanel.add(dateReturnedText, gbc_txtDateReturned);
-        
-        JLabel lblWarrantyFee = new JLabel("Phí:");
-        lblWarrantyFee.setForeground(new Color(34, 33, 75));
-        lblWarrantyFee.setFont(new Font("Verdana", Font.BOLD, 12));
-        GridBagConstraints gbc_lblWarrantyFee = new GridBagConstraints();
-        gbc_lblWarrantyFee.insets = new Insets(10, 0, 25, 5);
-        gbc_lblWarrantyFee.gridx = 0;
-        gbc_lblWarrantyFee.gridy = 6;
-        detailPanel.add(lblWarrantyFee, gbc_lblWarrantyFee);
-        
-        warrantyFeeText = new JTextField();
-        warrantyFeeText.setForeground(new Color(34, 33, 75));
-        warrantyFeeText.setBorder(new LineBorder(borderColor, 2, true));
-        warrantyFeeText.setFont(new Font("Verdana", Font.PLAIN, 12));
-        warrantyFeeText.setColumns(10);
-        GridBagConstraints gbc_warrantyFeeText = new GridBagConstraints();
-        gbc_warrantyFeeText.weighty = 0.1;
-        gbc_warrantyFeeText.fill = GridBagConstraints.HORIZONTAL;
-        gbc_warrantyFeeText.ipady = 5;
-        gbc_warrantyFeeText.insets = new Insets(10, 0, 25, 0);
-        gbc_warrantyFeeText.gridx = 1;
-        gbc_warrantyFeeText.gridy = 6;
-        detailPanel.add(warrantyFeeText, gbc_warrantyFeeText);
         
         JLabel lblNote = new JLabel("Ghi chú:");
         lblNote.setFont(new Font("Verdana", Font.BOLD, 12));
@@ -370,7 +305,7 @@ public class Warranty extends JPanel {
         GridBagConstraints gbc_lblNote = new GridBagConstraints();
         gbc_lblNote.insets = new Insets(10, 0, 25, 5);
         gbc_lblNote.gridx = 0;
-        gbc_lblNote.gridy = 7;
+        gbc_lblNote.gridy = 6;
         detailPanel.add(lblNote, gbc_lblNote);
         
         JScrollPane scrollPane = new JScrollPane();
@@ -378,10 +313,10 @@ public class Warranty extends JPanel {
         scrollPane.setBorder(null);
         GridBagConstraints gbc_scrollPane = new GridBagConstraints();
         gbc_scrollPane.weighty = 0.1;
-        gbc_scrollPane.insets = new Insets(10, 0, 25, 0);
+        gbc_scrollPane.insets = new Insets(10, 0, 25, 5);
         gbc_scrollPane.fill = GridBagConstraints.HORIZONTAL;
         gbc_scrollPane.gridx = 1;
-        gbc_scrollPane.gridy = 7;
+        gbc_scrollPane.gridy = 6;
         detailPanel.add(scrollPane, gbc_scrollPane);
         
 		JTextArea txtNote = new JTextArea();
@@ -412,7 +347,7 @@ public class Warranty extends JPanel {
 		iconClear = iconClear.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		btnAdd = new JButton("Thêm");
+		JButton btnAdd = new JButton("Thêm");
 		btnAdd.setForeground(new Color(255, 255, 255));
 		btnAdd.setIcon(new ImageIcon(iconAdd));
 		btnAdd.setPreferredSize(new Dimension(100, 40));
@@ -423,7 +358,7 @@ public class Warranty extends JPanel {
 		btnAdd.setFocusPainted(false);
 		btnPanel.add(btnAdd);
 		
-		btnDelete= new JButton("Xóa");
+		JButton btnDelete= new JButton("Xóa");
 		btnDelete.setIcon(new ImageIcon(iconDelete));
 		btnDelete.setPreferredSize(new Dimension(100, 40));
 		btnDelete.setFont(new Font("Verdana", Font.BOLD, 12));
@@ -433,7 +368,7 @@ public class Warranty extends JPanel {
 		btnDelete.setFocusPainted(false);
 		btnPanel.add(btnDelete);
 		
-		btnEdit = new JButton("Sửa");
+		JButton btnEdit = new JButton("Sửa");
 		btnEdit.setIcon(new ImageIcon(iconEdit));
 		btnEdit.setPreferredSize(new Dimension(100, 40));
 		btnEdit.setFont(new Font("Verdana", Font.BOLD, 12));
@@ -443,7 +378,7 @@ public class Warranty extends JPanel {
 		btnEdit.setFocusPainted(false);
 		btnPanel.add(btnEdit);
 		
-		btnClear = new JButton("Mới");
+		JButton btnClear = new JButton("Mới");
 		btnClear.setIcon(new ImageIcon(iconClear));
 		btnClear.setPreferredSize(new Dimension(100, 40));
 		btnClear.setFont(new Font("Verdana", Font.BOLD, 12));
@@ -453,77 +388,4 @@ public class Warranty extends JPanel {
 		btnClear.setFocusPainted(false);
 		btnPanel.add(btnClear);
 	}
-	public void loadDataTable(ArrayList<WarrantyDTO> result) {
-		WarrantyModel.setRowCount(0);
-		for (WarrantyDTO c : result) {
-			WarrantyModel.addRow(new Object[] {
-					c.getWarrantyId(), c.getCustomerId(), c.getProductName(), c.getDateReceived(), c.getDateReturned(), 
-					c.getWarrantyFee(), c.getWarrantyStatusId(), c.getWarrantyDescription()
-			});
-		}
-	}
-
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getSource() == btnAdd) {
-            if (Validation.isEmpty(customerIdText.getText()) && Validation.isEmpty(productNameText.getText())) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên mã khách hàng và tên sản phẩm cần bảo hành");
-            } else {
-                int customerId = Integer.parseInt(customerIdText.getText());
-                String productName = productNameText.getText();
-//                
-//                java.util.Date utillDateReceived = new SimpleDateFormat("yyyy-MM-dd").parse(dateReceivedText.getText());
-//            	Date dateReceived = new Date(utillDateReceived.getTime());
-//            	
-//            	java.util.Date utilldateReturned = new SimpleDateFormat("yyyy-MM-dd").parse(dateReceivedText.getText());
-//             	Date dateReturned = new Date(utilldateReturned.getTime());
-             	
-            	double warrantyFee;
-            	int warrantyStatusId;
-            	String warrantyDescription;
-                int id = WarrantyDAO.getInstance().getAutoIncrement();
-//                warrantyBUS.add(customerId, productName, dateReceived, dateReturned, warrantyFee, warrantyStatusId, warrantyDescription);
-                loadDataTable(listWarranty);
-                customerIdText.setText("");
-                productNameText.setText("");
-                dateReceivedText.setText("");
-                dateReturnedText.setText("");
-                warrantyFeeText.setText("");
-//                warrantyStatusId
-            }
-        } 
-	}
-//            else if (e.getSource() == btnDeleteCate) {
-//            int index = getRowSelected();
-//            if (index != -1) {
-//            	categoryBUS.delete(listCategory.get(index));
-//                loadDataTable(listCategory);
-//                cateNameTxt.setText("");
-//            }
-//        } else if (e.getSource() == btnEditCate) {
-//            int index = getRowSelected();
-//            if (index != -1) {
-//                if (Validation.isEmpty(cateNameTxt.getText())) {
-//                    JOptionPane.showMessageDialog(this, "Vui lòng nhập loại sản phẩm mới");
-//                } else {
-//                    String categoryName = cateNameTxt.getText();
-//                    if (categoryBUS.checkDup(categoryName)) {
-//                    	categoryBUS.update(new CategoryDTO(listCategory.get(index).getCategoryId(), categoryName));
-//                        loadDataTable(listCategory);
-//                        cateNameTxt.setText("");
-//                    } else {
-//                        JOptionPane.showMessageDialog(this, "Thương hiệu đã tồn tại !");
-//                    }
-//                }
-//            }
-//        } else if (e.getSource() == table) {        
-//            int index = table.getSelectedRow();
-//            cateIdTxt.setText(String.valueOf(listCategory.get(index).getCategoryId()));
-//            cateNameTxt.setText(listCategory.get(index).getCategoryName());
-//        } else if (e.getSource() == btnRefreshCate) {
-//        	loadDataTable(listCategory);
-//        	cateIdTxt.setText("");
-//            cateNameTxt.setText("");     
-//            cateFindTxt.setText("");
-//        }
 }

@@ -1,18 +1,6 @@
 package bus;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.swing.JFileChooser;
-import javax.swing.JTable;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.TableModel;
-
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import dao.CategoryDAO;
 import dto.CategoryDTO;
@@ -74,9 +62,9 @@ public class CategoryBUS {
     public ArrayList<CategoryDTO> search(String text) {
         text = text.toLowerCase();
         ArrayList<CategoryDTO> result = new ArrayList<>();
-        for (CategoryDTO i : this.listCate) {
-            if (Integer.toString(i.getCategoryId()).toLowerCase().contains(text) || i.getCategoryName().toLowerCase().contains(text)) {
-                result.add(i);
+        for (CategoryDTO c : this.listCate) {
+            if (Integer.toString(c.getCategoryId()).toLowerCase().contains(text) || c.getCategoryName().toLowerCase().contains(text)) {
+                result.add(c);
             }
         }
         return result;
@@ -99,8 +87,7 @@ public class CategoryBUS {
         boolean check = true;
         int i = 0;
         while (i < this.listCate.size() && check == true) {
-            if (this.listCate.get(i).getCategoryName().toLowerCase().contains(name.toLowerCase())) {
-            	System.out.println(listCate.get(i).getCategoryName());
+            if (this.listCate.get(i).getCategoryName().toLowerCase().contains(name.toLowerCase())){
                 check = false;
             } else {
                 i++;
@@ -108,4 +95,5 @@ public class CategoryBUS {
         }
         return check;
     }
+
 }

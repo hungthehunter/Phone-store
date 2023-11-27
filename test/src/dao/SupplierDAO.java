@@ -1,11 +1,8 @@
 package dao;
 
 import java.io.FileInputStream;
-
 import java.io.IOException;
 import java.sql.Connection;
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +17,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import database.JDBCmySQL;
+import dto.ProductDTO;
+import dto.ReceiptDetailDTO;
 import dto.SupplierDTO;
 
 public class SupplierDAO implements DAOInterface<SupplierDTO>{
@@ -56,7 +55,7 @@ public class SupplierDAO implements DAOInterface<SupplierDTO>{
 		int result = 0;
 		try {
 			Connection con = JDBCmySQL.getConnection();
-            String sql = "UPDATE `supplier` SET `supplierName`=? , `supplierPhone`=? , `supplierAddress`=? , `email`=? , `note`=?"
+            String sql = "UPDATE `category` SET `supplierName`=? , `supplierPhone`=? , `supplierAddress`=? , `email`=? , `note`=?"
             		+ " WHERE `supplierId`=?";
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setString(1, t.getSupplierName());
@@ -64,7 +63,6 @@ public class SupplierDAO implements DAOInterface<SupplierDTO>{
 			pst.setString(3, t.getAddress());
 			pst.setString(4, t.getEmail());
 			pst.setString(5, t.getNote());
-			pst.setInt(6, t.getSupplierId());
 			result = pst.executeUpdate();
 			JDBCmySQL.closeConnection(con);
 		}catch (SQLException ex) {
@@ -361,4 +359,27 @@ public class SupplierDAO implements DAOInterface<SupplierDTO>{
 //	        e.printStackTrace();
 //	    }
 //	}
+
+	@Override
+	public ArrayList<SupplierDTO> selectAllDelete() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public int restore(ProductDTO t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int update(ReceiptDetailDTO r, String pk) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
 }

@@ -9,10 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -27,37 +23,26 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
-
-import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help.TextTable.Cell;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import com.mysql.cj.result.Row;
 
 import bus.CategoryBUS;
+import bus.ProductBUS;
 import dao.CategoryDAO;
 import dto.CategoryDTO;
+import dto.ProductDTO;
 import service.ExcelExporter;
 import service.Validation;
 
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.border.LineBorder;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
 public class Category extends JPanel implements MouseListener, KeyListener{
@@ -68,16 +53,17 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	private JTextField cateNameTxt;
 	private JTextField textField_3;
 	private JTable table_1;
-	private DefaultTableModel categoryModel;
+	private DefaultTableModel categoryModel, productModel;
 	private JButton btnAddCate;
 	private JButton btnEditCate;
 	private JButton btnDeleteCate;
 	private JButton btnRefreshCate;
-	CategoryBUS categoryBUS = new CategoryBUS();
-	
-	ArrayList<CategoryDTO> listCategory = categoryBUS.getALL();
-	private JTextField cateIdTxt;
 	private JButton btnExport;
+	CategoryBUS categoryBUS = new CategoryBUS();
+	ArrayList<CategoryDTO> listCategory = categoryBUS.getALL();
+	ProductBUS productBUS = new ProductBUS();
+	ArrayList<ProductDTO> listProduct = productBUS.getALL();
+	private JTextField cateIdTxt;
 
 	/**
 	 * Create the panel.
@@ -85,6 +71,7 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	public Category() {
 		initComponent();
 		loadDataTable(listCategory);
+		loadDataProductTable(listProduct);
 	}
 
 	public void initComponent() {
@@ -149,17 +136,17 @@ public class Category extends JPanel implements MouseListener, KeyListener{
         iconExcel = iconExcel.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         btnExport.setIcon(new ImageIcon(iconExcel));
         btnExport.setBorder(new LineBorder(borderColor, 2, true));
-        btnExport.setForeground(Color.white);
-        btnExport.setBackground(buttonColor);
-        btnExport.addMouseListener(this);
+		btnExport.setForeground(Color.white);
+		btnExport.setBackground(buttonColor);
+		btnExport.addMouseListener(this);
 		
-		GridBagConstraints gbc_btnFindCate = new GridBagConstraints();
-		gbc_btnFindCate.weighty = 0.1;
-		gbc_btnFindCate.weightx = 0.1;
-		gbc_btnFindCate.insets = new Insets(0, 0, 5, 5);
-		gbc_btnFindCate.gridx = 1;
-		gbc_btnFindCate.gridy = 1;
-		panelCategoryTable.add(btnExport, gbc_btnFindCate);
+		GridBagConstraints gbc_btnExport = new GridBagConstraints();
+		gbc_btnExport.weighty = 0.1;
+		gbc_btnExport.weightx = 0.1;
+		gbc_btnExport.insets = new Insets(0, 0, 5, 5);
+		gbc_btnExport.gridx = 1;
+		gbc_btnExport.gridy = 1;
+		panelCategoryTable.add(btnExport, gbc_btnExport);
 		
 		JButton btnFindCate_1 = new JButton("Nhập Excel");
 		iconExcel = iconExcel.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -194,7 +181,14 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	     Object[][] data = {
 
 	     };
-	    
+	     
+//	     DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+//	            @Override
+//	            public boolean isCellEditable(int row, int column) {
+//	                return false;
+//	            }
+//	        };
+	   categoryModel = new DefaultTableModel();
 	   categoryModel = new DefaultTableModel(data, columnNames) {
            @Override
            public boolean isCellEditable(int row, int column) {
@@ -205,6 +199,7 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	   
        table = new JTable(categoryModel);
        table.addMouseListener(this);
+       table.setRowHeight(20);
        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
        TableColumnModel columnModel = table.getColumnModel();
@@ -217,7 +212,7 @@ public class Category extends JPanel implements MouseListener, KeyListener{
        table.getTableHeader().setForeground(Color.white);
 		
 		
-		
+//       scrollPane.setViewportBorder(BorderFactory.createLineBorder(borderColor, 5));
 		scrollPane.setViewportView(table);
 		
 		JPanel panelCategoryInfo = new JPanel();
@@ -355,23 +350,23 @@ public class Category extends JPanel implements MouseListener, KeyListener{
      	btnRefreshCate.addMouseListener(this);
 		panel_3.add(btnRefreshCate);
 		
-		JPanel paneltable = new JPanel();
-		paneltable.setBackground(Color.WHITE);
-		paneltable.setBorder(new MatteBorder(2, 0, 0, 0, borderColor));
-		GridBagConstraints gbc_paneltable = new GridBagConstraints();
-		gbc_paneltable.weightx = 1.0;
-		gbc_paneltable.gridwidth = 2;
-		gbc_paneltable.insets = new Insets(5, 20, 5, 10);
-		gbc_paneltable.fill = GridBagConstraints.BOTH;
-		gbc_paneltable.gridx = 0;
-		gbc_paneltable.gridy = 1;
-		add(paneltable, gbc_paneltable);
-		GridBagLayout gbl_paneltable = new GridBagLayout();
-		gbl_paneltable.columnWidths = new int[]{0, 0};
-		gbl_paneltable.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_paneltable.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_paneltable.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
-		paneltable.setLayout(gbl_paneltable);
+		JPanel panelProductTable = new JPanel();
+		panelProductTable.setBackground(Color.WHITE);
+		panelProductTable.setBorder(new MatteBorder(2, 0, 0, 0, borderColor));
+		GridBagConstraints gbc_panelProductTable = new GridBagConstraints();
+		gbc_panelProductTable.weightx = 1.0;
+		gbc_panelProductTable.gridwidth = 2;
+		gbc_panelProductTable.insets = new Insets(5, 20, 5, 10);
+		gbc_panelProductTable.fill = GridBagConstraints.BOTH;
+		gbc_panelProductTable.gridx = 0;
+		gbc_panelProductTable.gridy = 1;
+		add(panelProductTable, gbc_panelProductTable);
+		GridBagLayout gbl_panelProductTable = new GridBagLayout();
+		gbl_panelProductTable.columnWidths = new int[]{0, 0};
+		gbl_panelProductTable.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_panelProductTable.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panelProductTable.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		panelProductTable.setLayout(gbl_panelProductTable);
 		
 		JLabel lblNewLabel_4 = new JLabel("Thông Tin Sản Phẩm");
 		lblNewLabel_4.setForeground(textColor);
@@ -382,9 +377,10 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_4.gridx = 0;
 		gbc_lblNewLabel_4.gridy = 0;
-		paneltable.add(lblNewLabel_4, gbc_lblNewLabel_4);
+		panelProductTable.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
 		textField_3 = new JTextField();
+		textField_3.addKeyListener(this);
 		textField_3.setBorder(new LineBorder(borderColor, 2, true));
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.ipady = 5;
@@ -394,7 +390,7 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_3.gridx = 0;
 		gbc_textField_3.gridy = 1;
-		paneltable.add(textField_3, gbc_textField_3);
+		panelProductTable.add(textField_3, gbc_textField_3);
 		textField_3.setColumns(10);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -405,20 +401,29 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.gridx = 0;
 		gbc_scrollPane_1.gridy = 2;
-		paneltable.add(scrollPane_1, gbc_scrollPane_1);
+		panelProductTable.add(scrollPane_1, gbc_scrollPane_1);
 		
 	     String[] columnNames1 = {"Mã SP","Tên SP" ,"Loại SP"};
 	     Object[][] data1 = {
-
+	
 	     };
 	     
-	     DefaultTableModel model1 = new DefaultTableModel(data1, columnNames1) {
+	    productModel = new DefaultTableModel(data1, columnNames1) {
 	            @Override
 	            public boolean isCellEditable(int row, int column) {
 	                return false;
 	            }
 	        };
-      table_1 = new JTable(model1);	
+      table_1 = new JTable(productModel);
+      table_1.setRowHeight(20);
+      table_1.getColumnModel().getColumn(0).setPreferredWidth(50);
+      table_1.getColumnModel().getColumn(1).setPreferredWidth(150);
+      table_1.getColumnModel().getColumn(2).setPreferredWidth(100);
+      
+      TableColumnModel columnProductModel = table_1.getColumnModel();
+      columnProductModel.getColumn(0).setCellRenderer(centerRenderer);
+      columnProductModel.getColumn(1).setCellRenderer(centerRenderer);
+      columnProductModel.getColumn(2).setCellRenderer(centerRenderer);
       table_1.setBorder(new LineBorder(borderColor, 2, false));
       table_1.getTableHeader().setBorder(new LineBorder(borderColor, 2, false));
       table_1.getTableHeader().setReorderingAllowed(false);
@@ -437,6 +442,16 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 		}
 	}
 	
+	public void loadDataProductTable(ArrayList<ProductDTO> result) {
+		productModel.setRowCount(0);
+		for (ProductDTO p : result) {
+			productModel.addRow(new Object[] {
+					p.getProductId(), p.getProductName(), p.getCategoryName()
+			});
+			System.out.println(p.getProductName());
+		}
+	}
+	
 	  public int getRowSelected() {
 	        int index = table.getSelectedRow();
 	        if (index == -1) {
@@ -450,15 +465,15 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == btnAddCate) {
-			System.out.println("Click");
             if (Validation.isEmpty(cateNameTxt.getText())) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập tên loại sản phẩm mới");
             } else {
                 String categoryName = cateNameTxt.getText().trim();                
+                int id = CategoryDAO.getInstance().getAutoIncrement();
                 if (categoryBUS.checkDup(categoryName)) {
-                    int id = CategoryDAO.getInstance().getAutoIncrement();
                     categoryBUS.add(categoryName);
                     loadDataTable(listCategory);
+                    cateIdTxt.setText("");
                     cateNameTxt.setText("");
                 } else {
                     JOptionPane.showMessageDialog(this, "Loại sản phẩm đã tồn tại !");
@@ -469,6 +484,7 @@ public class Category extends JPanel implements MouseListener, KeyListener{
             if (index != -1) {
             	categoryBUS.delete(listCategory.get(index));
                 loadDataTable(listCategory);
+                cateIdTxt.setText("");
                 cateNameTxt.setText("");
             }
         } else if (e.getSource() == btnEditCate) {
@@ -477,38 +493,71 @@ public class Category extends JPanel implements MouseListener, KeyListener{
                 if (Validation.isEmpty(cateNameTxt.getText())) {
                     JOptionPane.showMessageDialog(this, "Vui lòng nhập loại sản phẩm mới");
                 } else {
-                    String categoryName = cateNameTxt.getText().trim();
+                    String categoryName = cateNameTxt.getText().trim();             
+                    int id = CategoryDAO.getInstance().getAutoIncrement();                    
                     if (categoryBUS.checkDup(categoryName)) {
                     	categoryBUS.update(new CategoryDTO(listCategory.get(index).getCategoryId(), categoryName));
                         loadDataTable(listCategory);
+                        cateIdTxt.setText("");
                         cateNameTxt.setText("");
                     } else {
-                        JOptionPane.showMessageDialog(this, "Thương hiệu đã tồn tại !");
+                        JOptionPane.showMessageDialog(this, "Loại sản phẩm đã tồn tại !");
                     }
                 }
             }
-        } else if (e.getSource() == table) {   
-        	System.out.println("Edit");
+        } else if (e.getSource() == table) {        
             int index = table.getSelectedRow();
             cateIdTxt.setText(String.valueOf(listCategory.get(index).getCategoryId()));
             cateNameTxt.setText(listCategory.get(index).getCategoryName());
         } else if (e.getSource() == btnRefreshCate) {
         	loadDataTable(listCategory);
+        	loadDataProductTable(listProduct);
         	cateIdTxt.setText("");
             cateNameTxt.setText("");     
             cateFindTxt.setText("");
-        } else if(e.getSource() == btnExport) {
-        	try {
-        		ExcelExporter excel = new ExcelExporter();
-				excel.exportJTableToExcel(table);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+        } else if (e.getSource() == btnExport) {
+        	exportExcel();
         }
+		
+	}
+		
+	
+	private void exportExcel() {
+    	try {
+    		ExcelExporter excel = new ExcelExporter();
+        	excel.exportJTableToExcel(table);
+		} catch (Exception e2) {
+            JOptionPane.showMessageDialog(this, "Lỗi Xuất Excel !");
+		}
 	}
 	
+	public void filterTable(String searchText) {
+	    searchText = searchText.toLowerCase();
+	    ArrayList<CategoryDTO> filteredList = new ArrayList<>();
 
+	    for (CategoryDTO c : listCategory) {
+	        if (c.getCategoryName().toLowerCase().contains(searchText) || String.valueOf(c.getCategoryId()).toLowerCase().contains(searchText)) {
+	            filteredList.add(c);
+	        }
+	    }
+
+	    loadDataTable(filteredList);
+	}
+	
+	public void filterProductTable(String searchText) {
+	    searchText = searchText.toLowerCase();
+	    ArrayList<ProductDTO> filteredList = new ArrayList<>();
+
+	    for (ProductDTO p : listProduct) {
+	        if (p.getProductName().toLowerCase().contains(searchText) || String.valueOf(p.getProductId()).toLowerCase().contains(searchText) 
+	        		&& p.getCategoryName().toLowerCase().contains(searchText)) {
+	            filteredList.add(p);
+	        }
+	    }
+
+	    loadDataProductTable(filteredList);
+	}
+    
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -549,12 +598,10 @@ public class Category extends JPanel implements MouseListener, KeyListener{
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
         try {
-//            filterTable(cateFindTxt.getText());
-    	    ArrayList<CategoryDTO> filteredList = new ArrayList<>();
-        	filteredList = categoryBUS.search(cateFindTxt.getText());
-        	loadDataTable(filteredList);
+            filterTable(cateFindTxt.getText());
+            filterProductTable(textField_3.getText());
         } catch (Exception  ex) {
-            Logger.getLogger(testPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, ex);
         }
 		
 	}

@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 
 import database.JDBCmySQL;
 import dto.CategoryDTO;
+import dto.ProductDTO;
+import dto.ReceiptDetailDTO;
 
 public class CategoryDAO implements DAOInterface<CategoryDTO>{
 	public static CategoryDAO getInstance() {
@@ -119,7 +121,7 @@ public class CategoryDAO implements DAOInterface<CategoryDTO>{
         int result = -1;
         try {
             Connection con = (Connection) JDBCmySQL.getConnection();
-            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'pmqldt' AND   TABLE_NAME   = 'category'";
+            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'phone' AND   TABLE_NAME   = 'category'";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs2 = pst.executeQuery(sql);
             if (!rs2.isBeforeFirst() ) {
@@ -135,6 +137,25 @@ public class CategoryDAO implements DAOInterface<CategoryDTO>{
         }
         return result;
     }
+
+	@Override
+	public ArrayList<CategoryDTO> selectAllDelete() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int restore(ProductDTO t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int update(ReceiptDetailDTO r, String pk) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 
 

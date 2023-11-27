@@ -19,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
-import java.awt.event.ActionListener;
 public class Menu extends JFrame {
 	private JPanel contentPanel;
     private Map<String, JButton> buttonMap = new HashMap<>();
@@ -70,12 +69,14 @@ public class Menu extends JFrame {
 		picture_navbar.setIcon(new ImageIcon(my_email));
 		navbar_panel.add(picture_navbar);
 		
-        createMenuButton(navbar_panel, "Invoice");
-        createMenuButton(navbar_panel, "Products");
-        createMenuButton(navbar_panel, "Staff");
-        createMenuButton(navbar_panel, "Customer");
-        createMenuButton(navbar_panel, "Warranty");
-        createMenuButton(navbar_panel, "Statistics");
+        createMenuButton(navbar_panel, "Thanh Toán");
+        createMenuButton(navbar_panel, "Sản Phẩm");
+        createMenuButton(navbar_panel, "Nhân Viên");
+        createMenuButton(navbar_panel, "Nhà Cung Cấp");
+        createMenuButton(navbar_panel, "Khách Hàng");
+        createMenuButton(navbar_panel, "Thông Kê");
+        createMenuButton(navbar_panel, "Đăng Xuất");
+
 
 
 
@@ -153,7 +154,7 @@ public class Menu extends JFrame {
             System.out.println("Button123 '" + text + "' clicked");
             contentPanel.removeAll();
             switch (text) {
-            case "Products": {
+            case "Sản Phẩm": {
             	menuProduct menuProduct = new menuProduct();
             	contentPanel.add(menuProduct);
             	contentPanel.revalidate();
@@ -161,44 +162,49 @@ public class Menu extends JFrame {
             	break;      	
             }
             
-            case "Customer":{
-//            	testPanel customer = new testPanel();
-//            	contentPanel.add(customer);
-//            	contentPanel.revalidate();
-//            	contentPanel.repaint();
+            case "Khách Hàng":{
+            	Customer customer = new Customer();
+            	contentPanel.add(customer);
+            	contentPanel.revalidate();
+            	contentPanel.repaint();
             	break;
             }
             
-            case "Invoice":{
-//            	Invoice invoice = new Invoice();
-//            	contentPanel.add(invoice);
-//            	contentPanel.revalidate();
-//            	contentPanel.repaint();
+            case "Thanh Toán":{
+            	Payment payment = new Payment();
+            	contentPanel.add(payment);
+            	contentPanel.revalidate();
+            	contentPanel.repaint();
             	break;
             }
 
-            case "Staff":{
-//            	Staff staff = new Staff();
-//            	contentPanel.add(staff);
-//            	contentPanel.revalidate();
-//            	contentPanel.repaint();
+            case "Nhân Viên":{
+            	Staff staff = new Staff();
+            	contentPanel.add(staff);
+            	contentPanel.revalidate();
+            	contentPanel.repaint();
             	break;
             }
 
-			case "Warranty":{
-				Supplier warranty = new Supplier();
-	            contentPanel.add(warranty);
+			case "Nhà Cung Cấp":{
+				Supplier supplier = new Supplier();
+	            contentPanel.add(supplier);
 	        	contentPanel.revalidate();
 	        	contentPanel.repaint();
 	        	break;
 			}
 			
-			case "Statistics":{
-//				Statistics statistics = new Statistics();
-//	            contentPanel.add(statistics);
-//	        	contentPanel.revalidate();
-//	        	contentPanel.repaint();
+			case "Thống Kê":{
+//				ReceiptDetail a = new ReceiptDetail();
+//				a.setVisible(true);
 	        	break;
+			}
+			
+			case "Đăng Xuất":{				
+				Login login = new Login();
+				login.displayLogin();
+				this.dispose();
+				break;
 			}
 				
 			default:
@@ -214,6 +220,7 @@ public class Menu extends JFrame {
 			public void run() {
 				try {
 					Menu frame = new Menu();
+					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

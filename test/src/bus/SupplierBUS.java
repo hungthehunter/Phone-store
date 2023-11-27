@@ -2,8 +2,11 @@ package bus;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
+
 import javax.swing.JFileChooser;
+
 import dao.SupplierDAO;
 import dto.SupplierDTO;
 
@@ -11,6 +14,7 @@ import dto.SupplierDTO;
 public class SupplierBUS {
 	private final SupplierDAO suppDAO = new SupplierDAO();
 	private ArrayList<SupplierDTO> listSupp = new ArrayList<>();
+	private Date sqlDate;
 	
 	public SupplierBUS() {
 		listSupp = suppDAO.selectAll();
@@ -23,6 +27,10 @@ public class SupplierBUS {
 	public SupplierDTO getByIndex(int index) {
 		return this.listSupp.get(index);
 	}
+
+    public String getSupplierName(int supplierId) {
+        return this.listSupp.get(getIndexById(supplierId)).getSupplierName();
+    }
 	
 	public int getIndexById(int supplierId) {
 		int i = 0;
@@ -69,7 +77,7 @@ public class SupplierBUS {
 		ArrayList<SupplierDTO> result = new ArrayList<SupplierDTO>();
 		for(SupplierDTO s : this.listSupp) {
 			if(Integer.toString(s.getSupplierId()).toLowerCase().contains(text) || s.getSupplierName().toLowerCase().contains(text) || 
-					s.getAddress().toLowerCase().contains(text) || s.getEmail().toLowerCase().contains(text)) {
+					s.getAddress().toLowerCase().contains(text) || s.getEmail().toLowerCase().contains(text) || s.getPhone().toLowerCase().contains(text)) {
 				result.add(s);
 			}
 		}
@@ -91,9 +99,8 @@ public class SupplierBUS {
 	    }
 	    return check;
 	}
-
     
-    public void importExcel () { 	
+public void importExcel () { 	
     	JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(null);
    		int result = fileChooser.showOpenDialog(null);

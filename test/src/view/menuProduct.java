@@ -36,12 +36,11 @@ public class menuProduct extends JPanel {
 		categoryPanel.setBorder(new LineBorder(borderColor, 3));
 		tabbedPane.addTab("Loại Sản Phẩm", null, categoryPanel, null);
 		
+		receiptView receiptPanel = new receiptView();
+//		receiptPanel.setBorder(new LineBorder(borderColor, 3));
 		JTabbedPane tabbedPane_3 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("New tab", null, tabbedPane_3, null);
-		
-		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		
-		tabbedPane.addTab("New tab", null, tabbedPane_1, null);
+		tabbedPane.addTab("Phiếu Nhập", null, receiptPanel, null);
+
 
 	}
 
